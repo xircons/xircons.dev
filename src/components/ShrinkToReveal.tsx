@@ -117,8 +117,8 @@ export default function ShrinkToReveal({
 
 
   return (
-    <section ref={containerRef} className={`relative w-full ${scrollHeight}`}>
-      <div className="sticky top-0 grid h-screen w-full grid-cols-1 grid-rows-[50vh_1fr] overflow-hidden bg-bg text-fg lg:grid-cols-2 lg:grid-rows-[1fr]">
+    <section ref={containerRef} className={`relative w-full ${scrollHeight}`} data-navbar-theme="dark">
+      <div className="sticky top-0 grid h-screen w-full grid-cols-1 grid-rows-[50vh_1fr] overflow-hidden bg-bg text-fg p-5 lg:grid-cols-2 lg:grid-rows-[1fr]">
         <div className="relative min-h-0 overflow-hidden">
           <motion.div
             style={{ clipPath, WebkitClipPath: clipPath }}
@@ -145,12 +145,6 @@ export default function ShrinkToReveal({
               />
             </motion.div>
           </motion.div>
-
-          <motion.span
-            aria-hidden="true"
-            style={{ scaleY: indicatorScaleY, opacity: indicatorOpacity }}
-            className="pointer-events-none absolute bottom-4 right-4 z-10 block h-12 w-px origin-top bg-fg/50 sm:bottom-6 sm:right-6 sm:h-16 lg:bottom-10 lg:right-10 lg:h-20"
-          />
         </div>
 
         <div

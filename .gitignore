@@ -54,6 +54,7 @@ taste-*.png
 .claude
 claude.md
 CLAUDE.md
+GEMINI.MD
 
 # Agents
 AGENTS.md
