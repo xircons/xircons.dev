@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editor
+.idea
+.vscode
+*.swp
+
+# scraped / local artifacts
+domData.json
+taste-*.jpeg
+taste-*.png
+
+# Claude
+.claude
+claude.md
+CLAUDE.md
+
+# Agents
+AGENTS.md
