@@ -124,7 +124,7 @@ export default function Navbar() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         style={{ "--enter-x": "24px" } as React.CSSProperties}
-        className={`group fixed right-4 top-4 z-[60] flex h-10 items-stretch border transition-colors duration-300 sm:right-6 sm:top-5 sm:h-12 lg:right-10 lg:top-5 ${mounted ? "hero-enter" : "hero-enter-start"} ${buttonTheme}`}
+        className={`group fixed right-4 top-4 z-[60] flex h-10 cursor-pointer items-stretch border transition-colors duration-300 sm:right-6 sm:top-5 sm:h-12 lg:right-10 lg:top-5 ${mounted ? "hero-enter" : "hero-enter-start"} ${buttonTheme}`}
       >
         <span className="hidden items-center pl-4 pr-32 text-sm font-medium uppercase tracking-wide sm:flex">
           {open ? "Close" : "Menu"}
