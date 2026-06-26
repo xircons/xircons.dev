@@ -58,3 +58,6 @@ GEMINI.MD
 
 # Agents
 AGENTS.md
+
+# local env vars
+.env*.local
