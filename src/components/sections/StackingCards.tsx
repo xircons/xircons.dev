@@ -118,7 +118,7 @@ export default function StackingCards({
   return (
     <section
       id="works"
-      className="relative z-10 w-full scroll-mt-24 bg-bg text-fg [padding-bottom:var(--stack-pad-b-m)] lg:[padding-bottom:var(--stack-pad-b)]"
+      className="relative z-10 w-full bg-bg text-fg [padding-bottom:var(--stack-pad-b-m)] lg:[padding-bottom:var(--stack-pad-b)]"
       data-navbar-theme="dark"
       style={{
         "--stack-pad-b-m": paddingBottomMobile,

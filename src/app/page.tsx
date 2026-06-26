@@ -8,6 +8,7 @@ import ValueSection from "@/components/sections/ValueSection";
 import ContactCTA from "@/components/sections/ContactCTA";
 import VideoBand from "@/components/sections/VideoBand";
 import Footer from "@/components/Footer";
+import HashScroller from "@/components/HashScroller";
 import { projects } from "@/data/projects";
 
 const getCategory = (id: string | number) => {
@@ -39,6 +40,7 @@ const PROJECT_CARDS: StackCardData[] = [...projects]
 export default function Home() {
   return (
     <>
+      <HashScroller />
       <Navbar />
       <HeroSection />
       <ShrinkToReveal

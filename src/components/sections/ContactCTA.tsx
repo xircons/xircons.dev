@@ -33,7 +33,7 @@ export default function ContactCTA() {
             Contact
           </span>
           <p className="max-w-sm text-base leading-relaxed text-[#E0E6ED]/60 sm:text-lg">
-            Tell us about your project and we will advise you on the fit, scope, and options — as well as how to integrate the right technology into your timeline and objectives.
+            Let's start the conversation. Every great product begins with great collaboration.
           </p>
         </div>
 
