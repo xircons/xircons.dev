@@ -90,8 +90,8 @@ export default function ShrinkToReveal({
 
   return (
     <section ref={containerRef} className={`relative w-full ${scrollHeight}`} data-navbar-theme="dark">
-      <div className="sticky top-0 grid h-screen w-full grid-cols-1 grid-rows-[50vh_1fr] overflow-hidden bg-bg text-fg p-5 lg:grid-cols-2 lg:grid-rows-[1fr]">
-        <div className="relative min-h-0 overflow-hidden">
+      <div className="sticky top-0 flex h-screen flex-col sm:grid w-full sm:grid-cols-1 sm:grid-rows-[1fr] overflow-hidden bg-bg text-fg p-3 sm:p-5 lg:grid-cols-2 lg:grid-rows-[1fr]">
+        <div className="relative flex-1 sm:h-auto min-h-0 overflow-hidden">
           <motion.div
             style={{ clipPath, WebkitClipPath: clipPath }}
             className="absolute inset-0 h-full w-full will-change-[clip-path]"
@@ -127,11 +127,11 @@ export default function ShrinkToReveal({
         </div>
 
         <div
-          className="grid min-h-0 overflow-hidden p-3 sm:p-5"
+          className="flex flex-col sm:grid shrink-0 sm:min-h-0 overflow-hidden p-3 sm:p-5"
           style={{ gridTemplateRows: "1fr auto" }}
         >
           <div
-            className="flex min-h-0 flex-col justify-between gap-6 border border-border/80 p-4 sm:gap-8 sm:p-6"
+            className="flex sm:min-h-0 flex-col justify-between gap-0 border border-border/80 p-6 sm:gap-8 sm:mb-0"
           >
             <h2
               className="text-balance text-3xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-4xl md:text-4xl lg:text-5xl xl:text-[3.75rem]"
@@ -167,7 +167,7 @@ export default function ShrinkToReveal({
                 ));
               })()}
             </h2>
-            <p className="mt-auto max-w-[24rem] text-sm leading-relaxed text-fg/70 sm:text-base lg:text-lg">
+            <p className="mt-12 max-w-[24rem] text-sm leading-relaxed text-fg/70 sm:text-base lg:text-lg">
               {subhead}
             </p>
           </div>

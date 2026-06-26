@@ -137,7 +137,7 @@ export default function ValueSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 my-24">
 
         <div className="lg:sticky lg:top-5">
-          <div className="flex min-h-[50vh] flex-col justify-between gap-10 border border-border/80 p-6 lg:p-12">
+          <div className="flex min-h-[40vh] lg:min-h-[50vh] flex-col justify-between gap-10 border border-border/80 p-6 lg:p-12">
             <div className="flex flex-col gap-6">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-fg/50">
                 Value

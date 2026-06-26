@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LogoReveal from "@/components/LogoReveal";
+import LiveClock from "@/components/LiveClock";
 
 const NAV = [
   { label: "About", href: "/#about" },
@@ -26,7 +27,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#1A1A1A] text-[#E0E6ED]">
 
-      <div className="grid grid-cols-1 border-y border-border/20 sm:grid-cols-3">
+      <div className="grid grid-cols-2 border-y border-border/20 sm:grid-cols-3">
         {[
           { code: "01 /", title: "Navigate", links: NAV },
           { code: "02 /", title: "Connect", links: CONNECT },
@@ -34,8 +35,11 @@ export default function Footer() {
         ].map((col, i) => (
           <div
             key={col.code}
-            className={`flex flex-col gap-6 px-8 py-12 lg:px-16 lg:py-16 xl:px-20 ${i < 2 ? "border-b border-border/20 sm:border-b-0 sm:border-r" : ""
-              }`}
+            className={`flex flex-col gap-6 p-6 sm:px-8 sm:py-12 lg:px-16 lg:py-16 xl:px-20 ${
+              i === 0 ? "border-r border-b border-border/20 sm:border-b-0" :
+              i === 1 ? "border-b border-border/20 sm:border-b-0 sm:border-r" :
+              "col-span-2 sm:col-span-1"
+            }`}
           >
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#E0E6ED]/30">
@@ -60,10 +64,11 @@ export default function Footer() {
 
       <LogoReveal className="h-[40vh] w-full" />
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border/20 px-8 py-5 lg:px-16 xl:px-20">
-        <span className="text-[11px] uppercase tracking-widest text-[#E0E6ED]/30">
-          ©{year} Xircons
+      <div className="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4 border-t border-border/20 p-6 sm:px-8 sm:py-5 lg:px-16 xl:px-20 text-[11px] uppercase tracking-widest text-[#E0E6ED]/30 text-center sm:text-left">
+        <span>
+          CHIANG MAI, THAILAND: (GMT+7) <LiveClock />
         </span>
+        <span>© {year} All Rights Reserved. XIRCONS.</span>
       </div>
 
     </footer>

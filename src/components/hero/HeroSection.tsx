@@ -61,8 +61,8 @@ export default function HeroSection({
   }, []);
 
   return (
-    <section className="w-full bg-bg">
-      <div className="grid h-[70vh] max-h-[70vh] w-full grid-cols-[30vw_1fr] overflow-hidden bg-bg text-fg">
+    <section className="flex h-[100vh] w-full flex-col bg-bg">
+      <div className="grid min-h-0 w-full flex-1 grid-cols-[42vw_1fr] overflow-hidden bg-bg text-fg sm:grid-cols-[35vw_1fr] lg:grid-cols-[30vw_1fr]">
 
         <div className="flex h-full min-h-0 min-w-0 flex-col justify-between gap-4 overflow-hidden border-r border-border/80 px-4 py-4 sm:px-6 sm:py-6 lg:px-10 lg:py-5">
           <div className="h-8 w-20 shrink-0 sm:h-10 sm:w-24 lg:h-12 lg:w-28" />
@@ -90,7 +90,7 @@ export default function HeroSection({
             <div className="h-10 sm:h-12" />
           </div>
 
-          <div className="relative grid min-h-0 w-full grid-cols-3 grid-rows-4 gap-[1px] overflow-hidden bg-border/80">
+          <div className="relative grid min-h-0 w-full grid-cols-2 grid-rows-4 sm:grid-cols-3 gap-[1px] overflow-hidden bg-border/80">
 
             <div className="flex items-center bg-bg px-4 sm:px-6 lg:px-8">
               <span
@@ -102,10 +102,10 @@ export default function HeroSection({
             </div>
 
             <div className="bg-bg" />
-            <div className="bg-bg" />
+            <div className="hidden sm:block bg-bg" />
 
             <div
-              className="group relative col-span-3 row-span-2 cursor-none overflow-hidden bg-bg"
+              className="group relative col-span-2 row-span-2 sm:col-span-3 sm:row-span-2 cursor-none overflow-hidden bg-bg"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
@@ -133,13 +133,13 @@ export default function HeroSection({
 
             <div className="bg-bg" />
             <div className="bg-bg" />
-            <div className="bg-bg" />
+            <div className="hidden sm:block bg-bg" />
 
           </div>
         </div>
       </div>
 
-      <div className="relative w-full overflow-hidden bg-bg" data-navbar-theme="light">
+      <div className="relative w-full shrink-0 overflow-hidden bg-bg" data-navbar-theme="light">
         <video
           className="block h-auto w-full"
           src="/video/hero-background-optimized.mp4"

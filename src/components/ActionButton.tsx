@@ -48,7 +48,7 @@ export default function ActionButton({
   className = "",
 }: ActionButtonProps) {
   const t = TONE[tone];
-  const width = fullWidth ? "w-full" : "w-fit";
+  const width = fullWidth ? "w-full" : "w-full sm:w-fit";
 
   const inner = (
     <span
@@ -64,7 +64,7 @@ export default function ActionButton({
     </span>
   );
 
-  const groupClass = `group inline-flex ${fullWidth ? "w-full" : "w-fit"} ${className}`;
+  const groupClass = `group inline-flex ${width} ${className}`;
 
   if (href) {
     return (
