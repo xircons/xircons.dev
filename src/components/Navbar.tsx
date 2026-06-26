@@ -149,9 +149,21 @@ export default function Navbar() {
                   className={`border-t border-[#E0E6ED]/15 ${i === NAV.length - 1 && !isWorks ? "border-b" : ""}`}
                 >
                   <div className="flex items-center justify-between gap-5">
-                    <Link
+                    <a
                       href={item.href}
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => {
+                        setOpen(false);
+                        document.body.style.overflow = "";
+                        if (window.location.pathname === "/") {
+                          e.preventDefault();
+                          const targetId = item.href.replace("/#", "");
+                          const target = document.getElementById(targetId);
+                          if (target) {
+                            target.scrollIntoView({ behavior: "smooth", block: "start" });
+                            window.history.pushState(null, "", item.href);
+                          }
+                        }
+                      }}
                       className={`group flex flex-1 items-baseline gap-6 text-[#E0E6ED]/70 transition-all duration-500 ease-out hover:text-[#E0E6ED] ${worksOpen ? "py-3 lg:py-5" : "py-6 lg:py-10"}`}
                     >
                       <span className="font-mono text-xs font-medium text-[#E0E6ED]/40 transition-colors duration-500 group-hover:text-[#E0E6ED]/60 sm:text-sm">
@@ -162,7 +174,7 @@ export default function Navbar() {
                       >
                         {item.label}
                       </span>
-                    </Link>
+                    </a>
 
                     {isWorks && (
                       <button

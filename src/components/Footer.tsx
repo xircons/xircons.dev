@@ -46,7 +46,7 @@ export default function Footer() {
             </div>
             <nav className="flex flex-col gap-3">
               {col.links.map((link) => (
-                <Link
+                <a
                   key={link.label}
                   href={link.href}
                   {...(typeof link.href === "string" && link.href.startsWith("http")
@@ -55,7 +55,7 @@ export default function Footer() {
                   className="text-base text-[#E0E6ED]/70 transition-colors duration-150 hover:text-[#E0E6ED]"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
             </nav>
           </div>
