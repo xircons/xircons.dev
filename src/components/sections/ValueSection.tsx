@@ -133,7 +133,7 @@ export default function ValueSection() {
   const span = 0.6 / words.length;
 
   return (
-    <section ref={sectionRef} className="relative z-10 w-full bg-bg text-fg">
+    <section id="skills" ref={sectionRef} className="relative z-10 w-full scroll-mt-24 bg-bg text-fg">
       <div className="grid grid-cols-1 lg:grid-cols-2 my-24">
 
         <div className="lg:sticky lg:top-5">

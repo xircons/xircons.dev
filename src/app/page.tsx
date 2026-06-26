@@ -10,15 +10,31 @@ import VideoBand from "@/components/sections/VideoBand";
 import Footer from "@/components/Footer";
 import { projects } from "@/data/projects";
 
-const PROJECT_CARDS: StackCardData[] = projects.map((project) => ({
-  eyebrow: project.eyebrow,
-  headline: project.headline,
-  body: project.body,
-  imageSrc: project.imageUrl,
-  imageAlt: project.headline,
-  cta: project.ctaText,
-  href: project.ctaLink,
-}));
+const getCategory = (id: string | number) => {
+  const map: Record<string, string> = {
+    1: "Production",
+    2: "Competition",
+    3: "Academic",
+    4: "Production",
+    5: "Personal",
+    6: "Academic",
+    7: "Personal"
+  };
+  return map[String(id)] || "Project";
+};
+
+const PROJECT_CARDS: StackCardData[] = [...projects]
+  .sort((a, b) => Number(a.id) - Number(b.id))
+  .map((project) => ({
+    number: `P${String(project.id).padStart(3, "0")} /`,
+    eyebrow: getCategory(project.id),
+    headline: project.headline,
+    body: project.body,
+    imageSrc: project.imageUrl,
+    imageAlt: project.headline,
+    cta: "View Project",
+    href: `/project/${project.headline.toLowerCase().replace(/\s+/g, "-")}`,
+  }));
 
 export default function Home() {
   return (

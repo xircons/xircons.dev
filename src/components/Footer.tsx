@@ -6,14 +6,12 @@ const NAV = [
   { label: "About", href: "/#about" },
   { label: "Works", href: "/#works" },
   { label: "Skills", href: "/#skills" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const CONNECT = [
-  { label: "GitHub", href: "https://github.com/pppwtk" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Twitter / X", href: "#" },
-  { label: "Dribbble", href: "#" },
+  { label: "GitHub", href: "https://github.com/xircons" },
+  { label: "Facebook", href: "https://www.facebook.com/pppwtk" },
+  { label: "Instagram", href: "https://www.instagram.com/pppwtk" },
 ];
 
 const LEGAL = [
@@ -35,11 +33,10 @@ export default function Footer() {
         ].map((col, i) => (
           <div
             key={col.code}
-            className={`flex flex-col gap-6 p-6 sm:px-8 sm:py-12 lg:px-16 lg:py-16 xl:px-20 ${
-              i === 0 ? "border-r border-b border-border/20 sm:border-b-0" :
+            className={`flex flex-col gap-6 p-6 sm:px-8 sm:py-12 lg:px-16 lg:py-16 xl:px-20 ${i === 0 ? "border-r border-b border-border/20 sm:border-b-0" :
               i === 1 ? "border-b border-border/20 sm:border-b-0 sm:border-r" :
-              "col-span-2 sm:col-span-1"
-            }`}
+                "col-span-2 sm:col-span-1"
+              }`}
           >
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#E0E6ED]/30">

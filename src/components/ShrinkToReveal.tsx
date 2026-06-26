@@ -58,8 +58,8 @@ export default function ShrinkToReveal({
   imageSrc = "/logo/xircons-full-nobg.png",
   imageAlt = "Xircons",
   edgePadding = "1.25rem",
-  headline = "Lorem Ipsum is simply, dummy text of the printing, and typesetting industry.",
-  subhead = "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+  headline = "HELLO! I'M XIRCONS",
+  subhead = "Full-Stack Developer experienced in building production-ready web applications, business platforms, and developer tools. Skilled in translating business requirements into scalable software solutions, from UX/UI design and database architecture to deployment and maintenance.",
   scrollHeight = "h-[120vh]",
   cards = DEFAULT_CARDS,
 }: ShrinkToRevealProps) {
@@ -89,7 +89,7 @@ export default function ShrinkToReveal({
 
 
   return (
-    <section ref={containerRef} className={`relative w-full ${scrollHeight}`} data-navbar-theme="dark">
+    <section id="about" ref={containerRef} className={`relative w-full scroll-mt-24 ${scrollHeight}`} data-navbar-theme="dark">
       <div className="sticky top-0 flex h-screen flex-col sm:grid w-full sm:grid-cols-1 sm:grid-rows-[1fr] overflow-hidden bg-bg text-fg p-3 sm:p-5 lg:grid-cols-2 lg:grid-rows-[1fr]">
         <div className="relative flex-1 sm:h-auto min-h-0 overflow-hidden">
           <motion.div
@@ -167,7 +167,7 @@ export default function ShrinkToReveal({
                 ));
               })()}
             </h2>
-            <p className="mt-12 max-w-[24rem] text-sm leading-relaxed text-fg/70 sm:text-base lg:text-lg">
+            <p className="mt-12 max-w-[32rem] text-sm leading-relaxed text-fg/70 sm:text-base lg:text-lg">
               {subhead}
             </p>
           </div>

@@ -61,8 +61,8 @@ export default function HeroSection({
   }, []);
 
   return (
-    <section className="flex h-[100vh] w-full flex-col bg-bg">
-      <div className="grid min-h-0 w-full flex-1 grid-cols-[42vw_1fr] overflow-hidden bg-bg text-fg sm:grid-cols-[35vw_1fr] lg:grid-cols-[30vw_1fr]">
+    <section className="flex h-[100vh] w-full flex-col bg-bg lg:block lg:h-auto">
+      <div className="grid min-h-0 w-full flex-1 grid-cols-[42vw_1fr] overflow-hidden bg-bg text-fg sm:grid-cols-[35vw_1fr] lg:h-[70vh] lg:max-h-[70vh] lg:flex-none lg:grid-cols-[30vw_1fr]">
 
         <div className="flex h-full min-h-0 min-w-0 flex-col justify-between gap-4 overflow-hidden border-r border-border/80 px-4 py-4 sm:px-6 sm:py-6 lg:px-10 lg:py-5">
           <div className="h-8 w-20 shrink-0 sm:h-10 sm:w-24 lg:h-12 lg:w-28" />
