@@ -152,7 +152,7 @@ export default function ShrinkToReveal({
           style={{ gridTemplateRows: "1fr auto" }}
         >
           <div
-            className="flex min-h-0 flex-col justify-between gap-6 border border-border p-4 sm:gap-8 sm:p-6"
+            className="flex min-h-0 flex-col justify-between gap-6 border border-border/80 p-4 sm:gap-8 sm:p-6"
           >
             <h2
               className="text-balance text-3xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-4xl md:text-4xl lg:text-5xl xl:text-[3.75rem]"
@@ -193,12 +193,12 @@ export default function ShrinkToReveal({
             </p>
           </div>
 
-          <div className="grid min-h-0 grid-cols-2 border-x border-b border-t-0 border-border">
+          <div className="grid min-h-0 grid-cols-2 border-x border-b border-t-0 border-border/80">
             {cards.map((card, idx) => (
               <a
                 key={`${card.eyebrow}-${idx}`}
                 href={card.href ?? "#"}
-                className={`group relative flex min-h-0 flex-col justify-between gap-3 overflow-hidden p-4 transition-colors duration-500 ease-out sm:gap-4 sm:p-6 ${idx > 0 ? "border-l border-border/30" : ""
+                className={`group relative flex min-h-0 flex-col justify-between gap-3 overflow-hidden p-4 transition-colors duration-500 ease-out sm:gap-4 sm:p-6 ${idx > 0 ? "border-l border-border/80" : ""
                   }`}
               >
                 <div className="flex items-center justify-between sm:mb-8 lg:mb-12">
@@ -209,11 +209,11 @@ export default function ShrinkToReveal({
                 <p className="line-clamp-3 text-xs leading-relaxed text-fg/70 sm:line-clamp-4 sm:text-sm">
                   {card.body}
                 </p>
-                <div className="inline-flex w-full items-stretch border border-border text-xs font-medium transition-colors duration-500 ease-out group-hover:border-accent group-hover:text-accent sm:text-sm">
+                <div className="inline-flex w-full items-stretch border border-border/80 text-xs font-medium transition-colors duration-500 ease-out group-hover:border-accent group-hover:text-accent sm:text-sm">
                   <span className="flex flex-1 items-center px-4 py-2.5">
                     {card.cta ?? "Learn more"}
                   </span>
-                  <span className="relative flex w-10 items-center justify-center overflow-hidden border-l border-border/50 transition-colors duration-500 ease-out group-hover:border-accent">
+                  <span className="relative flex w-10 items-center justify-center overflow-hidden border-l border-border/80 transition-colors duration-500 ease-out group-hover:border-accent">
                     <ArrowIcon className="absolute transition-transform duration-500 ease-out group-hover:translate-x-[250%]" />
                     <ArrowIcon className="absolute -translate-x-[250%] transition-transform duration-500 ease-out group-hover:translate-x-0" />
                   </span>

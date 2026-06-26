@@ -86,13 +86,13 @@ export default function Navbar() {
         style={{ "--enter-x": "24px" } as React.CSSProperties}
         className={`fixed right-4 top-4 z-50 flex h-10 items-center border transition-colors sm:right-6 sm:top-5 sm:h-12 lg:right-10 lg:top-5 ${mounted ? "hero-enter" : "hero-enter-start"} ${isLight
           ? "border-white/40 bg-bg text-fg hover:bg-bg/90"
-          : "border-border bg-fg text-bg hover:bg-fg/90"
+          : "border-border/80 bg-fg text-bg hover:bg-fg/90"
           }`}
       >
         <span className="hidden pl-4 pr-32 text-sm font-medium uppercase tracking-wide sm:inline">
           Menu
         </span>
-        <span className={`flex h-full w-10 items-center justify-center border-l transition-colors sm:w-12 ${isLight ? "border-white/40" : "border-border"}`}>
+        <span className={`flex h-full w-10 items-center justify-center border-l transition-colors sm:w-12 ${isLight ? "border-white/40" : "border-border/80"}`}>
           <MenuIcon />
         </span>
       </button>

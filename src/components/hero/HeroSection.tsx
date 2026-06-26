@@ -64,7 +64,7 @@ export default function HeroSection({
     <section className="w-full bg-bg">
       <div className="grid h-[70vh] max-h-[70vh] w-full grid-cols-[30vw_1fr] overflow-hidden bg-bg text-fg">
 
-        <div className="flex h-full min-h-0 min-w-0 flex-col justify-between gap-4 overflow-hidden border-r border-border px-4 py-4 sm:px-6 sm:py-6 lg:px-10 lg:py-5">
+        <div className="flex h-full min-h-0 min-w-0 flex-col justify-between gap-4 overflow-hidden border-r border-border/80 px-4 py-4 sm:px-6 sm:py-6 lg:px-10 lg:py-5">
           <div className="h-8 w-20 shrink-0 sm:h-10 sm:w-24 lg:h-12 lg:w-28" />
           <h1
             className={`min-w-0 break-words text-[clamp(1.5rem,4vw,6rem)] font-bold leading-[0.9] tracking-tight ${mounted ? "hero-enter" : "hero-enter-start"}`}
@@ -86,11 +86,11 @@ export default function HeroSection({
 
         <div className="grid h-full min-h-0 min-w-0 grid-rows-[auto_1fr] overflow-hidden">
 
-          <div className="flex items-center justify-end gap-3 border-b border-border px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-5">
+          <div className="flex items-center justify-end gap-3 border-b border-border/80 px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-5">
             <div className="h-10 sm:h-12" />
           </div>
 
-          <div className="relative grid min-h-0 w-full grid-cols-3 grid-rows-4 gap-[1px] overflow-hidden bg-border">
+          <div className="relative grid min-h-0 w-full grid-cols-3 grid-rows-4 gap-[1px] overflow-hidden bg-border/80">
 
             <div className="flex items-center bg-bg px-4 sm:px-6 lg:px-8">
               <span
