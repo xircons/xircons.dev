@@ -1,7 +1,61 @@
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/hero/HeroSection";
+import ShrinkToReveal from "@/components/ShrinkToReveal";
+import StackingCards, {
+  type StackCardData,
+} from "@/components/sections/StackingCards";
+import ValueSection from "@/components/sections/ValueSection";
+import ContactCTA from "@/components/sections/ContactCTA";
+import VideoBand from "@/components/sections/VideoBand";
+import Footer from "@/components/Footer";
+import HashScroller from "@/components/HashScroller";
+import { projects } from "@/data/projects";
+
+const getCategory = (id: string | number) => {
+  const map: Record<string, string> = {
+    1: "Production",
+    2: "Competition",
+    3: "Academic",
+    4: "Production",
+    5: "Personal",
+    6: "Academic",
+    7: "Personal"
+  };
+  return map[String(id)] || "Project";
+};
+
+const PROJECT_CARDS: StackCardData[] = [...projects]
+  .sort((a, b) => Number(a.id) - Number(b.id))
+  .map((project) => ({
+    number: `P${String(project.id).padStart(3, "0")} /`,
+    eyebrow: getCategory(project.id),
+    headline: project.headline,
+    body: project.body,
+    imageSrc: project.imageUrl,
+    imageAlt: project.headline,
+    cta: "View Project",
+    href: `/project/${project.headline.toLowerCase().replace(/\s+/g, "-")}`,
+  }));
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome to xircons.dev</h1>
-    </main>
+    <>
+      <HashScroller />
+      <Navbar />
+      <HeroSection />
+      <ShrinkToReveal
+        imageSrc="/wuttikan/___________________copykub.jpg"
+        imageAlt="Wuttikan Studio"
+      />
+      <StackingCards
+        cards={PROJECT_CARDS}
+        introEyebrow="Selected Works"
+        introHeadline="Projects built end-to-end, shipped and maintained"
+      />
+      <VideoBand />
+      <ValueSection />
+      <ContactCTA />
+      <Footer />
+    </>
   );
 }
