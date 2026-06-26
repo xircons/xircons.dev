@@ -3,9 +3,9 @@ import LogoReveal from "@/components/LogoReveal";
 import LiveClock from "@/components/LiveClock";
 
 const NAV = [
-  { label: "About", href: { pathname: "/", hash: "about" } },
-  { label: "Works", href: { pathname: "/", hash: "works" } },
-  { label: "Skills", href: { pathname: "/", hash: "skills" } },
+  { label: "About", href: "/#about" },
+  { label: "Works", href: "/#works" },
+  { label: "Skills", href: "/#skills" },
 ];
 
 const CONNECT = [
@@ -23,7 +23,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-[#1A1A1A] text-[#E0E6ED]">
+    <footer className="w-full bg-[#1A1A1A] text-[#E0E6ED]" data-navbar-theme="light">
 
       <div className="grid grid-cols-2 border-y border-border/20 sm:grid-cols-3">
         {[
@@ -49,6 +49,9 @@ export default function Footer() {
                 <Link
                   key={link.label}
                   href={link.href}
+                  {...(typeof link.href === "string" && link.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                   className="text-base text-[#E0E6ED]/70 transition-colors duration-150 hover:text-[#E0E6ED]"
                 >
                   {link.label}

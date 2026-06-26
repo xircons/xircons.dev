@@ -154,7 +154,6 @@ function AccordionItem({
                 ))}
               </ul>
             )}
-            {item.cta && <ActionButton label={item.cta} className="mt-8" />}
           </div>
         </div>
       </div>

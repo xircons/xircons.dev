@@ -25,7 +25,7 @@ export default function ContactCTA() {
   const span = 0.6 / words.length;
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#1A1A1A] text-[#E0E6ED]">
+    <section ref={sectionRef} className="w-full bg-[#1A1A1A] text-[#E0E6ED]" data-navbar-theme="light">
 
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2">
         <div className="px-8 py-12 lg:col-start-1 lg:row-start-1 lg:border-r lg:border-b lg:border-border/20 lg:px-16 lg:py-16">

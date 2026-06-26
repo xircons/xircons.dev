@@ -73,7 +73,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <div className="flex items-center justify-between border-b border-border/80 px-5 pt-24 pb-5 lg:px-10 lg:pt-28">
         <Link
-          href={{ pathname: "/", hash: "works" }}
+          href="/#works"
           className="group flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-fg/50 transition-colors hover:text-fg"
         >
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
