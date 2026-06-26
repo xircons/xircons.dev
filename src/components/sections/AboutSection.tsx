@@ -21,11 +21,11 @@ export default function AboutSection() {
 
         <div className="relative min-h-[60vw] lg:min-h-screen">
           <Image
-            src="/wuttikan/wuttikan_studio_1.png"
+            src="/wuttikan/___________________copykub.jpg"
             alt="Xircons studio"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover object-center"
+            className="object-cover object-center grayscale"
           />
         </div>
 

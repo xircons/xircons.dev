@@ -38,10 +38,11 @@ function StackedCard({
 
   return (
     <article
-      className="sticky overflow-hidden border-t border-border/80 bg-bg text-fg"
+      className={`sticky overflow-hidden border-t border-border/80 bg-bg text-fg ${index > 0 ? "shadow-[0_-5px_12.5px_rgba(0,0,0,0.015)]" : ""
+        }`}
       style={{ top: `${top}px`, height: cardHeight, zIndex: index + 1 }}
     >
-      <div className="grid h-full grid-cols-1 lg:grid-cols-[8%_48%_44%] border-b border-border/80">
+      <div className="grid h-full grid-cols-1 lg:grid-cols-[8%_48%_44%]">
         <div className="hidden items-start justify-center border-r border-border/80 pt-5 font-mono text-sm font-medium tracking-tight text-accent lg:flex">
           {number}
         </div>
@@ -59,11 +60,11 @@ function StackedCard({
         </div>
 
         <div className="flex min-h-0 flex-col">
-          <div className="flex items-center gap-4 border-b border-border/80 px-6 py-5 lg:px-12">
+          <div className="flex items-center gap-4 px-6 py-5 lg:px-12">
             <span className="font-mono text-sm font-medium tracking-tight text-accent lg:hidden">
               {number}
             </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] sm:text-sm lg:text-base">
+            <span className="text-xs font-bold uppercase tracking-[0.1em] sm:text-sm lg:text-base">
               {card.eyebrow}
             </span>
           </div>

@@ -8,8 +8,8 @@ import {
   useTransform,
   useMotionTemplate,
   useSpring,
-  type MotionValue,
 } from "framer-motion";
+import HeadlineWord from "@/components/HeadlineWord";
 
 interface RevealCard {
   eyebrow: string;
@@ -40,34 +40,6 @@ function ArrowIcon({ className = "" }: { className?: string }) {
     >
       <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
-  );
-}
-
-function HeadlineWord({
-  word,
-  progress,
-  start,
-  end,
-}: {
-  word: string;
-  progress: MotionValue<number>;
-  start: number;
-  end: number;
-}) {
-  const opacity = useTransform(progress, [start, end], [0, 1]);
-  const y = useTransform(progress, [start, end], ["0.9em", "0em"]);
-  const rotateX = useTransform(progress, [start, end], [-65, 0]);
-
-  return (
-    <span className="inline-block overflow-hidden align-bottom">
-      <motion.span
-        style={{ opacity, y, rotateX, transformOrigin: "bottom center" }}
-        className="inline-block will-change-transform"
-      >
-        {word}
-        <span>&nbsp;</span>
-      </motion.span>
-    </span>
   );
 }
 
@@ -136,13 +108,20 @@ export default function ShrinkToReveal({
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover grayscale"
               />
               <motion.div
                 aria-hidden="true"
                 style={{ opacity: overlayOpacity }}
-                className="absolute inset-0 bg-gradient-to-tr from-bg via-bg/10 to-transparent"
-              />
+                className="absolute inset-0"
+              >
+                <Image
+                  src="/wuttikan/___________________copykub.jpg"
+                  alt="Background overlay"
+                  fill
+                  className="object-cover grayscale"
+                />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
