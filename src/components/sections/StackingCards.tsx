@@ -44,7 +44,11 @@ function StackedCard({
   const top = navbarOffsetPx + index * peekPx;
   const topMobile = navbarOffsetPx + index * mobilePeekPx;
 
+  const anchorId = `project-${card.headline.toLowerCase().replace(/\s+/g, "-")}`;
+
   return (
+    <>
+    <span id={anchorId} aria-hidden="true" className="block h-0 w-0 -translate-y-24" />
     <article
       className={`sticky overflow-hidden border-t border-border/80 bg-bg text-fg [top:var(--card-top-m)] h-auto lg:[top:var(--card-top)] lg:[height:var(--card-h)] ${index > 0 ? "shadow-[0_-5px_12.5px_rgba(0,0,0,0.015)]" : ""
         }`}
@@ -96,6 +100,7 @@ function StackedCard({
         </div>
       </div>
     </article>
+    </>
   );
 }
 

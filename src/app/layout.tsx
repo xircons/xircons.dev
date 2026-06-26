@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import FormStateClearer from "@/components/FormStateClearer";
 
 
 const geistSans = Geist({
@@ -14,7 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "xircons",
+  title: {
+    default: "Xircons",
+    template: "%s — Xircons",
+  },
   description: "Minimalist portfolio showcasing UX-focused engineering and design.",
 };
 
@@ -29,6 +33,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <FormStateClearer />
         <main className="flex-1">{children}</main>
       </body>
     </html>
