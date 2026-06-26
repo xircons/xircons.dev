@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <Navbar />
 
       <div className="flex items-center justify-between border-b border-border/80 px-5 pt-24 pb-5 lg:px-10 lg:pt-28">
-        <a
+        <Link
           href="/#works"
           className="group flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-fg/50 transition-colors hover:text-fg"
         >
@@ -90,7 +90,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <path d="M6 13L1 7l5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           Back to works
-        </a>
+        </Link>
         <span className="font-mono text-sm font-medium tracking-tight text-accent">{number} /</span>
       </div>
 

@@ -12,11 +12,16 @@ export default function ContactForm() {
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isMounted, setIsMounted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
     const saved = sessionStorage.getItem("contactFormState");
     if (saved) {
@@ -27,19 +32,22 @@ export default function ContactForm() {
         if (data.email) setEmail(data.email);
         if (data.phone) setPhone(data.phone);
         if (data.company) setCompany(data.company);
+        if (data.website) setWebsite(data.website);
         if (data.message) setMessage(data.message);
         if (data.acceptedTerms !== undefined) setAcceptedTerms(data.acceptedTerms);
-      } catch (e) { }
+      } catch {
+        // Ignore JSON parse errors
+      }
     }
   }, []);
 
   useEffect(() => {
     if (isMounted) {
       sessionStorage.setItem("contactFormState", JSON.stringify({
-        step, name, email, phone, company, message, acceptedTerms
+        step, name, email, phone, company, website, message, acceptedTerms
       }));
     }
-  }, [isMounted, step, name, email, phone, company, message, acceptedTerms]);
+  }, [isMounted, step, name, email, phone, company, website, message, acceptedTerms]);
 
   const onNext = () => {
     const newErrors: Record<string, string> = {};
@@ -59,25 +67,92 @@ export default function ContactForm() {
     setStep(2);
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const newErrors: Record<string, string> = {};
+    if (!message.trim()) newErrors.message = "Message is required";
+    if (!acceptedTerms) newErrors.terms = "You must accept the terms and privacy policy";
 
-    if (!acceptedTerms) {
-      setErrors({ terms: "You must accept the terms to continue" });
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
     setErrors({});
-    sessionStorage.removeItem("contactFormState");
-    const subject = encodeURIComponent(`Inquiry from ${name.trim()} (${company.trim() || "Individual"})`);
-    const body = encodeURIComponent(
-      `Name: ${name.trim()}\nEmail: ${email.trim()}\nPhone: ${phone.trim()}\nCompany: ${company.trim()}\n\n${message.trim()}`
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setSubmitError("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          company: company.trim(),
+          website: website.trim(),
+          message: message.trim(),
+          acceptedTerms,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.field) {
+          setErrors({ [data.field]: data.error || "Invalid value" });
+          if (["name", "email", "phone", "company"].includes(data.field)) {
+            setStep(1);
+          }
+          return;
+        }
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      sessionStorage.removeItem("contactFormState");
+      setIsSuccess(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isMounted) {
     return <div className="min-h-[500px]" aria-hidden="true" />;
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="flex w-full max-w-2xl flex-col items-center justify-center py-20 text-center animate-in fade-in duration-700">
+        <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 text-accent">
+          <svg viewBox="0 0 24 24" className="h-10 w-10" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <h2 className="mb-4 text-3xl font-bold tracking-tight text-fg">Thank you for reaching out!</h2>
+        <p className="text-lg text-fg/70">
+          We have received your message and will get back to you shortly.
+        </p>
+        <button
+          onClick={() => {
+            setStep(1);
+            setName("");
+            setEmail("");
+            setPhone("");
+            setCompany("");
+            setWebsite("");
+            setMessage("");
+            setAcceptedTerms(false);
+            setIsSuccess(false);
+          }}
+          className="mt-10 group flex h-12 items-center justify-center border border-border/80 px-8 text-sm font-bold text-fg transition-colors hover:border-accent"
+        >
+          Send another message
+        </button>
+      </div>
+    );
   }
 
   const getRowClass = (hasError: boolean) =>
@@ -97,9 +172,20 @@ export default function ContactForm() {
 
       {step === 1 ? (
         <form className="flex flex-col" noValidate>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="sr-only absolute -left-[9999px]"
+          />
           <div className={getRowClass(!!errors.name)}>
             <label htmlFor="name" className={labelClass}>
-              Full name *
+              Full name <span className="text-red-500">*</span>
             </label>
             <div className="flex w-full flex-col sm:w-2/3 sm:items-end">
               <input
@@ -119,7 +205,7 @@ export default function ContactForm() {
 
           <div className={getRowClass(!!errors.email)}>
             <label htmlFor="email" className={labelClass}>
-              Email *
+              Email <span className="text-red-500">*</span>
             </label>
             <div className="flex w-full flex-col sm:w-2/3 sm:items-end">
               <input
@@ -191,16 +277,24 @@ export default function ContactForm() {
         <form onSubmit={onSubmit} className="flex flex-col" noValidate>
           <div className="flex flex-col gap-6">
             <label htmlFor="message" className="text-[1.1rem] font-bold leading-snug text-fg">
-              Tell us about the type of project, timeline, current phase and what you need (website, web app, mobile app, custom software, etc.)
+              Tell us about the type of project, timeline, current phase and what you need (website, web app, mobile app, custom software, etc.) <span className="text-red-500">*</span>
             </label>
             <textarea
               id="message"
               rows={5}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) => {
+                setMessage(e.target.value);
+                if (errors.message) setErrors((prev) => ({ ...prev, message: "" }));
+              }}
               placeholder="Message"
-              className="w-full resize-none border-b border-border/80 bg-transparent py-4 text-sm text-fg placeholder:text-fg/40 outline-none transition-colors focus:border-accent"
+              className={`w-full resize-none border-b py-4 text-sm outline-none transition-colors ${
+                errors.message
+                  ? "border-red-500 text-red-500 placeholder:text-red-500/50"
+                  : "border-border/80 bg-transparent text-fg placeholder:text-fg/40 focus:border-accent"
+              }`}
             />
+            {errors.message && <span className="text-xs font-medium text-red-500">{errors.message}</span>}
           </div>
 
           <div className="mt-8 flex flex-col gap-2">
@@ -222,32 +316,44 @@ export default function ContactForm() {
             {errors.terms && <span className="text-xs font-medium text-red-500">{errors.terms}</span>}
           </div>
 
-          <div className="mt-12 flex gap-4">
-            <button
-              type="button"
-              onClick={() => setStep(1)}
-              aria-label="Back"
-              className="flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center border border-border/80 text-fg transition-colors hover:border-accent"
-            >
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                <path d="M19 12H5M11 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <button
-              type="submit"
-              className="group flex h-12 flex-1 cursor-pointer items-stretch bg-fg text-sm font-bold text-bg"
-            >
-              <span className="flex flex-1 items-center px-4">Submit</span>
-              <span className="relative flex w-12 items-center justify-center overflow-hidden border-l border-bg/20 transition-colors duration-500 ease-out group-hover:border-bg/40">
-                <svg viewBox="0 0 24 24" className="absolute h-4 w-4 transition-transform duration-500 ease-out group-hover:translate-x-[250%]" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                  <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            {submitError && (
+              <div className="mt-4 rounded bg-red-500/10 p-4 text-sm font-medium text-red-500">
+                {submitError}
+              </div>
+            )}
+
+            <div className="mt-12 flex gap-4">
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                disabled={isSubmitting}
+                aria-label="Back"
+                className="flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center border border-border/80 text-fg transition-colors hover:border-accent disabled:opacity-50"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                  <path d="M19 12H5M11 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <svg viewBox="0 0 24 24" className="absolute h-4 w-4 -translate-x-[250%] transition-transform duration-500 ease-out group-hover:translate-x-0" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                  <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </button>
-          </div>
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group flex h-12 flex-1 cursor-pointer items-stretch bg-fg text-sm font-bold text-bg disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                <span className="flex flex-1 items-center px-4">
+                  {isSubmitting ? "Sending..." : "Submit"}
+                </span>
+                {!isSubmitting && (
+                  <span className="relative flex w-12 items-center justify-center overflow-hidden border-l border-bg/20 transition-colors duration-500 ease-out group-hover:border-bg/40">
+                    <svg viewBox="0 0 24 24" className="absolute h-4 w-4 transition-transform duration-500 ease-out group-hover:translate-x-[250%]" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                      <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <svg viewBox="0 0 24 24" className="absolute h-4 w-4 -translate-x-[250%] transition-transform duration-500 ease-out group-hover:translate-x-0" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                      <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                )}
+              </button>
+            </div>
 
           <div className="mt-12 border-t border-border/80 pt-6">
             <h4 className="mb-2 text-xs font-bold text-fg">Basic information on data protection</h4>
