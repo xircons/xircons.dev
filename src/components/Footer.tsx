@@ -3,9 +3,9 @@ import LogoReveal from "@/components/LogoReveal";
 import LiveClock from "@/components/LiveClock";
 
 const NAV = [
-  { label: "About", href: "/#about" },
-  { label: "Works", href: "/#works" },
-  { label: "Skills", href: "/#skills" },
+  { label: "About", href: { pathname: "/", hash: "about" } },
+  { label: "Works", href: { pathname: "/", hash: "works" } },
+  { label: "Skills", href: { pathname: "/", hash: "skills" } },
 ];
 
 const CONNECT = [

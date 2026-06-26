@@ -54,9 +54,9 @@ export default function ActionButton({
     <span
       className={`inline-flex ${width} items-stretch border ${t.border} ${t.base} text-xs font-medium transition-colors duration-500 ease-out ${t.hover} sm:text-sm`}
     >
-      <span className="flex flex-1 items-center px-6 py-2.5 pr-24">{label}</span>
+      <span className="flex flex-1 items-center px-4 py-2.5 sm:px-6">{label}</span>
       <span
-        className={`relative flex w-10 items-center justify-center overflow-hidden border-l ${t.border} transition-colors duration-500 ease-out ${t.hover}`}
+        className={`relative flex w-10 shrink-0 items-center justify-center overflow-hidden border-l ${t.border} transition-colors duration-500 ease-out ${t.hover}`}
       >
         <ArrowIcon className="absolute transition-transform duration-500 ease-out group-hover:translate-x-[250%]" />
         <ArrowIcon className="absolute -translate-x-[250%] transition-transform duration-500 ease-out group-hover:translate-x-0" />

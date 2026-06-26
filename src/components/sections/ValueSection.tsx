@@ -5,7 +5,7 @@ import { useScroll, useSpring } from "framer-motion";
 import ActionButton from "@/components/ActionButton";
 import HeadlineWord from "@/components/HeadlineWord";
 
-const HEADLINE = "Built to last. Shipped to matter.";
+const HEADLINE = "Building scalable software solutions.";
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T>(null);
@@ -30,28 +30,64 @@ function useReveal<T extends HTMLElement>() {
 interface ValueItem {
   title: string;
   body: string;
+  skills?: string[];
   cta?: string;
 }
 
 const ITEMS: ValueItem[] = [
   {
     title: "Full-Stack Development",
-    body: "End-to-end ownership from database schema to pixel-perfect UI. Type-safe APIs, modern frameworks, and CI/CD pipelines that ship reliably — without handoff gaps between layers.",
+    body: "I am experienced in building production-ready web applications, business platforms, and developer tools. I handle the entire software development lifecycle—from translating business requirements and system design to full-stack development using React, Next.js, TypeScript, and Node.js.",
+    skills: [
+      "React & Next.js",
+      "Astro & Islands",
+      "Vite & Redux Toolkit",
+      "Node.js & Express",
+      "Python Flask (Beginner)",
+      "RESTful Routing & Auth",
+      "Socket.io & JWT",
+    ],
     cta: "See the work",
   },
   {
     title: "Data & Infrastructure",
-    body: "Architecture decisions that hold up under real traffic and real teams. We design for change — modular boundaries, documented contracts, and infrastructure that scales without rewrites.",
+    body: "I design database architectures and robust deployment workflows across both development and production environments. I focus on building scalable software solutions, reliable REST API integrations, and maintaining infrastructure that can support complex internal and customer-facing platforms.",
+    skills: [
+      "PostgreSQL",
+      "MySQL",
+      "Firestore",
+      "GitHub Actions",
+      "Docker",
+      "Linux",
+      "CI/CD",
+      "Nginx",
+    ],
     cta: "View approach",
   },
   {
     title: "Interaction & Experience",
-    body: "Grid-driven layouts, restrained typography, and motion that earns its place. Every screen built around clarity and usability instead of unnecessary decoration.",
+    body: "I collaborate heavily on UX/UI design and feature planning to deliver truly user-centered solutions. By building clean, multi-language platforms and intuitive administrative dashboards, I ensure that the frontend experience is highly scalable, engaging, and easy to navigate.",
+    skills: [
+      "Framer Motion",
+      "Scroll Animations",
+      "Micro-interactions",
+      "CSS Transitions",
+      "Tailwind CSS & Radix UI",
+      "Responsive UI & Component Design",
+      "Chart.js & Recharts",
+    ],
     cta: "Explore designs",
   },
   {
     title: "AI & Advanced Logic",
-    body: "We embed the latest intelligence models where they create real leverage, with prompt caching, tool use, and evaluation pipelines that keep quality measurable and outputs reliable.",
+    body: "I build advanced features and automated developer tools, such as zero-configuration CLI packages and automated testing pipelines. I focus on implementing dynamic logic, secure authentication, and real-time operations that transform complex datasets into production-ready features.",
+    skills: [
+      "LLM Integration & Tool Use",
+      "Prompt Caching",
+      "Evaluation Pipelines",
+      "State Machines",
+      "Advanced Data Parsing",
+    ],
     cta: "Explore capabilities",
   },
 ];
@@ -106,7 +142,19 @@ function AccordionItem({
             <p className="max-w-prose text-base leading-relaxed text-fg/70 sm:text-lg">
               {item.body}
             </p>
-            {item.cta && <ActionButton label={item.cta} className="mt-4" />}
+            {item.skills && (
+              <ul className="mt-8 flex flex-col gap-2">
+                {item.skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="text-[10px] font-semibold uppercase tracking-widest text-fg/60"
+                  >
+                    / {skill}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {item.cta && <ActionButton label={item.cta} className="mt-8" />}
           </div>
         </div>
       </div>
@@ -137,7 +185,7 @@ export default function ValueSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 my-24">
 
         <div className="lg:sticky lg:top-5">
-          <div className="flex min-h-[40vh] lg:min-h-[50vh] flex-col justify-between gap-10 border border-border/80 p-6 lg:p-12">
+          <div className="flex min-h-[40vh] lg:min-h-[75vh] flex-col justify-between gap-10 border border-border/80 p-6 lg:p-12">
             <div className="flex flex-col gap-6">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-fg/50">
                 Value
@@ -161,7 +209,7 @@ export default function ValueSection() {
               </h2>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-fg/50">
-              Three principles behind every project — the things that separate work that holds up from work that has to be redone.
+              Translating business requirements into production-ready platforms, from system design to final deployment.
             </p>
           </div>
         </div>

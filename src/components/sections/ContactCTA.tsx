@@ -5,7 +5,7 @@ import { useScroll, useSpring } from "framer-motion";
 import ActionButton from "@/components/ActionButton";
 import HeadlineWord from "@/components/HeadlineWord";
 
-const HEADLINE = "Build something that actually ships.";
+const HEADLINE = "Let's build production-ready platforms.";
 
 export default function ContactCTA() {
   const sectionRef = useRef<HTMLElement>(null);

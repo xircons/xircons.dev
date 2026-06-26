@@ -73,7 +73,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <div className="flex items-center justify-between border-b border-border/80 px-5 pt-24 pb-5 lg:px-10 lg:pt-28">
         <Link
-          href="/#works"
+          href={{ pathname: "/", hash: "works" }}
           className="group flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-fg/50 transition-colors hover:text-fg"
         >
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
@@ -98,7 +98,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         ].map((item, i) => (
           <div
             key={item.label}
-            className={`flex flex-col gap-2 border-border/80 px-5 py-6 lg:px-10 lg:py-8 ${i < 3 ? "border-r" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""}`}
+            className={`flex flex-col gap-2 border-border/80 px-5 py-6 lg:px-10 lg:py-8 ${
+              i === 0 || i === 2 ? "border-r" : i === 1 ? "lg:border-r" : ""
+            } ${i < 2 ? "border-b lg:border-b-0" : ""}`}
           >
             <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-fg/50">{item.label}</span>
             <span className="text-sm font-medium text-fg lg:text-base">{item.value}</span>
@@ -153,7 +155,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           className="group grid cursor-pointer grid-cols-1 border-t border-border/80 md:grid-cols-2"
         >
           <div className="border-b border-border/80 p-5 md:border-b-0 md:border-r lg:p-10">
-            <div className="relative aspect-[16/10] w-full overflow-hidden border border-border/80">
+            <div className="relative aspect-[16/10] w-full overflow-hidden">
               <img
                 src={nextProject.imageUrl}
                 alt=""
