@@ -69,8 +69,12 @@ export default function ContactForm() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!acceptedTerms) {
-      setErrors((prev) => ({ ...prev, terms: "You must accept the terms and privacy policy" }));
+    const newErrors: Record<string, string> = {};
+    if (!message.trim()) newErrors.message = "Message is required";
+    if (!acceptedTerms) newErrors.terms = "You must accept the terms and privacy policy";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -96,6 +100,13 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (!response.ok) {
+        if (data.field) {
+          setErrors({ [data.field]: data.error || "Invalid value" });
+          if (["name", "email", "phone", "company"].includes(data.field)) {
+            setStep(1);
+          }
+          return;
+        }
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
 
@@ -174,7 +185,7 @@ export default function ContactForm() {
           />
           <div className={getRowClass(!!errors.name)}>
             <label htmlFor="name" className={labelClass}>
-              Full name *
+              Full name <span className="text-red-500">*</span>
             </label>
             <div className="flex w-full flex-col sm:w-2/3 sm:items-end">
               <input
@@ -194,7 +205,7 @@ export default function ContactForm() {
 
           <div className={getRowClass(!!errors.email)}>
             <label htmlFor="email" className={labelClass}>
-              Email *
+              Email <span className="text-red-500">*</span>
             </label>
             <div className="flex w-full flex-col sm:w-2/3 sm:items-end">
               <input
@@ -266,16 +277,24 @@ export default function ContactForm() {
         <form onSubmit={onSubmit} className="flex flex-col" noValidate>
           <div className="flex flex-col gap-6">
             <label htmlFor="message" className="text-[1.1rem] font-bold leading-snug text-fg">
-              Tell us about the type of project, timeline, current phase and what you need (website, web app, mobile app, custom software, etc.)
+              Tell us about the type of project, timeline, current phase and what you need (website, web app, mobile app, custom software, etc.) <span className="text-red-500">*</span>
             </label>
             <textarea
               id="message"
               rows={5}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) => {
+                setMessage(e.target.value);
+                if (errors.message) setErrors((prev) => ({ ...prev, message: "" }));
+              }}
               placeholder="Message"
-              className="w-full resize-none border-b border-border/80 bg-transparent py-4 text-sm text-fg placeholder:text-fg/40 outline-none transition-colors focus:border-accent"
+              className={`w-full resize-none border-b py-4 text-sm outline-none transition-colors ${
+                errors.message
+                  ? "border-red-500 text-red-500 placeholder:text-red-500/50"
+                  : "border-border/80 bg-transparent text-fg placeholder:text-fg/40 focus:border-accent"
+              }`}
             />
+            {errors.message && <span className="text-xs font-medium text-red-500">{errors.message}</span>}
           </div>
 
           <div className="mt-8 flex flex-col gap-2">

@@ -105,15 +105,37 @@ export async function POST(req: NextRequest) {
     const { name, email, phone, company, message, acceptedTerms } = body;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (
-      typeof name !== "string" || name.trim().length < 1 || name.length > 120 ||
-      typeof email !== "string" || email.length < 1 || email.length > 120 || !emailRegex.test(email) ||
-      (phone !== undefined && phone !== "" && (typeof phone !== "string" || phone.length > 40)) ||
-      (company !== undefined && company !== "" && (typeof company !== "string" || company.length > 120)) ||
-      typeof message !== "string" || message.trim().length < 1 || message.length > 4000 ||
-      acceptedTerms !== true
-    ) {
-      return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    if (typeof name !== "string" || name.trim().length < 1) {
+      return NextResponse.json({ error: "Name is required.", field: "name" }, { status: 400 });
+    }
+    if (name.length > 120) {
+      return NextResponse.json({ error: "Name is too long (maximum 120 characters).", field: "name" }, { status: 400 });
+    }
+
+    if (typeof email !== "string" || email.trim().length < 1) {
+      return NextResponse.json({ error: "Email is required.", field: "email" }, { status: 400 });
+    }
+    if (email.length > 120 || !emailRegex.test(email)) {
+      return NextResponse.json({ error: "Please provide a valid email address.", field: "email" }, { status: 400 });
+    }
+
+    if (phone !== undefined && phone !== "" && (typeof phone !== "string" || phone.length > 40)) {
+      return NextResponse.json({ error: "Phone number is too long (maximum 40 characters).", field: "phone" }, { status: 400 });
+    }
+
+    if (company !== undefined && company !== "" && (typeof company !== "string" || company.length > 120)) {
+      return NextResponse.json({ error: "Company name is too long (maximum 120 characters).", field: "company" }, { status: 400 });
+    }
+
+    if (typeof message !== "string" || message.trim().length < 1) {
+      return NextResponse.json({ error: "Message is required.", field: "message" }, { status: 400 });
+    }
+    if (message.length > 4000) {
+      return NextResponse.json({ error: "Message is too long (maximum 4000 characters).", field: "message" }, { status: 400 });
+    }
+
+    if (acceptedTerms !== true) {
+      return NextResponse.json({ error: "You must accept the terms and conditions.", field: "terms" }, { status: 400 });
     }
 
     const safeName = escapeHtml(name.trim());
