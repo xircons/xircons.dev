@@ -7,7 +7,7 @@ export default function HashScroller() {
     const scrollToHash = () => {
       const hash = window.location.hash;
       if (!hash) return;
-      const target = document.querySelector(hash);
+      const target = document.getElementById(hash.slice(1));
       if (!target) return;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {

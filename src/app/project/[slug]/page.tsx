@@ -13,6 +13,16 @@ export function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+  if (!project) return {};
+  return {
+    title: project.headline,
+    description: project.body,
+  };
+}
+
 function slugify(headline: string) {
   return headline.toLowerCase().replace(/\s+/g, "-");
 }
@@ -73,11 +83,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <div className="flex items-center justify-between border-b border-border/80 px-5 pt-24 pb-5 lg:px-10 lg:pt-28">
         <Link
-          href={{ pathname: "/", hash: "works" }}
+          href="/#works"
           className="group flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-fg/50 transition-colors hover:text-fg"
         >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
-            <path d="M7 12L3 8L7 4M13 8H3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform group-hover:-translate-x-1" aria-hidden="true">
+            <path d="M6 13L1 7l5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           Back to works
         </Link>

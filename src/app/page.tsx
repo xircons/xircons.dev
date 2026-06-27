@@ -49,8 +49,8 @@ export default function Home() {
       />
       <StackingCards
         cards={PROJECT_CARDS}
-        introEyebrow="Selected Works"
-        introHeadline="Projects built end-to-end, shipped and maintained"
+        introEyebrow="Selected Projects"
+        introHeadline="Production-ready web applications, business platforms, and developer tools."
       />
       <VideoBand />
       <ValueSection />

@@ -67,8 +67,13 @@ export default function ActionButton({
   const groupClass = `group inline-flex ${width} ${className}`;
 
   if (href) {
+    const isExternal = href.startsWith("http");
     return (
-      <Link href={href} className={groupClass}>
+      <Link 
+        href={href} 
+        className={groupClass}
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
         {inner}
       </Link>
     );
