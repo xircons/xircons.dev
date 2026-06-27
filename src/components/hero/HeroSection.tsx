@@ -39,6 +39,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setMounted(true));
@@ -139,15 +140,21 @@ export default function HeroSection({
         </div>
       </div>
 
-      <div className="relative w-full shrink-0 overflow-hidden bg-bg" data-navbar-theme="light">
+      <div className="relative w-full shrink-0 overflow-hidden bg-bg aspect-video" data-navbar-theme="light">
+        {!isVideoLoaded && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-200 animate-pulse">
+            <span className="sr-only">Loading video...</span>
+          </div>
+        )}
         <video
-          className="block h-auto w-full"
+          className={`block h-auto w-full transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
           src="/video/hero-background-optimized.mp4"
           autoPlay
           muted
           loop
           playsInline
           aria-hidden="true"
+          onLoadedData={() => setIsVideoLoaded(true)}
         />
       </div>
     </section>
