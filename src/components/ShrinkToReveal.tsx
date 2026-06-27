@@ -172,7 +172,7 @@ export default function ShrinkToReveal({
             </p>
           </div>
 
-          <div className="grid min-h-0 grid-cols-2 border-x border-b border-t-0 border-border/80">
+          {/* <div className="grid min-h-0 grid-cols-2 border-x border-b border-t-0 border-border/80">
             {cards.map((card, idx) => (
               <a
                 key={`${card.eyebrow}-${idx}`}
@@ -199,7 +199,7 @@ export default function ShrinkToReveal({
                 </div>
               </a>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
