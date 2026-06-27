@@ -33,8 +33,7 @@ export async function POST(req: NextRequest) {
 
     const ipList = req.headers.get("x-forwarded-for")?.split(",") || [];
     const fallbackIp = ipList.length > 0 ? ipList[ipList.length - 1] : req.headers.get("x-real-ip");
-    const requestIp = (req as unknown as { ip?: string }).ip;
-    const ip = (requestIp || fallbackIp || "unknown").trim().toLowerCase();
+    const ip = (fallbackIp || "unknown").trim().toLowerCase();
 
     const now = Date.now();
     const windowStart = now - WINDOW_MS;
