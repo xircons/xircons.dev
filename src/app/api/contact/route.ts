@@ -31,11 +31,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Payload Too Large" }, { status: 413 });
     }
 
-    // Resolve IP safely. NextRequest doesn't type 'ip' natively in the App Router, 
-    // but Vercel sets x-forwarded-for automatically.
     const ipList = req.headers.get("x-forwarded-for")?.split(",") || [];
     const fallbackIp = ipList.length > 0 ? ipList[ipList.length - 1] : req.headers.get("x-real-ip");
-    const ip = ((req as any).ip || fallbackIp || "unknown").trim().toLowerCase();
+    const requestIp = (req as unknown as { ip?: string }).ip;
+    const ip = (requestIp || fallbackIp || "unknown").trim().toLowerCase();
 
     const now = Date.now();
     const windowStart = now - WINDOW_MS;
@@ -54,7 +53,7 @@ export async function POST(req: NextRequest) {
       // Re-insert to maintain MRU position without growing the array
       INMEMORY_LIMITER.delete(ip);
       INMEMORY_LIMITER.set(ip, requestTimestamps);
-      
+
       return NextResponse.json(
         { error: "Too many requests" },
         { status: 429, headers: { "Retry-After": "600" } }
