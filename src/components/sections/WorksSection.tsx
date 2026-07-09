@@ -33,13 +33,14 @@ function ProjectCard({ card }: { card: StackCardData }) {
       <div className="rounded-none lg:hidden">
         <div className="p-0">
           <div className="relative aspect-video overflow-hidden">
+            <div className="absolute inset-0 bg-fg/10 animate-pulse" />
             <Image
               src={card.imageSrc}
               alt={card.imageAlt}
               fill
               quality={100}
               sizes="100vw"
-              className="object-cover object-center"
+              className="relative z-10 object-cover object-center"
             />
           </div>
         </div>
@@ -97,13 +98,14 @@ function ProjectCard({ card }: { card: StackCardData }) {
         </div>
 
         <div className="relative aspect-video overflow-hidden border-x border-border/80">
+          <div className="absolute inset-0 bg-fg/10 animate-pulse" />
           <Image
             src={card.imageSrc}
             alt={card.imageAlt}
             fill
             quality={100}
             sizes="50vw"
-            className="object-cover object-center scale-[1.15] group-hover:scale-100 transition-transform duration-700 ease-in-out"
+            className="relative z-10 object-cover object-center scale-[1.15] group-hover:scale-100 transition-transform duration-700 ease-in-out"
           />
         </div>
 
