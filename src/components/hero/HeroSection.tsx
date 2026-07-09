@@ -38,11 +38,38 @@ export default function HeroSection({
   subheadText = "Building products from concept to deployment.",
 }: HeroSectionProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(id);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const reveal = () => setIsVideoLoaded(true);
+
+    // If the video already has data (fast/cached load), the loadeddata
+    // event may have fired before this listener attached — reveal now.
+    if (video.readyState >= 2) {
+      reveal();
+      return;
+    }
+
+    video.addEventListener("loadeddata", reveal);
+    video.addEventListener("canplay", reveal);
+    // Never leave the skeleton stuck if the source fails.
+    video.addEventListener("error", reveal);
+
+    return () => {
+      video.removeEventListener("loadeddata", reveal);
+      video.removeEventListener("canplay", reveal);
+      video.removeEventListener("error", reveal);
+    };
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -139,14 +166,21 @@ export default function HeroSection({
         </div>
       </div>
 
-      <div className="relative w-full shrink-0 overflow-hidden bg-bg" data-navbar-theme="light">
+      <div className="relative w-full shrink-0 overflow-hidden bg-bg aspect-video" data-navbar-theme="light">
+        {!isVideoLoaded && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-200 animate-pulse">
+            <span className="sr-only">Loading video...</span>
+          </div>
+        )}
         <video
-          className="block h-auto w-full"
+          ref={videoRef}
+          className={`block h-auto w-full transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
           src="/video/hero-background-optimized.mp4"
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
           aria-hidden="true"
         />
       </div>

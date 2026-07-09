@@ -8,6 +8,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental: {
+    outputFileTracingExcludes: {
+      "/*": ["public/**/*"],
+    },
+  },
 };
 
 export default nextConfig;

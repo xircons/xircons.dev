@@ -76,7 +76,8 @@ export async function POST(req: NextRequest) {
           parsedOrigin === "localhost" ||
           parsedOrigin === "127.0.0.1" ||
           parsedOrigin === "xircons.dev" ||
-          parsedOrigin.endsWith(".xircons.dev");
+          parsedOrigin.endsWith(".xircons.dev") ||
+          parsedOrigin.endsWith(".vercel.app");
 
         if (!isAllowedOrigin) {
           return NextResponse.json({ error: "Forbidden" }, { status: 403 });

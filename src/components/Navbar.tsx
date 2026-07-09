@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { projects } from "@/data/projects";
 
 const WORK_LINKS = [...projects]
@@ -31,6 +30,7 @@ const NAV = [
   { code: "01", label: "About", href: "/#about" },
   { code: "02", label: "Works", href: "/#works" },
   { code: "03", label: "Skills", href: "/#skills" },
+  { code: "04", label: "Contact", href: "/contact" },
 ];
 
 const CONNECT = [
@@ -39,12 +39,13 @@ const CONNECT = [
   { label: "Instagram", href: "https://www.instagram.com/pppwtk" },
 ];
 
+const EMAIL = "admin@turnpro.dev";
+
 export default function Navbar() {
   const [isLight, setIsLight] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [worksOpen, setWorksOpen] = useState(false);
-  const router = useRouter();
   const year = new Date().getFullYear();
 
   useEffect(() => {
@@ -88,16 +89,33 @@ export default function Navbar() {
   }, [open]);
 
   const buttonTheme = open
-    ? "border-[#E0E6ED]/30 bg-[#1A1A1A] text-[#E0E6ED]"
+    ? "border-border/30 bg-fg text-border"
     : isLight
       ? "border-white/40 bg-bg text-fg"
       : "border-border/80 bg-fg text-bg";
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
+  const handleAnchorClick = (href: string) => (e: React.MouseEvent) => {
+    closeMenu();
+    if (window.location.pathname === "/" && href.startsWith("/#")) {
+      e.preventDefault();
+      const targetId = href.replace("/#", "");
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
 
   return (
     <>
       <Link
         href="/"
-        className={`fixed left-4 top-4 z-[60] block h-8 w-20 shrink-0 sm:left-6 sm:top-6 sm:h-10 sm:w-24 lg:left-10 lg:top-5 lg:h-12 lg:w-28 ${mounted ? "hero-enter" : "hero-enter-start"}`}
+        className={`fixed left-4 top-4 z-[70] block h-8 w-20 shrink-0 sm:left-6 sm:top-6 sm:h-10 sm:w-24 lg:left-10 lg:top-5 lg:h-12 lg:w-28 ${mounted ? "hero-enter" : "hero-enter-start"}`}
         style={{ "--enter-y": "-16px" } as React.CSSProperties}
       >
         <Image
@@ -124,7 +142,7 @@ export default function Navbar() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         style={{ "--enter-x": "24px" } as React.CSSProperties}
-        className={`group fixed right-4 top-4 z-[60] flex h-10 cursor-pointer items-stretch border transition-colors duration-300 sm:right-6 sm:top-5 sm:h-12 lg:right-10 lg:top-5 ${mounted ? "hero-enter" : "hero-enter-start"} ${buttonTheme}`}
+        className={`group fixed right-4 top-4 z-[70] flex h-10 cursor-pointer items-stretch border transition-colors duration-300 sm:right-6 sm:top-5 sm:h-12 lg:right-10 lg:top-5 ${mounted ? "hero-enter" : "hero-enter-start"} ${buttonTheme}`}
       >
         <span className="hidden items-center pl-4 pr-32 text-sm font-medium uppercase tracking-wide sm:flex">
           {open ? "Close" : "Menu"}
@@ -135,135 +153,126 @@ export default function Navbar() {
         </span>
       </button>
 
-      <div
+      <button
+        type="button"
+        aria-label="Close menu"
+        tabIndex={-1}
+        onClick={closeMenu}
+        className={`fixed inset-0 z-40 cursor-default bg-fg/50 backdrop-blur-sm transition-opacity duration-500 ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+      />
+
+      <aside
         aria-hidden={!open}
-        className={`fixed inset-0 z-50 h-full w-full bg-[#1A1A1A] text-[#E0E6ED] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed right-0 top-0 z-50 flex h-full w-full flex-col bg-white text-fg shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] sm:w-[70vw] md:w-[50vw] lg:w-[38vw] xl:w-[32vw] ${open ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="flex h-full w-full flex-col justify-between px-5 pt-24 pb-8 lg:px-10 lg:pt-28 lg:pb-12">
-          <nav className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-            {NAV.map((item, i) => {
-              const isWorks = item.label === "Works";
-              return (
-                <div
-                  key={item.label}
-                  className={`border-t border-[#E0E6ED]/15 ${i === NAV.length - 1 && !isWorks ? "border-b" : ""}`}
-                >
-                  <div className="flex items-center justify-between gap-5">
-                    <a
-                      href={item.href}
-                      onClick={(e) => {
-                        setOpen(false);
-                        document.body.style.overflow = "";
-                        if (window.location.pathname === "/") {
-                          e.preventDefault();
-                          const targetId = item.href.replace("/#", "");
-                          const target = document.getElementById(targetId);
-                          if (target) {
-                            target.scrollIntoView({ behavior: "smooth", block: "start" });
-                            window.history.pushState(null, "", item.href);
-                          }
-                        }
-                      }}
-                      className={`group flex flex-1 items-baseline gap-6 text-[#E0E6ED]/70 transition-all duration-500 ease-out hover:text-[#E0E6ED] ${worksOpen ? "py-3 lg:py-5" : "py-6 lg:py-10"}`}
-                    >
-                      <span className="font-mono text-xs font-medium text-[#E0E6ED]/40 transition-colors duration-500 group-hover:text-[#E0E6ED]/60 sm:text-sm">
-                        {item.code}
-                      </span>
-                      <span
-                        className={`font-bold leading-[0.85] tracking-tighter transition-all duration-500 ease-out group-hover:translate-x-4 ${worksOpen ? "text-[clamp(2rem,5vw,3.5rem)]" : "text-[clamp(3rem,10vw,7.5rem)]"}`}
+        <div className="flex h-full w-full flex-col justify-between overflow-y-auto px-6 pb-8 pt-24 sm:px-8 sm:pt-28 lg:px-10 lg:pb-12">
+          <div>
+            <h2 className="mb-8 text-xs font-medium uppercase tracking-[0.25em] text-fg/40">
+              Navigation
+            </h2>
+            <nav className="flex flex-col">
+              {NAV.map((item) => {
+                const isWorks = item.label === "Works";
+                return (
+                  <div key={item.label}>
+                    <div className="group flex items-center justify-between gap-4">
+                      <Link
+                        href={item.href}
+                        onClick={item.href.startsWith("/#") ? handleAnchorClick(item.href) : closeMenu}
+                        className={`flex flex-1 items-baseline gap-4 text-fg transition-colors duration-500 ${worksOpen ? "py-3" : "py-5"}`}
                       >
-                        {item.label}
-                      </span>
-                    </a>
+                        <span
+                          className={`font-bold leading-[0.95] tracking-tight transition-all duration-500 ease-out group-hover:translate-x-2 ${worksOpen ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl lg:text-6xl"}`}
+                        >
+                          {item.label}
+                        </span>
+                      </Link>
+
+                      {isWorks && (
+                        <button
+                          type="button"
+                          aria-label={worksOpen ? "Collapse projects" : "Expand projects"}
+                          aria-expanded={worksOpen}
+                          onClick={() => setWorksOpen((v) => !v)}
+                          className="relative grid h-10 w-10 shrink-0 cursor-pointer place-items-center text-fg/70 transition-colors hover:border-fg/60 hover:text-fg"
+                        >
+                          <span className="absolute h-0.5 w-4 rounded-full bg-current" />
+                          <span
+                            className={`absolute h-0.5 w-4 rounded-full bg-current transition-transform duration-500 ease-out ${worksOpen ? "rotate-0" : "rotate-90"}`}
+                          />
+                        </button>
+                      )}
+                    </div>
 
                     {isWorks && (
-                      <button
-                        type="button"
-                        aria-label={worksOpen ? "Collapse projects" : "Expand projects"}
-                        aria-expanded={worksOpen}
-                        onClick={() => setWorksOpen((v) => !v)}
-                        className="relative grid h-14 w-14 shrink-0 cursor-pointer place-items-center text-[#E0E6ED]/70 transition-colors hover:text-[#E0E6ED]"
+                      <div
+                        className="grid transition-all duration-500 ease-out"
+                        style={{ gridTemplateRows: worksOpen ? "1fr" : "0fr" }}
                       >
-                        <span className="absolute h-0.5 w-6 rounded-full bg-current" />
-                        <span
-                          className={`absolute h-0.5 w-6 rounded-full bg-current transition-transform duration-500 ease-out ${worksOpen ? "rotate-0" : "rotate-90"}`}
-                        />
-                      </button>
+                        <div className="overflow-hidden">
+                          <ul className="mb-4 ml-4 flex flex-col border-l border-fg/10 pl-4">
+                            {WORK_LINKS.map((work) => (
+                              <li key={work.slug}>
+                                <Link
+                                  href={`/project/${work.slug}`}
+                                  onClick={closeMenu}
+                                  className="group flex items-center justify-between gap-4 py-2 pr-2 transition-colors duration-300"
+                                >
+                                  <span className="flex items-baseline gap-2">
+                                    <span className="font-mono text-xs font-medium text-fg/40 transition-colors duration-300 group-hover:text-fg/70">
+                                      P{String(work.id).padStart(3, "0")}
+                                    </span>
+                                    <span className="text-sm font-medium text-fg/70 transition-colors duration-300 group-hover:text-fg">
+                                      {work.label}
+                                    </span>
+                                  </span>
+                                  <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    aria-hidden="true"
+                                    className="shrink-0 -translate-x-1 text-fg/40 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                                  >
+                                    <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                                  </svg>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
                     )}
                   </div>
+                );
+              })}
+            </nav>
+          </div>
 
-                  {isWorks && (
-                    <div
-                      className="grid transition-all duration-500 ease-out"
-                      style={{ gridTemplateRows: worksOpen ? "1fr" : "0fr" }}
-                    >
-                      <div className="overflow-hidden">
-                        <ul className="mb-4 ml-5 flex flex-col lg:ml-6">
-                          {WORK_LINKS.map((work) => (
-                            <li key={work.slug}>
-                              <Link
-                                href={`/project/${work.slug}`}
-                                onClick={() => {
-                                  setOpen(false);
-                                  document.body.style.overflow = "";
-                                }}
-                                className="group flex items-center justify-between gap-4 py-2.5 pl-6 pr-4 transition-colors duration-500 hover:bg-[#E0E6ED]/5 lg:py-3 lg:pl-10 lg:pr-6"
-                              >
-                                <span className="flex items-baseline gap-2 sm:gap-2">
-                                  <span className="font-mono text-xs font-medium text-[#E0E6ED]/40 transition-colors duration-500 group-hover:text-[#E0E6ED]/60">
-                                    P{String(work.id).padStart(3, "0")} /
-                                  </span>
-                                  <span className="text-base font-medium text-[#E0E6ED]/70 transition-colors duration-500 group-hover:text-[#E0E6ED] lg:text-lg">
-                                    {work.label}
-                                  </span>
-                                </span>
-                                <svg
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="1.5"
-                                  aria-hidden="true"
-                                  className="shrink-0 -translate-x-1 text-[#E0E6ED]/40 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                                >
-                                  <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-            <div className="border-b border-[#E0E6ED]/15" />
-          </nav>
-
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <div className="mt-12 flex flex-col gap-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs">
                 {CONNECT.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-[#E0E6ED]/70 transition-colors hover:text-[#E0E6ED]"
+                    className="text-fg/60 transition-colors hover:text-fg"
                   >
                     {link.label}
                   </a>
                 ))}
               </div>
+              <span className="text-[10px] uppercase tracking-widest text-fg/40">
+                © {year} XIRCONS
+              </span>
             </div>
-            <span className="text-[10px] uppercase tracking-widest text-[#E0E6ED]/30">
-              <span>© {year} All Rights Reserved. XIRCONS.</span>
-            </span>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 }
