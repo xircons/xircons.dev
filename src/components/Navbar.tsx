@@ -179,7 +179,7 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={item.href.startsWith("/#") ? handleAnchorClick(item.href) : closeMenu}
-                        className={`flex flex-1 items-baseline gap-4 text-fg/70 transition-colors duration-500 group-hover:text-fg ${worksOpen ? "py-3" : "py-5"}`}
+                        className={`flex flex-1 items-baseline gap-4 text-fg transition-colors duration-500 ${worksOpen ? "py-3" : "py-5"}`}
                       >
                         <span
                           className={`font-bold leading-[0.95] tracking-tight transition-all duration-500 ease-out group-hover:translate-x-2 ${worksOpen ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl lg:text-6xl"}`}
