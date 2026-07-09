@@ -26,7 +26,7 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     eyebrow: "Full-stack developer • 2026",
     headline: "NinjaLingo",
     body: "A flashcard web app I built so people can study and track their progress. I also wrote a custom script to convert vocabulary CSV files into JSON to easily import data. Users sign in to review cards, and admins manage the sets.",
@@ -57,7 +57,22 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 6,
+    id: 3,
+    eyebrow: "Full-stack developer • 2025",
+    headline: "deskcat",
+    body: "Recommend following my case study.",
+    imageUrl: "/projects/deskcat/hero.png",
+    ctaText: "View Source",
+    ctaLink: "https://github.com/xircons/deskcat",
+    caseStudy: [
+      "I built deskcat as a solo developer to serve as a continuous on-screen companion and productivity tool. It is a desktop application featuring a floating pixel-art cat that helps users jot quick notes throughout the day. The problem it solves is the exhaustion and frustration of having to sit down every evening and trying to remember what was accomplished all day just to write daily reflections; by continuously tracking activities alongside a virtual pet companion, users no longer have to rely on their memory at the end of the day.",
+      "The user flow is seamlessly integrated into the desktop environment: the virtual pet floats transparently on screen, with its eyes following the mouse cursor while clicks effortlessly pass through to underlying applications. Users can click the cat to instantly open a quick-note popup to jot down activities, or click and drag it around the screen using elastic physics. At configured intervals, the cat bounces with alert marks to prompt a new entry, and if ignored, its mood progressively transitions from content to lonely or grumpy until a note is saved. At the end of the day, a final reflection prompt aggregates all chronological notes, allowing users to write their evening summary without starting from a blank slate.",
+      "The project is structured as an Electron desktop application built entirely with TypeScript and packaged using electron-builder. The architecture strictly separates concerns: the main process handles window management, system tray menus, global keystroke monitoring using uiohook-napi, and atomic filesystem writes to safely store daily JSON and Markdown files. The renderer process manages the DOM and utilizes a custom spring-damper physics engine for drag-and-drop interactions, offloading hardware-accelerated rendering to the GPU with inline CSS transforms to eliminate browser layout thrashing.",
+      "One significant challenge was managing the dynamic rendering of the cat's states and patterns without degrading desktop performance. Originally, updating SVG skins caused expensive garbage collection sweeps; this was solved by implementing a DOM object pool that intelligently recycles <rect> elements and toggles their display states. The cat artwork, animations, and coat patterns are adapted from \"Catjang\" by jan (nerfspeed on Discord) under the CC BY-NC 4.0 license. To integrate these assets, I made specific technical modifications, including baking ear/tail paths, namespacing IDs, adding steam-puff groups, and reimplementing the data-patch-frame lightweight spot-painter entirely in TypeScript without runtime cell-mapping tables.",
+    ],
+  },
+  {
+    id: 7,
     eyebrow: "Full-stack developer • 2025",
     headline: "store.atelien",
     body: "An e-commerce website I made for a school project. People can sign up, browse products, use a cart and checkout, and there is an admin area to manage orders, products, and coupons.",
@@ -72,7 +87,7 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     eyebrow: "Full-stack developer • 2025",
     headline: "Tic-Tac-Toe with AI",
     body: "A tic-tac-toe game I built where you can play against the computer or with a friend. The computer has different levels, and on the hardest level it plays very strong so it is almost impossible to beat.",
@@ -87,7 +102,7 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     eyebrow: "Full-stack developer • 2025",
     headline: "Good Night Hostel",
     body: "A booking website and staff dashboard I built for a hostel. Guests can look at rooms and switch languages, while staff can manage bookings, housekeeping, and view charts in their own admin area.",
@@ -102,7 +117,7 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     eyebrow: "Full-stack developer • 2026",
     headline: "Geo Care Network",
     body: "A Chiang Mai–focused map prototype for community incident reporting: browse and file reports on a live map, run CCTV footage through Gemini for auto-filled crash reports, and triage CCTV cases in a separate agency console—backed locally by zero-mock.",

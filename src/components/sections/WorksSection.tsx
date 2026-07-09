@@ -84,7 +84,7 @@ function ProjectCard({ card }: { card: StackCardData }) {
       <div className="hidden grid-cols-[25%_50%_25%] px-12 lg:grid">
 
         <div className="relative">
-          <div className="absolute inset-x-7 top-full -translate-y-[calc(100%+1.25rem)] transition-all duration-500 ease-in-out group-hover:top-0 group-hover:translate-y-5">
+          <div className="absolute inset-x-7 top-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out group-hover:top-0 group-hover:translate-y-5">
             {card.number && (
               <span className="mb-3 block font-mono text-[10px] font-medium tracking-widest text-fg/30 uppercase">
                 {card.number}
@@ -93,7 +93,6 @@ function ProjectCard({ card }: { card: StackCardData }) {
             <h3 className="text-lg font-bold leading-tight tracking-tight text-fg">
               {card.headline}
             </h3>
-            <span className="mt-1 block text-sm text-fg/50">{card.eyebrow}</span>
           </div>
         </div>
 
@@ -111,13 +110,21 @@ function ProjectCard({ card }: { card: StackCardData }) {
         <div className="relative overflow-hidden">
           <span
             aria-hidden="true"
-            className="absolute right-5 top-full -translate-y-[calc(100%+1rem)] text-lg text-fg/50 transition-all duration-500 ease-in-out group-hover:top-0 group-hover:translate-y-4 group-hover:text-fg"
+            className="absolute right-5 top-1/2 -translate-y-1/2 text-lg text-fg/50 transition-all duration-500 ease-in-out group-hover:top-0 group-hover:translate-y-4 group-hover:text-fg"
           >
             ↗
           </span>
 
-          {(card.role || card.year) && (
+          {(card.eyebrow || card.role || card.year) && (
             <div className="absolute inset-x-5 bottom-5 flex translate-y-[calc(100%+1.5rem)] flex-col items-end gap-3 text-right transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+              {card.eyebrow && (
+                <div>
+                  <span className="block font-mono text-[10px] tracking-widest text-fg/40 uppercase">
+                    Type
+                  </span>
+                  <span className="text-sm font-semibold text-fg">{card.eyebrow}</span>
+                </div>
+              )}
               {card.role && (
                 <div>
                   <span className="block font-mono text-[10px] tracking-widest text-fg/40 uppercase">

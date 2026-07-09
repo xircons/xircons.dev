@@ -15,11 +15,12 @@ const getCategory = (id: string | number) => {
   const map: Record<string, string> = {
     1: "Production",
     2: "Competition",
-    3: "Academic",
-    4: "Production",
-    5: "Personal",
-    6: "Academic",
-    7: "Personal"
+    3: "Personal",
+    4: "Academic",
+    5: "Production",
+    6: "Personal",
+    7: "Academic",
+    8: "Personal",
   };
   return map[String(id)] || "Project";
 };
