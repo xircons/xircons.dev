@@ -20,12 +20,13 @@ export default function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2">
 
         <div className="relative min-h-[60vw] lg:min-h-screen">
+          <div className="absolute inset-0 bg-fg/10 animate-pulse" />
           <Image
             src="/wuttikan/___________________copykub.jpg"
             alt="Xircons studio"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover object-center grayscale"
+            className="relative z-10 object-cover object-center grayscale"
           />
         </div>
 

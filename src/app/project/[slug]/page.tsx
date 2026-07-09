@@ -146,7 +146,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div className="relative z-0 flex w-full min-w-0 flex-col gap-5 md:w-[61%] md:shrink-0">
             {gallery.map((src) => (
               <div key={src} className="relative w-full shrink-0 overflow-hidden border border-border/80">
-                <img src={src} alt="" loading="lazy" className="block h-auto w-full" />
+                <div className="absolute inset-0 bg-fg/10 animate-pulse" />
+                <img src={src} alt="" loading="lazy" className="relative z-10 block h-auto w-full" />
               </div>
             ))}
           </div>
@@ -169,10 +170,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         >
           <div className="border-b border-border/80 p-5 md:border-b-0 md:border-r lg:p-10">
             <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <div className="absolute inset-0 bg-fg/10 animate-pulse" />
               <img
                 src={nextProject.imageUrl}
                 alt=""
-                className="h-full w-full object-cover object-center"
+                className="relative z-10 h-full w-full object-cover object-center"
               />
             </div>
           </div>

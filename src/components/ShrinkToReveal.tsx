@@ -102,13 +102,14 @@ export default function ShrinkToReveal({
               }}
               className="relative h-full w-full will-change-transform"
             >
+              <div className="absolute inset-0 bg-fg/10 animate-pulse" />
               <Image
                 src={imageSrc}
                 alt={imageAlt}
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover grayscale"
+                className="relative z-10 object-cover grayscale"
               />
               <motion.div
                 aria-hidden="true"

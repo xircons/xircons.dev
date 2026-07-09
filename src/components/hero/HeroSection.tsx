@@ -168,7 +168,7 @@ export default function HeroSection({
 
       <div className="relative w-full shrink-0 overflow-hidden bg-bg aspect-video" data-navbar-theme="light">
         {!isVideoLoaded && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-200 animate-pulse">
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-fg/10 animate-pulse">
             <span className="sr-only">Loading video...</span>
           </div>
         )}
