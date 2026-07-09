@@ -153,6 +153,7 @@ export default function HeroSection({
           muted
           loop
           playsInline
+          preload="metadata"
           aria-hidden="true"
           onLoadedData={() => setIsVideoLoaded(true)}
         />
