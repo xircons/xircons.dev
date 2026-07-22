@@ -31,13 +31,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: project.headline,
       description: project.body,
       url: `https://xircons-dev.vercel.app/project/${slug}`,
-      images: [project.imageUrl],
+      siteName: "Xircons",
     },
     twitter: {
       card: "summary_large_image",
       title: project.headline,
       description: project.body,
-      images: [project.imageUrl],
     },
   };
 }
