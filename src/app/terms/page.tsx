@@ -15,7 +15,7 @@ export default function TermsPage() {
       <section className="mx-auto flex w-full max-w-4xl flex-col px-6 py-32 sm:px-10 lg:py-48">
         <button
           onClick={() => router.back()}
-          className="group mb-12 flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-fg/50 transition-colors hover:text-fg"
+          className="group mb-12 flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-fg/50 transition-colors hover:text-fg cursor-pointer"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform group-hover:-translate-x-1">
             <path d="M6 13L1 7l5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
