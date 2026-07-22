@@ -9,7 +9,7 @@ export const size = {
 };
 
 export default function Icon() {
-  const imagePath = path.join(process.cwd(), "public", "xircons-x-nobg.png");
+  const imagePath = path.join(process.cwd(), "public", "logo", "xircons-x-nobg.png");
   let imageBuffer;
   try {
     imageBuffer = readFileSync(imagePath);
