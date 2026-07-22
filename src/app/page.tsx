@@ -10,6 +10,17 @@ import VideoBand from "@/components/sections/VideoBand";
 import Footer from "@/components/Footer";
 import HashScroller from "@/components/HashScroller";
 import { projects } from "@/data/projects";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Xircons — Engineering & Design",
+  description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+  openGraph: {
+    title: "Xircons — Engineering & Design",
+    description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+    url: "/",
+  },
+};
 
 const getCategory = (id: string | number) => {
   const map: Record<string, string> = {

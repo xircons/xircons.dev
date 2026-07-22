@@ -149,6 +149,7 @@ export default function HeroSection({
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-contain scale-[0.85] md:scale-[0.9] transition-opacity duration-300 group-hover:opacity-0"
                 />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo/xircons-ascii-nobg.svg?v=20"
                   alt="Xircons logo ASCII"

@@ -3,9 +3,11 @@ import path from "node:path";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, projects, type ProjectData } from "@/data/projects";
 import Link from "next/link";
+import Image from "next/image";
 import ActionButton from "@/components/ActionButton";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { breadcrumbSchema, creativeWorkSchema, softwareApplicationSchema } from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -22,6 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: project.headline,
     description: project.body,
+    alternates: {
+      canonical: `https://xircons-dev.vercel.app/project/${slug}`,
+    },
+    openGraph: {
+      title: project.headline,
+      description: project.body,
+      url: `https://xircons-dev.vercel.app/project/${slug}`,
+      images: [project.imageUrl],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.headline,
+      description: project.body,
+      images: [project.imageUrl],
+    },
   };
 }
 
@@ -80,8 +97,36 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const gallery = getGallery(project);
   const paragraphs = project.caseStudy ?? [project.body];
 
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", url: "https://xircons-dev.vercel.app/" },
+    { name: project.headline, url: `https://xircons-dev.vercel.app/project/${slug}` },
+  ]);
+
+  const projectSchema = project.headline === "Zero-mock" 
+    ? softwareApplicationSchema({
+        name: project.headline,
+        url: project.ctaLink ?? `https://xircons-dev.vercel.app/project/${slug}`,
+        imageUrl: `https://xircons-dev.vercel.app${project.imageUrl}`,
+        description: project.body,
+      })
+    : creativeWorkSchema({
+        name: project.headline,
+        url: `https://xircons-dev.vercel.app/project/${slug}`,
+        imageUrl: `https://xircons-dev.vercel.app${project.imageUrl}`,
+        description: project.body,
+      });
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [breadcrumb, projectSchema],
+  };
+
   return (
     <main className="relative w-full bg-bg text-fg" data-navbar-theme="dark">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
 
       <div className="flex items-center justify-between border-b border-border/80 px-5 pt-24 pb-5 lg:px-10 lg:pt-28">
@@ -147,7 +192,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             {gallery.map((src) => (
               <div key={src} className="relative w-full shrink-0 overflow-hidden border border-border/80">
                 <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                <img src={src} alt="" loading="lazy" className="relative z-10 block h-auto w-full" />
+                <Image src={src} alt="" width={1920} height={1080} className="relative z-10 block h-auto w-full" />
               </div>
             ))}
           </div>
@@ -171,10 +216,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div className="border-b border-border/80 p-5 md:border-b-0 md:border-r lg:p-10">
             <div className="relative aspect-[16/10] w-full overflow-hidden">
               <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-              <img
+              <Image
                 src={nextProject.imageUrl}
                 alt=""
-                className="relative z-10 h-full w-full object-cover object-center"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="relative z-10 object-cover object-center"
               />
             </div>
           </div>
