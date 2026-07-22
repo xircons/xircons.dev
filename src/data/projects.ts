@@ -32,7 +32,7 @@ export const projects: readonly ProjectData[] = [
     body: "A flashcard web app I built so people can study and track their progress. I also wrote a custom script to convert vocabulary CSV files into JSON to easily import data. Users sign in to review cards, and admins manage the sets.",
     imageUrl: "/projects/ninjalingo/hero.png",
     ctaText: "Private Repo",
-    ctaLink: "",
+    ctaLink: undefined,
     caseStudy: [
       "I worked on NinjaLingo as part of a team, in a full-stack role. It is a language-learning flashcard web app aimed at helping users study vocabulary in a structured way. The product solves the problem of finding trustworthy card sets, staying motivated, and reviewing on a schedule instead of cramming. Public card set catalog and card content live in the database and are loaded through the app's API, so learners always pull curated, consistent content while their own progress can be tracked over time.",
       "The main flow takes users from choosing a card set to a dashboard, into an interactive review session, and then to a completion screen with session feedback. Review uses spaced repetition (SM-2-style scheduling) so cards come back at sensible intervals. There is a profile area for account-related needs, shareable paths for specific sets (e.g. opening a set from a URL), and an admin area for managing content behind stricter access. On the UI side we focused on a clear, friendly experience: Tailwind CSS for layout and theming (including light/dark), and Framer Motion for motion so interactions feel smooth without getting in the way of studying.",

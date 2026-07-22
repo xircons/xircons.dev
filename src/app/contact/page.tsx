@@ -6,6 +6,11 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch to start a project with Xircons.",
+  openGraph: {
+    title: "Contact — Xircons",
+    description: "Get in touch to start a project with Xircons.",
+    url: "/contact",
+  },
 };
 
 export default function ContactPage() {
