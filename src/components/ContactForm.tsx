@@ -113,7 +113,7 @@ export default function ContactForm() {
       sessionStorage.removeItem("contactFormState");
       setIsSuccess(true);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : "Failed to send message. Please try again later.");
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -133,7 +133,7 @@ export default function ContactForm() {
         </div>
         <h2 className="mb-4 text-3xl font-bold tracking-tight text-fg">Thank you for reaching out!</h2>
         <p className="text-lg text-fg/70">
-          We have received your message and will get back to you shortly.
+          I have received your message and will reply by email.
         </p>
         <button
           onClick={() => {
@@ -277,7 +277,7 @@ export default function ContactForm() {
         <form onSubmit={onSubmit} className="flex flex-col" noValidate>
           <div className="flex flex-col gap-6">
             <label htmlFor="message" className="text-[1.1rem] font-bold leading-snug text-fg">
-              Tell us about the type of project, timeline, current phase and what you need (website, web app, mobile app, custom software, etc.) <span className="text-red-500">*</span>
+              Tell me about the type of project, timeline, current phase and what you need (website, web app, custom software, etc.) <span className="text-red-500">*</span>
             </label>
             <textarea
               id="message"
@@ -358,7 +358,7 @@ export default function ContactForm() {
           <div className="mt-12 border-t border-border/80 pt-6">
             <h4 className="mb-2 text-xs font-bold text-fg">Basic information on data protection</h4>
             <p className="text-[10px] leading-relaxed text-fg/60">
-              Controller: XIRCONS. Purpose: To process and manage the provided data, which will be used exclusively for internal purposes and will not be shared with third parties under any circumstances, except by express request of a judicial authority. Legal basis: Consent of the data subject, in accordance with Regulation (EU) 2016/679 (GDPR). Rights: You have the right to withdraw your consent at any time, as well as to access, rectify, erase your data and exercise other rights recognized by current regulations, by sending a request to: <a href={`mailto:${CONTACT_EMAIL}`} className="underline underline-offset-2">{CONTACT_EMAIL}</a>. Additional information: You can find more information about the protection of your data in our Privacy Policy.
+              Controller: Xircons. Purpose: To read and reply to your inquiry. Your message is sent by email through Resend and received in Gmail. It is not shared with anyone else, except at the express request of a judicial authority. Legal basis: Consent of the data subject, in accordance with Regulation (EU) 2016/679 (GDPR). Rights: You have the right to withdraw your consent at any time, as well as to access, rectify, erase your data and exercise other rights recognized by current regulations, by sending a request to: <a href={`mailto:${CONTACT_EMAIL}`} className="underline underline-offset-2">{CONTACT_EMAIL}</a>. Additional information: You can find more information about the protection of your data in my Privacy Policy.
             </p>
           </div>
         </form>

@@ -39,7 +39,6 @@ const CONNECT = [
   { label: "Instagram", href: "https://www.instagram.com/pppwtk" },
 ];
 
-const EMAIL = "admin@turnpro.dev";
 
 export default function Navbar() {
   const [isLight, setIsLight] = useState(false);

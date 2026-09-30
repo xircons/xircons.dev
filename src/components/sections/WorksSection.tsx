@@ -155,8 +155,8 @@ function ProjectCard({ card }: { card: StackCardData }) {
 export default function WorksSection({
   cards,
   navbarOffsetPx = 88,
-  introEyebrow = "Solutions",
-  introHeadline = "Industrialized technology for an evolving environment",
+  introEyebrow = "Selected Projects",
+  introHeadline = "Web applications, business platforms, and developer tools.",
 }: WorksSectionProps) {
   return (
     <section
