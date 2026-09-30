@@ -4,10 +4,12 @@ export function personSchema() {
     "@type": "Person",
     name: "Xircons",
     url: "https://xircons-dev.vercel.app",
-    jobTitle: "Software Engineer & UX Designer",
+    jobTitle: "Full-stack Developer",
+    email: "xirconsss@gmail.com",
     sameAs: [
       "https://github.com/xircons",
-      // add other socials here if available
+      "https://www.facebook.com/pppwtk",
+      "https://www.instagram.com/pppwtk",
     ],
   };
 }

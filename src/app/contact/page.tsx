@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch to start a project with Xircons.",
   openGraph: {
-    title: "Contact — Xircons",
+    title: "Contact | Xircons",
     description: "Get in touch to start a project with Xircons.",
     url: "/contact",
   },
@@ -28,7 +28,7 @@ export default function ContactPage() {
               Contact
             </h1>
             <p className="max-w-[28rem] text-xl font-medium leading-[1.15] tracking-[-0.02em] sm:text-2xl lg:text-[2rem]">
-              Tell us about your case and we will guide you with the right approach.
+              Tell me about your project and I&apos;ll reply with next steps.
             </p>
           </div>
           <div aria-hidden="true" className="flex-1 px-6 py-12 sm:px-10 lg:px-16 lg:py-24 xl:px-24" />

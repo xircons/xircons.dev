@@ -24,7 +24,7 @@ export default async function Image() {
       >
         <div style={{ fontWeight: 700, fontSize: 128, marginBottom: 30 }}>Xircons</div>
         <div style={{ color: "#1A1A1A", fontSize: 48, opacity: 0.7 }}>
-          Minimalist portfolio showcasing UX-focused engineering and design.
+          Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.
         </div>
       </div>
     ),

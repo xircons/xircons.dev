@@ -11,13 +11,6 @@ import {
 } from "framer-motion";
 import HeadlineWord from "@/components/HeadlineWord";
 
-interface RevealCard {
-  eyebrow: string;
-  body: string;
-  href?: string;
-  cta?: string;
-}
-
 interface ShrinkToRevealProps {
   imageSrc?: string;
   imageAlt?: string;
@@ -25,43 +18,15 @@ interface ShrinkToRevealProps {
   headline?: string;
   subhead?: string;
   scrollHeight?: string;
-  cards?: RevealCard[];
 }
-
-function ArrowIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={`h-4 w-4 ${className}`}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-const DEFAULT_CARDS: RevealCard[] = [
-  {
-    eyebrow: "Lorem Ipsum",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966,",
-  },
-  {
-    eyebrow: "Lorem Ipsum",
-    body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966,",
-  },
-];
 
 export default function ShrinkToReveal({
   imageSrc = "/logo/xircons-full-nobg.png",
   imageAlt = "Xircons",
   edgePadding = "1.25rem",
   headline = "HELLO! I'M XIRCONS",
-  subhead = "Full-Stack Developer experienced in building production-ready web applications, business platforms, and developer tools. Skilled in translating business requirements into scalable software solutions, from UX/UI design and database architecture to deployment and maintenance.",
+  subhead = "Full-stack developer building web applications, business platforms, and developer tools. I take projects from business requirements and UX/UI design through database architecture, deployment, and maintenance.",
   scrollHeight = "h-[120vh]",
-  cards = DEFAULT_CARDS,
 }: ShrinkToRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -84,8 +49,6 @@ export default function ShrinkToReveal({
 
   const overlayOpacity = useTransform(smoothProgress, [0, 1], [0.6, 0.15]);
 
-  const indicatorScaleY = useTransform(smoothProgress, [0.05, 1], [0, 1]);
-  const indicatorOpacity = useTransform(smoothProgress, [0.05, 0.2, 0.95, 1], [0, 1, 1, 0.3]);
 
 
   return (
@@ -172,35 +135,6 @@ export default function ShrinkToReveal({
               {subhead}
             </p>
           </div>
-
-          {/* <div className="grid min-h-0 grid-cols-2 border-x border-b border-t-0 border-border/80">
-            {cards.map((card, idx) => (
-              <a
-                key={`${card.eyebrow}-${idx}`}
-                href={card.href ?? "#"}
-                className={`group relative flex min-h-0 flex-col justify-between gap-3 overflow-hidden p-4 transition-colors duration-500 ease-out sm:gap-4 sm:p-6 ${idx > 0 ? "border-l border-border/80" : ""
-                  }`}
-              >
-                <div className="flex items-center justify-between sm:mb-8 lg:mb-12">
-                  <h3 className="text-base font-bold uppercase transition-colors duration-300 group-hover:text-accent sm:text-lg">
-                    {card.eyebrow}
-                  </h3>
-                </div>
-                <p className="line-clamp-3 text-xs leading-relaxed text-fg/70 sm:line-clamp-4 sm:text-sm">
-                  {card.body}
-                </p>
-                <div className="inline-flex w-full items-stretch border border-border/80 text-xs font-medium transition-colors duration-500 ease-out group-hover:border-accent group-hover:text-accent sm:text-sm">
-                  <span className="flex flex-1 items-center px-4 py-2.5">
-                    {card.cta ?? "Learn more"}
-                  </span>
-                  <span className="relative flex w-10 items-center justify-center overflow-hidden border-l border-border/80 transition-colors duration-500 ease-out group-hover:border-accent">
-                    <ArrowIcon className="absolute transition-transform duration-500 ease-out group-hover:translate-x-[250%]" />
-                    <ArrowIcon className="absolute -translate-x-[250%] transition-transform duration-500 ease-out group-hover:translate-x-0" />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div> */}
         </div>
       </div>
     </section>

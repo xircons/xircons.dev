@@ -35,7 +35,7 @@ function AsciiCursor({ ref: cursorRef }: { ref: React.RefObject<HTMLDivElement |
 
 export default function HeroSection({
   headlineLines = ["FROM", "CONCEPT", "TO CODE"],
-  subheadText = "Building products from concept to deployment.",
+  subheadText = "Web apps, business platforms, and developer tools.",
 }: HeroSectionProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);

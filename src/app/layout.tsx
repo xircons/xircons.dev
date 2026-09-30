@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://xircons-dev.vercel.app"),
   title: {
     default: "Xircons",
-    template: "%s — Xircons",
+    template: "%s | Xircons",
   },
-  description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+  description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
   keywords: ["Software Engineering", "UX Design", "Web Development", "Portfolio", "Xircons"],
   authors: [{ name: "Xircons" }],
   creator: "Xircons",
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     title: "Xircons",
-    description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
     siteName: "Xircons",
   },
   twitter: {
     card: "summary_large_image",
     title: "Xircons",
-    description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
   },
 };
 

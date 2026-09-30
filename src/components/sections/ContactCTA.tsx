@@ -35,7 +35,7 @@ export default function ContactCTA() {
             Contact
           </span>
           <p className="max-w-sm text-base leading-relaxed text-[#E0E6ED]/60 sm:text-lg">
-            Let's start the conversation. Every great product begins with great collaboration.
+            Have a project in mind? Tell me what you need and I'll reply by email.
           </p>
         </div>
 

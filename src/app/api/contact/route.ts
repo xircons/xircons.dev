@@ -24,12 +24,12 @@ export async function POST(req: NextRequest) {
     
     const contentType = req.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
-      return NextResponse.json({ error: "Unsupported Media Type" }, { status: 415 });
+      return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 415 });
     }
 
     const contentLength = req.headers.get("content-length");
     if (contentLength && parseInt(contentLength, 10) > 4096) {
-      return NextResponse.json({ error: "Payload Too Large" }, { status: 413 });
+      return NextResponse.json({ error: "Your message is too long. Please shorten it and try again." }, { status: 413 });
     }
 
     const ipList = req.headers.get("x-forwarded-for")?.split(",") || [];
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       INMEMORY_LIMITER.set(ip, requestTimestamps);
 
       return NextResponse.json(
-        { error: "Too many requests" },
+        { error: "Too many messages sent. Please try again in 10 minutes." },
         { status: 429, headers: { "Retry-After": "600" } }
       );
     }
@@ -80,23 +80,23 @@ export async function POST(req: NextRequest) {
           parsedOrigin.endsWith(".vercel.app");
 
         if (!isAllowedOrigin) {
-          return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+          return NextResponse.json({ error: "This request was blocked. Please email xirconsss@gmail.com instead." }, { status: 403 });
         }
       } catch {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+        return NextResponse.json({ error: "This request was blocked. Please email xirconsss@gmail.com instead." }, { status: 403 });
       }
     }
 
     const text = await req.text();
     if (text.length > 4096) {
-      return NextResponse.json({ error: "Payload Too Large" }, { status: 413 });
+      return NextResponse.json({ error: "Your message is too long. Please shorten it and try again." }, { status: 413 });
     }
 
     let body;
     try {
       body = JSON.parse(text);
     } catch {
-      return NextResponse.json({ error: "Bad Request" }, { status: 400 });
+      return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 400 });
     }
 
     if (typeof body.website === "string" && body.website.trim() !== "") {
@@ -107,36 +107,36 @@ export async function POST(req: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (typeof name !== "string" || name.trim().length < 1) {
-      return NextResponse.json({ error: "Name is required.", field: "name" }, { status: 400 });
+      return NextResponse.json({ error: "Full name is required", field: "name" }, { status: 400 });
     }
     if (name.length > 120) {
-      return NextResponse.json({ error: "Name is too long (maximum 120 characters).", field: "name" }, { status: 400 });
+      return NextResponse.json({ error: "Full name is too long (maximum 120 characters)", field: "name" }, { status: 400 });
     }
 
     if (typeof email !== "string" || email.trim().length < 1) {
-      return NextResponse.json({ error: "Email is required.", field: "email" }, { status: 400 });
+      return NextResponse.json({ error: "Email is required", field: "email" }, { status: 400 });
     }
     if (email.length > 120 || !emailRegex.test(email)) {
-      return NextResponse.json({ error: "Please provide a valid email address.", field: "email" }, { status: 400 });
+      return NextResponse.json({ error: "Please enter a valid email address", field: "email" }, { status: 400 });
     }
 
     if (phone !== undefined && phone !== "" && (typeof phone !== "string" || phone.length > 40)) {
-      return NextResponse.json({ error: "Phone number is too long (maximum 40 characters).", field: "phone" }, { status: 400 });
+      return NextResponse.json({ error: "Phone number is too long (maximum 40 characters)", field: "phone" }, { status: 400 });
     }
 
     if (company !== undefined && company !== "" && (typeof company !== "string" || company.length > 120)) {
-      return NextResponse.json({ error: "Company name is too long (maximum 120 characters).", field: "company" }, { status: 400 });
+      return NextResponse.json({ error: "Company name is too long (maximum 120 characters)", field: "company" }, { status: 400 });
     }
 
     if (typeof message !== "string" || message.trim().length < 1) {
-      return NextResponse.json({ error: "Message is required.", field: "message" }, { status: 400 });
+      return NextResponse.json({ error: "Message is required", field: "message" }, { status: 400 });
     }
     if (message.length > 4000) {
-      return NextResponse.json({ error: "Message is too long (maximum 4000 characters).", field: "message" }, { status: 400 });
+      return NextResponse.json({ error: "Message is too long (maximum 4000 characters)", field: "message" }, { status: 400 });
     }
 
     if (acceptedTerms !== true) {
-      return NextResponse.json({ error: "You must accept the terms and conditions.", field: "terms" }, { status: 400 });
+      return NextResponse.json({ error: "You must accept the terms and privacy policy", field: "terms" }, { status: 400 });
     }
 
     const safeName = escapeHtml(name.trim());
@@ -166,11 +166,15 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.json({ error }, { status: 400 });
+      console.error("Resend error:", error);
+      return NextResponse.json(
+        { error: "Your message could not be sent. Please email xirconsss@gmail.com instead." },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json({ success: true, data }, { status: 200 });
   } catch {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
 }

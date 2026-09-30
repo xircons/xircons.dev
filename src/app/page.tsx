@@ -13,11 +13,11 @@ import { projects } from "@/data/projects";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Xircons — Engineering & Design",
-  description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+  title: { absolute: "Xircons | Engineering & Design" },
+  description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
   openGraph: {
-    title: "Xircons — Engineering & Design",
-    description: "Minimalist portfolio showcasing UX-focused engineering and design.",
+    title: "Xircons | Engineering & Design",
+    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
     url: "/",
   },
 };
@@ -62,12 +62,12 @@ export default function Home() {
       <HeroSection />
       <ShrinkToReveal
         imageSrc="/wuttikan/___________________copykub.jpg"
-        imageAlt="Wuttikan Studio"
+        imageAlt="Xircons studio"
       />
       <WorksSection
         cards={PROJECT_CARDS}
         introEyebrow="Selected Projects"
-        introHeadline="Production-ready web applications, business platforms, and developer tools."
+        introHeadline="Web applications, business platforms, and developer tools."
       />
       <VideoBand />
       <ValueSection />

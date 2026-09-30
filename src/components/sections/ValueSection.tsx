@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useSpring } from "framer-motion";
-import ActionButton from "@/components/ActionButton";
 import HeadlineWord from "@/components/HeadlineWord";
 
 const HEADLINE = "Building scalable software solutions.";
@@ -31,13 +30,12 @@ interface ValueItem {
   title: string;
   body: string;
   skills?: string[];
-  cta?: string;
 }
 
 const ITEMS: ValueItem[] = [
   {
     title: "Full-Stack Development",
-    body: "I am experienced in building production-ready web applications, business platforms, and developer tools. I handle the entire software development lifecycle—from translating business requirements and system design to full-stack development using React, Next.js, TypeScript, and Node.js.",
+    body: "I build web applications, business platforms, and developer tools. I handle the full lifecycle, from turning business requirements into a system design to building it with React, Next.js, TypeScript, and Node.js.",
     skills: [
       "React & Next.js",
       "Astro & Islands",
@@ -47,11 +45,10 @@ const ITEMS: ValueItem[] = [
       "RESTful Routing & Auth",
       "Socket.io & JWT",
     ],
-    cta: "See the work",
   },
   {
     title: "Data & Infrastructure",
-    body: "I design database architectures and robust deployment workflows across both development and production environments. I focus on building scalable software solutions, reliable REST API integrations, and maintaining infrastructure that can support complex internal and customer-facing platforms.",
+    body: "I design database schemas and deployment workflows for both development and production. I build REST API integrations and maintain the infrastructure behind internal and customer-facing platforms.",
     skills: [
       "PostgreSQL",
       "MySQL",
@@ -62,11 +59,10 @@ const ITEMS: ValueItem[] = [
       "CI/CD",
       "Nginx",
     ],
-    cta: "View approach",
   },
   {
     title: "Interaction & Experience",
-    body: "I collaborate heavily on UX/UI design and feature planning to deliver truly user-centered solutions. By building clean, multi-language platforms and intuitive administrative dashboards, I ensure that the frontend experience is highly scalable, engaging, and easy to navigate.",
+    body: "I work on UX/UI design and feature planning alongside the code. My projects include multi-language sites and admin dashboards for clubs, hostels, and online stores.",
     skills: [
       "Framer Motion",
       "Scroll Animations",
@@ -76,19 +72,15 @@ const ITEMS: ValueItem[] = [
       "Responsive UI & Component Design",
       "Chart.js & Recharts",
     ],
-    cta: "Explore designs",
   },
   {
     title: "AI & Advanced Logic",
-    body: "I build advanced features and automated developer tools, such as zero-configuration CLI packages and automated testing pipelines. I focus on implementing dynamic logic, secure authentication, and real-time operations that transform complex datasets into production-ready features.",
+    body: "I build developer tools such as zero-config CLI packages and automated testing pipelines, plus features that need more than CRUD: file watching, real-time chat, and video analysis with Gemini.",
     skills: [
-      "LLM Integration & Tool Use",
-      "Prompt Caching",
-      "Evaluation Pipelines",
+      "Gemini API Integration",
       "State Machines",
       "Advanced Data Parsing",
     ],
-    cta: "Explore capabilities",
   },
 ];
 
@@ -208,7 +200,7 @@ export default function ValueSection() {
               </h2>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-fg/50">
-              Translating business requirements into production-ready platforms, from system design to final deployment.
+              From business requirements and system design to final deployment.
             </p>
           </div>
         </div>
