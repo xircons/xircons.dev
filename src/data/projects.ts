@@ -8,7 +8,7 @@ export interface ProjectData {
   imageUrl: string;
   // Shown side by side on the Works card instead of imageUrl, for phone screenshots.
   cardImages?: string[];
-  // Covers without images say "Private project" only when this is set; otherwise "Screenshots coming soon".
+  // Covers without images say "Private project" when this is set; otherwise they show only the name.
   isPrivate?: boolean;
   ctaText?: string;
   ctaLink?: string;
