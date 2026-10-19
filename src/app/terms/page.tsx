@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Terms and Conditions",
   description:
     "Terms of use for the Xircons website and any services offered through it.",
-  alternates: { canonical: "https://xircons-dev.vercel.app/terms" },
+  alternates: { canonical: "https://xircons.dev/terms" },
   openGraph: {
     title: "Terms and Conditions | Xircons",
     description:

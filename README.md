@@ -2,7 +2,7 @@
 
 Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools. Built with Next.js (App Router), React, Tailwind CSS, and Framer Motion.
 
-Live: https://xircons-dev.vercel.app
+Live: https://xircons.dev
 
 ## Run locally
 

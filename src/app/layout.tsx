@@ -19,7 +19,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://xircons-dev.vercel.app"),
+  metadataBase: new URL("https://xircons.dev"),
   title: {
     default: "Xircons",
     template: "%s | Xircons",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Xircons" }],
   creator: "Xircons",
   alternates: {
-    canonical: "https://xircons-dev.vercel.app/",
+    canonical: "https://xircons.dev/",
   },
   openGraph: {
     type: "website",

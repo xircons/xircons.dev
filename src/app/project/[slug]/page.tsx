@@ -27,12 +27,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: project.headline,
     description: project.body,
     alternates: {
-      canonical: `https://xircons-dev.vercel.app/project/${slug}`,
+      canonical: `https://xircons.dev/project/${slug}`,
     },
     openGraph: {
       title: `${project.headline} | Xircons`,
       description: project.body,
-      url: `https://xircons-dev.vercel.app/project/${slug}`,
+      url: `https://xircons.dev/project/${slug}`,
       siteName: "Xircons",
     },
     twitter: {
@@ -117,21 +117,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const paragraphs = project.caseStudy ?? [project.body];
 
   const breadcrumb = breadcrumbSchema([
-    { name: "Home", url: "https://xircons-dev.vercel.app/" },
-    { name: project.headline, url: `https://xircons-dev.vercel.app/project/${slug}` },
+    { name: "Home", url: "https://xircons.dev/" },
+    { name: project.headline, url: `https://xircons.dev/project/${slug}` },
   ]);
 
   const projectSchema = project.headline === "Zero-mock" 
     ? softwareApplicationSchema({
         name: project.headline,
-        url: project.ctaLink ?? `https://xircons-dev.vercel.app/project/${slug}`,
-        imageUrl: `https://xircons-dev.vercel.app${project.imageUrl}`,
+        url: project.ctaLink ?? `https://xircons.dev/project/${slug}`,
+        imageUrl: `https://xircons.dev${project.imageUrl}`,
         description: project.body,
       })
     : creativeWorkSchema({
         name: project.headline,
-        url: `https://xircons-dev.vercel.app/project/${slug}`,
-        imageUrl: `https://xircons-dev.vercel.app${project.imageUrl}`,
+        url: `https://xircons.dev/project/${slug}`,
+        imageUrl: `https://xircons.dev${project.imageUrl}`,
         description: project.body,
       });
 

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "How Xircons collects, uses, and protects personal data on this site.",
-  alternates: { canonical: "https://xircons-dev.vercel.app/privacy" },
+  alternates: { canonical: "https://xircons.dev/privacy" },
   openGraph: {
     title: "Privacy Policy | Xircons",
     description:
