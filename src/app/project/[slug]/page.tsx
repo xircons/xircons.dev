@@ -43,13 +43,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-// Reads PNG width and height from the IHDR header; other formats count as landscape.
+// Reads width and height from the PNG or WebP header; other formats count as landscape.
 function isPortrait(file: string) {
-  const head = Buffer.alloc(24);
+  const head = Buffer.alloc(30);
   const fd = fs.openSync(file, "r");
-  fs.readSync(fd, head, 0, 24, 0);
+  fs.readSync(fd, head, 0, 30, 0);
   fs.closeSync(fd);
-  return head.toString("ascii", 12, 16) === "IHDR" && head.readUInt32BE(20) > head.readUInt32BE(16);
+  const size = (w: number, h: number) => h > w;
+  switch (head.toString("ascii", 12, 16)) {
+    case "IHDR":
+      return size(head.readUInt32BE(16), head.readUInt32BE(20));
+    case "VP8X":
+      return size(head.readUIntLE(24, 3), head.readUIntLE(27, 3));
+    case "VP8 ":
+      return size(head.readUInt16LE(26) & 0x3fff, head.readUInt16LE(28) & 0x3fff);
+    case "VP8L": {
+      const bits = head.readUInt32LE(21);
+      return size(bits & 0x3fff, (bits >> 14) & 0x3fff);
+    }
+    default:
+      return false;
+  }
 }
 
 // Consecutive portrait (phone) shots are grouped so they sit side by side instead of each filling the column.
@@ -57,13 +71,15 @@ function getGallery(project: ProjectData): string[][] {
   const rel = path.dirname(project.imageUrl);
   const dir = path.join(process.cwd(), "public", rel);
   try {
-    return fs
-      .readdirSync(dir)
+    const files = fs.readdirSync(dir);
+    return files
       .filter(
         (file) =>
           /\.(png|jpe?g|webp|avif)$/i.test(file) &&
-          file !== "hero.png" &&
-          !file.includes(" ")
+          !file.startsWith("hero.") &&
+          !file.includes(" ") &&
+          // A PNG with a WebP copy beside it is skipped, so each screenshot shows once.
+          !(file.endsWith(".png") && files.includes(file.replace(/\.png$/, ".webp")))
       )
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
       .reduce<string[][]>((groups, file) => {

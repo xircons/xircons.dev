@@ -25,7 +25,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Full-stack developer • 2026",
     headline: "KeptCarbon",
     body: "GeoAI platform that estimates the carbon-credit potential of rubber plantations from plots mapped by users.",
-    imageUrl: "/projects/keptcarbon/hero.png",
+    imageUrl: "/projects/keptcarbon/hero.webp",
     ctaText: "Visit site",
     ctaLink: "https://keptcarbon.net",
     caseStudy: [
@@ -42,7 +42,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Lead frontend and full-stack developer • 2026",
     headline: "SkillForce",
     body: "Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.",
-    // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.png.
+    // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.webp.
     imageUrl: "/projects/placeholder.svg",
     ctaText: "Visit public site",
     ctaLink: "https://skillforce.camt.cmu.ac.th/company",
@@ -61,7 +61,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Full-stack developer • 2025",
     headline: "iCAS-CMU HUB",
     body: "A production CMU club platform for memberships, events, assignments, live chat, and admin workflows, live at icas-cmu.turnpro.dev.",
-    imageUrl: "/projects/icas-cmu/hero.png",
+    imageUrl: "/projects/icas-cmu/hero.webp",
     ctaText: "Visit site",
     ctaLink: "https://icas-cmu.turnpro.dev",
     caseStudy: [
@@ -80,8 +80,8 @@ const allProjects: readonly ProjectData[] = [
     headline: "Chekdee",
     isPrivate: true,
     body: "LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.",
-    imageUrl: "/projects/chekdee/16.png",
-    cardImages: ["/projects/chekdee/1.png", "/projects/chekdee/2.png", "/projects/chekdee/3.png"],
+    imageUrl: "/projects/chekdee/16.webp",
+    cardImages: ["/projects/chekdee/1.webp", "/projects/chekdee/2.webp", "/projects/chekdee/3.webp"],
     ctaText: "Private project",
     caseStudy: [
       "Chekdee is a LINE-based employee attendance system I built at turnPRO for CAMT, Chiang Mai University. Staff check in from inside LINE instead of a separate app or a fingerprint scanner, and admins get schedules, leave and reports in one dashboard. The goal was to make attendance quick for staff and hard to fake, while giving admins numbers they can trust.",
@@ -97,7 +97,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Solo full-stack developer • 2026",
     headline: "Zero-mock",
     body: "A zero-config Node.js CLI that instantly turns a single JSON file into a full CRUD REST API with CORS, pagination, and simulated latency for rapid frontend development.",
-    imageUrl: "/projects/zero-mock/hero.png",
+    imageUrl: "/projects/zero-mock/hero.webp",
     ctaText: "View package",
     ctaLink: "https://www.npmjs.com/package/@xirconsss/zero-mock",
     caseStudy: [
@@ -114,7 +114,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Full-stack developer • 2026",
     headline: "turnPRO",
     body: "Company site with an internal system that scores team skills from real project tasks and shows them as radar charts.",
-    imageUrl: "/projects/turnpro-skill-radar/hero.png",
+    imageUrl: "/projects/turnpro-skill-radar/hero.webp",
     ctaText: "Visit site",
     ctaLink: "https://turnpro.dev",
     caseStudy: [
@@ -129,7 +129,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Solo full-stack developer • 2025",
     headline: "store.atelien",
     body: "An e-commerce website I made for a school project. People can sign up, browse products, use a cart and checkout, and there is an admin area to manage orders, products, and coupons.",
-    imageUrl: "/projects/store.atelien/hero.png",
+    imageUrl: "/projects/store.atelien/hero.webp",
     ctaText: "View source",
     ctaLink: "https://github.com/xircons/store.atelien",
     caseStudy: [
@@ -146,7 +146,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Solo full-stack developer • 2025",
     headline: "deskcat",
     body: "A floating pixel-art cat that sits on your desktop, takes quick notes through the day, and gathers them into an end-of-day reflection.",
-    imageUrl: "/projects/deskcat/hero.png",
+    imageUrl: "/projects/deskcat/hero.webp",
     ctaText: "View source",
     ctaLink: "https://github.com/xircons/deskcat",
     caseStudy: [
@@ -164,7 +164,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Full-stack developer • 2026",
     headline: "Geo Care Network",
     body: "A Chiang Mai-focused map prototype for community incident reporting: browse and file reports on a live map, run CCTV footage through Gemini for auto-filled crash reports, and triage CCTV cases in a separate agency console. Data is served locally by zero-mock.",
-    imageUrl: "/projects/geo-care-network/hero.png",
+    imageUrl: "/projects/geo-care-network/hero.webp",
     ctaText: "View source",
     ctaLink: "https://github.com/xircons/geo-care-network",
     caseStudy: [
@@ -182,7 +182,7 @@ const allProjects: readonly ProjectData[] = [
     eyebrow: "Full-stack developer • 2025",
     headline: "Tic-Tac-Toe with AI",
     body: "A tic-tac-toe game I built where you can play against the computer or with a friend. The computer has different levels, and on the hardest level it plays very well, so it is almost impossible to beat.",
-    imageUrl: "/projects/tic-tac-toe/hero.png",
+    imageUrl: "/projects/tic-tac-toe/hero.webp",
     ctaText: "View source",
     ctaLink: "https://github.com/xircons/tictactoe-ai",
     caseStudy: [
