@@ -10,7 +10,7 @@ const WORK_LINKS = [...projects]
   .map((project) => ({
     id: project.id,
     label: project.headline,
-    slug: project.headline.toLowerCase().replace(/\s+/g, "-"),
+    slug: project.slug,
   }));
 
 function MenuToggleIcon({ open, className = "" }: { open: boolean; className?: string }) {

@@ -1,52 +1,68 @@
 export interface ProjectData {
-  id: string | number;
+  id: number;
+  slug: string;
+  category: string;
   eyebrow: string;
   headline: string;
   body: string;
   imageUrl: string;
+  // Shown side by side on the Works card instead of imageUrl, for phone screenshots.
+  cardImages?: string[];
+  // Covers without images say "Private project" only when this is set; otherwise "Screenshots coming soon".
+  isPrivate?: boolean;
   ctaText?: string;
   ctaLink?: string;
   caseStudy?: string[];
+  // Keeps the entry for later but drops it from every page, list and count.
+  hidden?: boolean;
 }
 
-export const projects: readonly ProjectData[] = [
+const allProjects: readonly ProjectData[] = [
   {
     id: 1,
+    slug: "keptcarbon",
+    category: "Internship",
     eyebrow: "Full-stack developer • 2026",
-    headline: "Zero-mock",
-    body: "A zero-config Node.js CLI that instantly turns a single JSON file into a full CRUD REST API with CORS, pagination, and simulated latency for rapid frontend development.",
-    imageUrl: "/projects/zero-mock/hero.png",
-    ctaText: "View Package",
-    ctaLink: "https://www.npmjs.com/package/@xirconsss/zero-mock",
+    headline: "KeptCarbon",
+    body: "GeoAI platform that estimates the carbon-credit potential of rubber plantations from plots mapped by users.",
+    imageUrl: "/projects/keptcarbon/hero.png",
+    ctaText: "Visit site",
+    ctaLink: "https://keptcarbon.net",
     caseStudy: [
-      "I built zero-mock as a solo maintainer in a full-stack and tooling role. It is a zero-config developer tool that dynamically generates a persistent REST API from a JSON file while providing a Next.js web dashboard to manage projects. The problem it solves is the overhead frontend developers face when building prototypes: they need a reliable, self-updating local database and a clean visual interface to monitor resources without writing custom mock handlers or manually editing JSON files.",
-      "The developer flow is short: launch the CLI in watch mode pointing to a JSON file, which automatically spins up the Express server and syncs the data. Developers can interact with endpoints via standard CRUD calls or view their API schema in real-time through the web interface. On-save modifications to the JSON file instantly update the server's endpoints without restart, and writes initiated by API requests are saved atomically to prevent database corruption while preventing infinite watch-reload cycles.",
-      "The project is structured as a Turborepo monorepo containing a Next.js frontend app and a standalone TypeScript CLI package. The backend uses Express for route handling, Chokidar for robust file system watching, and Vitest for unit and integration testing. Changes to the repository trigger a GitHub Actions CI workflow that runs typechecks, builds packages, runs coverage reports, and publishes the CLI tool to npm upon merging to the release branch.",
-      "One significant challenge was implementing hot-reloading for dynamic JSON schemas. Originally, Express routes were bound statically at startup, meaning adding new collections required a server restart; this was solved by refactoring to a parameter-based routing middleware (/:resource) that queries the database store dynamically on each request. Additionally, file watchers triggered infinite reload loops when the CLI itself wrote data back to disk, which was resolved by implementing an epoch-based lock guard (isSelfWrite) to suppress self-caused filesystem events.",
-    ],
-  },
-  {
-    id: 5,
-    eyebrow: "Full-stack developer • 2026",
-    headline: "NinjaLingo",
-    body: "A flashcard web app our team built so people can study and track their progress. I also wrote a custom script to convert vocabulary CSV files into JSON for easy import. Users sign in to review cards, and admins manage the sets.",
-    imageUrl: "/projects/ninjalingo/hero.png",
-    ctaText: "Private Repo",
-    ctaLink: undefined,
-    caseStudy: [
-      "We built NinjaLingo as a team, and I worked in a full-stack role. It is a language-learning flashcard web app aimed at helping users study vocabulary in a structured way. The product solves the problem of finding trustworthy card sets, staying motivated, and reviewing on a schedule instead of cramming. Public card set catalog and card content live in the database and are loaded through the app's API, so learners always pull curated, consistent content while their own progress can be tracked over time.",
-      "The main flow takes users from choosing a card set to a dashboard, into an interactive review session, and then to a completion screen with session feedback. Review uses spaced repetition (SM-2-style scheduling) so cards come back at sensible intervals. There is a profile area for account-related needs, shareable paths for specific sets (e.g. opening a set from a URL), and an admin area for managing content behind stricter access. On the UI side we focused on a clear, friendly experience: Tailwind CSS for layout and theming (including light/dark), and Framer Motion for motion so interactions feel smooth without getting in the way of studying.",
-      "On the frontend I helped build an Astro site that hydrates/islands React 19 for the interactive app, with React Router handling in-app routes (dashboard, review, card sets, admin entry, etc.). Styling uses Tailwind; we use TypeScript and Vitest for type safety and tests. Authentication is Firebase Auth; the data layer calls Astro API routes and sends the Firebase ID token on protected requests. The database is Neon (Postgres) for public sets, cards, progress, stats, and admin-related data. Astro middleware enforces separation between learner routes and admin routes using a session cookie and role checks. We also maintain Node scripts for seeding, CSV to JSON conversion for content pipelines, and deployment (e.g. build + hosting).",
-      "One tricky part was keeping the experience simple for guests while still supporting signed-in users and not exposing admin tools to the wrong people. We addressed that with a clear split in routing and server-side checks: middleware decides whether a path is public, learner-only, or admin-only, validates the Firebase token where needed, and redirects so admins and regular users do not land in each other's areas by mistake. On the data side, centralizing API access (authenticated fetch with the Bearer token to Astro endpoints backed by Neon) kept one consistent pattern for progress and catalog data instead of scattering logic across the client. That made it easier for the team to reason about security, roles, and data flow as the app grew.",
+      "I worked on KeptCarbon at turnPRO, a GeoAI web platform that estimates the carbon-credit potential of rubber plantations. It is built in collaboration with Thai universities to support Thailand's Net Zero 2050 policy, with Rayong as the pilot province. The goal is to give landowners and project teams a credible, map-first way to understand how much carbon their plantations can capture, instead of relying on spreadsheets and manual field estimates.",
+      "Users work directly on a map: they locate or draw plantation plots, see them over satellite and geospatial layers, and get carbon estimates and tree-count data for each plot. A dashboard summarises projects and plots with charts, so a project owner can move from a single plot to the overall picture without switching tools. The interface is fully in Thai, designed for people who are not GIS specialists.",
+      "The frontend is Next.js with the App Router, running server-side rendering and acting as the backend-for-frontend: it is the only layer that talks to PostgreSQL with PostGIS, which stores users, projects and plot geometries. Maps are rendered with MapLibre GL, and charts are custom SVG components rather than a chart library, to keep them light and match the design system. A separate stateless FastAPI service in Python 3.11 runs the geospatial work, reading GeoPackage, GeoTIFF and CSV data with GeoPandas, rasterio and pyproj. Everything runs on Docker Compose behind an nginx reverse proxy in production.",
+      "The main challenge was making the platform trustworthy as it moved toward real users. I ran a security and PDPA review of the live system, then worked on hardening the infrastructure: separating Docker environments, tightening the nginx configuration and keeping security headers such as HSTS and X-Frame-Options intact through merges. I also prepared a breaking database migration to UUID relations and JSONB, with a precheck, a backup step and a maintenance-window plan, so the schema could evolve without putting production data at risk.",
     ],
   },
   {
     id: 2,
+    slug: "skillforce",
+    category: "Internship",
+    eyebrow: "Lead frontend and full-stack developer • 2026",
+    headline: "SkillForce",
+    body: "Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.",
+    // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.png.
+    imageUrl: "/projects/placeholder.svg",
+    ctaText: "Visit public site",
+    ctaLink: "https://skillforce.camt.cmu.ac.th/company",
+    caseStudy: [
+      "The public site is only the front door. Most of my work sits behind the login: the Learner app I owned end to end, and the AI course-generation flow in the Admin app.",
+      "SkillForce is a multi-module workforce skills platform I built at turnPRO, made up of separate Admin, Learner, Company and Mentor apps on a shared backend. Admins manage courses, skill tracks, assessments and QR-verifiable certificates; learners take courses and track their progress; companies post the skills they need. The goal was a single system that connects training, assessment and hiring demand, rather than separate tools for each.",
+      "I started as a full-stack developer and became Lead Frontend Developer, leading a team of four frontend developers. I owned the Learner module, a mobile-first web app covering registration, profile, courses, assessment results, certificates and notifications, and later took on the AI course-generation flow in the Admin app. Every page had the same definition of done: wired to the real API, with loading, error and empty states, matching the frozen Figma design, and responsive on mobile.",
+      "The Learner app uses Next.js with the App Router, Tailwind CSS, React Query for server state and Recharts for learning-outcome charts, on a shared design system. The backend is a Node.js API with Prisma on PostgreSQL. I built an onboarding gate that sends partially registered users back to finish registration instead of into a broken app, and a resume flow that pre-fills an abandoned registration so learners do not have to start over.",
+      "The biggest challenge was delivery. We had an 11-day sprint to production covering development, QA and bug fixing, and two developers left in the middle of it. Instead of cutting scope, I rebuilt the timeline from that day to the fixed deploy date and re-assigned their work across the remaining team by strength. On the technical side, I found that some API failures were being shown to users as \"No data found\"; I made every page check for errors explicitly and show a retryable error state, so real problems surfaced instead of hiding as empty screens.",
+    ],
+  },
+  {
+    id: 3,
+    slug: "icas-cmu-hub",
+    category: "Competition",
     eyebrow: "Full-stack developer • 2025",
     headline: "iCAS-CMU HUB",
     body: "A production CMU club platform for memberships, events, assignments, live chat, and admin workflows, live at icas-cmu.turnpro.dev.",
     imageUrl: "/projects/icas-cmu/hero.png",
-    ctaText: "Visit Site",
+    ctaText: "Visit site",
     ctaLink: "https://icas-cmu.turnpro.dev",
     caseStudy: [
       "We built iCAS-CMU HUB (Integrated Club Administration System) as a team, and I worked on it as a full-stack developer. The app is a web platform for managing university clubs at CMU: it centralizes memberships, events, assignments, budgets, reports, and admin workflows so leaders and staff are not juggling spreadsheets and informal channels. My goal was to help deliver a single place where members can join clubs and take part in activities, while admins and club leaders can run day-to-day operations with clear roles and permissions. The platform is live in production at icas-cmu.turnpro.dev.",
@@ -57,27 +73,64 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 3,
-    eyebrow: "Full-stack developer • 2025",
-    headline: "deskcat",
-    body: "A floating pixel-art cat that sits on your desktop, takes quick notes through the day, and gathers them into an end-of-day reflection.",
-    imageUrl: "/projects/deskcat/hero.png",
-    ctaText: "View Source",
-    ctaLink: "https://github.com/xircons/deskcat",
+    id: 4,
+    slug: "chekdee",
+    category: "Internship",
+    eyebrow: "Solo full-stack developer • 2026",
+    headline: "Chekdee",
+    isPrivate: true,
+    body: "LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.",
+    imageUrl: "/projects/chekdee/16.png",
+    cardImages: ["/projects/chekdee/1.png", "/projects/chekdee/2.png", "/projects/chekdee/3.png"],
+    ctaText: "Private project",
     caseStudy: [
-      "I built deskcat as a solo developer to serve as a continuous on-screen companion and productivity tool. It is a desktop application featuring a floating pixel-art cat that helps users jot quick notes throughout the day. The problem it solves is the exhaustion and frustration of having to sit down every evening and trying to remember what was accomplished all day just to write daily reflections; by continuously tracking activities alongside a virtual pet companion, users no longer have to rely on their memory at the end of the day.",
-      "The user flow is built into the desktop environment: the virtual pet floats transparently on screen, with its eyes following the mouse cursor while clicks pass through to underlying applications. Users can click the cat to instantly open a quick-note popup to jot down activities, or click and drag it around the screen using elastic physics. At configured intervals, the cat bounces with alert marks to prompt a new entry, and if ignored, its mood progressively transitions from content to lonely or grumpy until a note is saved. At the end of the day, a final reflection prompt aggregates all chronological notes, allowing users to write their evening summary without starting from a blank slate.",
-      "The project is structured as an Electron desktop application built entirely with TypeScript and packaged using electron-builder. The architecture strictly separates concerns: the main process handles window management, system tray menus, global keystroke monitoring using uiohook-napi, and atomic filesystem writes to safely store daily JSON and Markdown files. The renderer process manages the DOM and utilizes a custom spring-damper physics engine for drag-and-drop interactions, offloading hardware-accelerated rendering to the GPU with inline CSS transforms to eliminate browser layout thrashing.",
-      "The main performance challenge was managing the dynamic rendering of the cat's states and patterns without degrading desktop performance. Originally, updating SVG skins caused expensive garbage collection sweeps; this was solved by implementing a DOM object pool that recycles <rect> elements and toggles their display states. The cat artwork, animations, and coat patterns are adapted from \"Catjang\" by jan (nerfspeed on Discord) under the CC BY-NC 4.0 license. To integrate these assets, I made specific technical modifications, including baking ear/tail paths, namespacing IDs, adding steam-puff groups, and reimplementing the data-patch-frame lightweight spot-painter entirely in TypeScript without runtime cell-mapping tables.",
+      "Chekdee is a LINE-based employee attendance system I built at turnPRO for CAMT, Chiang Mai University. Staff check in from inside LINE instead of a separate app or a fingerprint scanner, and admins get schedules, leave and reports in one dashboard. The goal was to make attendance quick for staff and hard to fake, while giving admins numbers they can trust.",
+      "Staff open the app through LINE (LIFF with LINE Login), register once, and check in by scanning a rotating QR code shown on a lobby TV; checking out is a single button in the app. Lateness and absence follow clear rules against each person's scheduled shift, and admins can correct a day with a logged reason. Leave requests are submitted through a form with attachments and emailed to the supervisor with a secure, expiring approval link. Admins manage recurring weekly schedules per employee, since staff are students whose hours follow their class timetable, alongside holidays that sync automatically from a public API.",
+      "I built the full frontend in Next.js with the App Router, TypeScript, Tailwind CSS and shadcn/ui, with all interface copy in Thai on a custom design system. The backend is written in Go with Echo, following Clean Architecture, with LINE login and password login for the system owner, JWT access tokens with refresh-token rotation, and PostgreSQL. It runs on Docker Compose on the company's own Linux server.",
+      "The core challenge was trust: check-in only means something if it cannot be faked. The QR token rotates every 15 seconds and is HMAC-signed, so a screenshot stops working almost immediately. Kiosk TVs authenticate with revocable device tokens instead of user accounts, and worked hours are calculated against the scheduled shift rather than raw timestamps. For reporting, I built a two-sheet Excel export with an employee lookup dropdown, conditional formatting and a per-employee daily log, so admins can audit the data without needing access to the system itself.",
+    ],
+  },
+  {
+    id: 5,
+    slug: "zero-mock",
+    category: "Production",
+    eyebrow: "Solo full-stack developer • 2026",
+    headline: "Zero-mock",
+    body: "A zero-config Node.js CLI that instantly turns a single JSON file into a full CRUD REST API with CORS, pagination, and simulated latency for rapid frontend development.",
+    imageUrl: "/projects/zero-mock/hero.png",
+    ctaText: "View package",
+    ctaLink: "https://www.npmjs.com/package/@xirconsss/zero-mock",
+    caseStudy: [
+      "I built zero-mock as a solo maintainer in a full-stack and tooling role. It is a zero-config developer tool that dynamically generates a persistent REST API from a JSON file while providing a Next.js web dashboard to manage projects. The problem it solves is the overhead frontend developers face when building prototypes: they need a reliable, self-updating local database and a clean visual interface to monitor resources without writing custom mock handlers or manually editing JSON files.",
+      "The developer flow is short: launch the CLI in watch mode pointing to a JSON file, which automatically spins up the Express server and syncs the data. Developers can interact with endpoints via standard CRUD calls or view their API schema in real-time through the web interface. On-save modifications to the JSON file instantly update the server's endpoints without restart, and writes initiated by API requests are saved atomically to prevent database corruption while preventing infinite watch-reload cycles.",
+      "The project is structured as a Turborepo monorepo containing a Next.js frontend app and a standalone TypeScript CLI package. The backend uses Express for route handling, Chokidar for robust file system watching, and Vitest for unit and integration testing. Changes to the repository trigger a GitHub Actions CI workflow that runs typechecks, builds packages, runs coverage reports, and publishes the CLI tool to npm upon merging to the release branch.",
+      "One significant challenge was implementing hot-reloading for dynamic JSON schemas. Originally, Express routes were bound statically at startup, meaning adding new collections required a server restart; this was solved by refactoring to a parameter-based routing middleware (/:resource) that queries the database store dynamically on each request. Additionally, file watchers triggered infinite reload loops when the CLI itself wrote data back to disk, which was resolved by implementing an epoch-based lock guard (isSelfWrite) to suppress self-caused filesystem events.",
+    ],
+  },
+  {
+    id: 6,
+    slug: "turnpro-skill-radar",
+    category: "Internship",
+    eyebrow: "Full-stack developer • 2026",
+    headline: "turnPRO",
+    body: "Company site with an internal system that scores team skills from real project tasks and shows them as radar charts.",
+    imageUrl: "/projects/turnpro-skill-radar/hero.png",
+    ctaText: "Visit site",
+    ctaLink: "https://turnpro.dev",
+    caseStudy: [
+      "turnpro.dev is turnPRO's company site, combining a public landing page with an internal system that measures the skills of each team member. Instead of asking people to rate themselves, it scores skills from the tasks they actually complete in the team's project-management tools, so the picture reflects real work rather than self-assessment.",
+      "Each person's scores are visualised as a radar chart, so strengths and gaps are visible at a glance and leads can balance assignments across the team.",
     ],
   },
   {
     id: 7,
-    eyebrow: "Full-stack developer • 2025",
+    slug: "store.atelien",
+    category: "Academic",
+    eyebrow: "Solo full-stack developer • 2025",
     headline: "store.atelien",
     body: "An e-commerce website I made for a school project. People can sign up, browse products, use a cart and checkout, and there is an admin area to manage orders, products, and coupons.",
     imageUrl: "/projects/store.atelien/hero.png",
-    ctaText: "View Source",
+    ctaText: "View source",
     ctaLink: "https://github.com/xircons/store.atelien",
     caseStudy: [
       "I built store.atelien, a full-stack e-commerce demo for my studies. It is a fictional design-focused store (inspired by a minimalist retail look) that lets people browse products, sign up and log in, manage a cart, apply discount codes, and complete checkout with shipping and totals. The goal was to show I can ship a realistic online shop end to end, beyond static pages, while keeping the project clearly educational and non-commercial.",
@@ -87,42 +140,32 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
-    id: 6,
-    eyebrow: "Full-stack developer • 2025",
-    headline: "Tic-Tac-Toe with AI",
-    body: "A tic-tac-toe game I built where you can play against the computer or with a friend. The computer has different levels, and on the hardest level it plays very well, so it is almost impossible to beat.",
-    imageUrl: "/projects/tic-tac-toe/hero.png",
-    ctaText: "View Source",
-    ctaLink: "https://github.com/xircons/tictactoe-ai",
-    caseStudy: [
-      "I built a tic-tac-toe project that combines a playable web app with a reinforcement-learning side: the src/ area holds a self-play training pipeline and Q-learning-style agents for research and experimentation, while the shipped experience lets people play against AI opponents and see how game state is sent to a server for smarter moves. The goal was to turn a simple 3x3 game into something that shows both classic game AI and modern full-stack delivery, so visitors get a real product instead of a notebook or script.",
-      "The app uses a multi-page flow with React Router: home with name entry and mode choice (human vs AI or two humans), a dedicated game screen with scores and reset, plus settings, match history, and an about page. I focused on a cohesive retro phone shell layout, optional background music and sound effects, slide notifications for turns and errors, a win modal, and achievements tied to play patterns. Difficulty maps to different AI behaviors (easy random play, medium heuristics, hard minimax-style play), and history plus achievements persist in the browser so the experience feels continuous across sessions.",
-      "On the front end I used React with Vite, Redux Toolkit for game, settings, history, and achievements, and localStorage to persist everything except the in-progress board. The backend is a Flask REST API with CORS tuned for GitHub Pages, local Vite ports, and deployment hosts; it exposes health, move, and validate endpoints and reuses a shared Python tic-tac-toe engine. CI workflows build the SPA and deploy static assets to GitHub Pages while the API can run separately (for example on Render), with the front end pointing at a configurable base URL through environment variables. There is no traditional database, since state lives on the client.",
-      "A practical challenge was hosting the UI and API on different origins: browsers enforce CORS, and the static site can outlive or lose contact with the API. I addressed this by explicitly allowing the right origins on the Flask side and by handling failed fetch calls in the game logic: if the API is unreachable, the client shows a clear message and falls back to a simple random move so the game still runs. That kept the demo reliable for portfolio viewers even when the backend sleeps or errors, without blocking the whole interface.",
-    ],
-  },
-  {
     id: 8,
-    eyebrow: "Full-stack developer • 2025",
-    headline: "Good Night Hostel",
-    body: "A booking website and staff dashboard I built for a hostel. Guests can look at rooms and switch languages, while staff can manage bookings, housekeeping, and view charts in their own admin area.",
-    imageUrl: "/projects/good-night-hostel/hero.png",
-    ctaText: "View Source",
-    ctaLink: "https://github.com/xircons/good-night-hostel",
+    slug: "deskcat",
+    category: "Personal",
+    eyebrow: "Solo full-stack developer • 2025",
+    headline: "deskcat",
+    body: "A floating pixel-art cat that sits on your desktop, takes quick notes through the day, and gathers them into an end-of-day reflection.",
+    imageUrl: "/projects/deskcat/hero.png",
+    ctaText: "View source",
+    ctaLink: "https://github.com/xircons/deskcat",
     caseStudy: [
-      "I built Good Night Hostel, a web project for a fictional hostel in Chiang Mai. It brings together a public site where visitors can learn about the property and complete a room search and booking flow, a simple guest account area (bookings, profile, notifications, loyalty), and a separate admin dashboard that behaves like a small property-management console. The main goal was to show how a real hostel might present itself online and how staff could track bookings, rooms, housekeeping, maintenance, and finances in one place. This version does not use a production backend.",
-      "On the guest side, I focused on a clear path from home and room pages through booking (dates, guests, room choice, contact and details) to a confirmation screen that reflects what the guest submitted. I used CSS variables and shared typography (including Thai-friendly fonts) so the look stays consistent and easier to adjust. The admin side uses a sidebar layout, dashboard charts (Chart.js and CanvasJS), and dedicated screens for room and booking management, housekeeping, maintenance, finance, customers, staff, and security, with EN/TH language hooks on the dashboard to match the hostel's audience.",
-      "The stack is plain HTML, CSS, and JavaScript, with no separate server or database in the repo. Content and room metadata live in shared static data (for example a central hostelData object), while the booking confirmation and customer account behavior use localStorage so the flow feels persistent in the browser. The admin modules use their own JavaScript engines with mock booking and operations data to drive tables, filters, and UI updates, which keeps the dashboard interactive without wiring up a real API yet.",
-      "The hardest part was keeping a multi-step booking experience reliable without a server: I had to validate dates (for example ensuring check-out is after check-in and enforcing sensible minimums), pass state between pages, and redirect away from the confirmation page if confirmation data was missing, so users never saw an empty or broken summary. On the admin side, splitting features into focused JS modules next to matching CSS helped me avoid one huge file and made it easier to extend screens like booking or housekeeping independently.",
+      "I built deskcat as a solo developer to serve as a continuous on-screen companion and productivity tool. It is a desktop application featuring a floating pixel-art cat that helps users jot quick notes throughout the day. The problem it solves is the exhaustion and frustration of having to sit down every evening and trying to remember what was accomplished all day just to write daily reflections; by continuously tracking activities alongside a virtual pet companion, users no longer have to rely on their memory at the end of the day.",
+      "The user flow is built into the desktop environment: the virtual pet floats transparently on screen, with its eyes following the mouse cursor while clicks pass through to underlying applications. Users can click the cat to instantly open a quick-note popup to jot down activities, or click and drag it around the screen using elastic physics. At configured intervals, the cat bounces with alert marks to prompt a new entry, and if ignored, its mood progressively transitions from content to lonely or grumpy until a note is saved. At the end of the day, a final reflection prompt aggregates all chronological notes, allowing users to write their evening summary without starting from a blank slate.",
+      "The project is structured as an Electron desktop application built entirely with TypeScript and packaged using electron-builder. The architecture strictly separates concerns: the main process handles window management, system tray menus, global keystroke monitoring using uiohook-napi, and atomic filesystem writes to safely store daily JSON and Markdown files. The renderer process manages the DOM and utilizes a custom spring-damper physics engine for drag-and-drop interactions, offloading hardware-accelerated rendering to the GPU with inline CSS transforms to eliminate browser layout thrashing.",
+      "The main performance challenge was managing the dynamic rendering of the cat's states and patterns without degrading desktop performance. Originally, updating SVG skins caused expensive garbage collection sweeps; this was solved by implementing a DOM object pool that recycles <rect> elements and toggles their display states. The cat artwork, animations, and coat patterns are adapted from \"Catjang\" by jan (nerfspeed on Discord) under the CC BY-NC 4.0 license. To integrate these assets, I made specific technical modifications, including baking ear/tail paths, namespacing IDs, adding steam-puff groups, and reimplementing the data-patch-frame lightweight spot-painter entirely in TypeScript without runtime cell-mapping tables.",
     ],
   },
   {
-    id: 4,
+    id: 9,
+    slug: "geo-care-network",
+    hidden: true,
+    category: "Academic",
     eyebrow: "Full-stack developer • 2026",
     headline: "Geo Care Network",
     body: "A Chiang Mai-focused map prototype for community incident reporting: browse and file reports on a live map, run CCTV footage through Gemini for auto-filled crash reports, and triage CCTV cases in a separate agency console. Data is served locally by zero-mock.",
     imageUrl: "/projects/geo-care-network/hero.png",
-    ctaText: "View Source",
+    ctaText: "View source",
     ctaLink: "https://github.com/xircons/geo-care-network",
     caseStudy: [
       "I built Geo Care Network, a web prototype for map-based incident reporting in a geographic care network, with sample data centered on Chiang Mai. It brings together a public-facing map and reports experience where residents can browse filed incidents, file or edit reports manually, and upload dashcam or CCTV footage for automated crash analysis, plus a separate agency notify workflow that behaves like a small triage console for CCTV-sourced cases. The goal was to prove out how a community safety tool could combine live map awareness, structured incident records, and AI-assisted filing from video.",
@@ -131,12 +174,34 @@ export const projects: readonly ProjectData[] = [
       "The main challenge was making CCTV analysis trustworthy and usable without a server pipeline: I had to enforce a maximum inline upload size for Gemini, run a three-pass ensemble with fixed seeds and aggregate votes so a single flaky pass would not miss a real crash, validate strict JSON fields before filing, and still handle clips with no embedded GPS by falling back to manual pin placement and optional Nominatim lookup. Passing modal state through React Router background locations kept edit and create flows from tearing users out of map context, while splitting reports API logic, CCTV analysis, GPS extraction, and reverse geocoding into focused feature modules next to co-located CSS Modules helped me avoid one oversized page file and made it easier to extend the triage console or tighten the AI contract independently.",
     ],
   },
+  {
+    id: 10,
+    slug: "tic-tac-toe-with-ai",
+    hidden: true,
+    category: "Personal",
+    eyebrow: "Full-stack developer • 2025",
+    headline: "Tic-Tac-Toe with AI",
+    body: "A tic-tac-toe game I built where you can play against the computer or with a friend. The computer has different levels, and on the hardest level it plays very well, so it is almost impossible to beat.",
+    imageUrl: "/projects/tic-tac-toe/hero.png",
+    ctaText: "View source",
+    ctaLink: "https://github.com/xircons/tictactoe-ai",
+    caseStudy: [
+      "I built a tic-tac-toe project that combines a playable web app with a reinforcement-learning side: the src/ area holds a self-play training pipeline and Q-learning-style agents for research and experimentation, while the shipped experience lets people play against AI opponents and see how game state is sent to a server for smarter moves. The goal was to turn a simple 3x3 game into something that shows both classic game AI and modern full-stack delivery, so visitors get a real product instead of a notebook or script.",
+      "The app uses a multi-page flow with React Router: home with name entry and mode choice (human vs AI or two humans), a dedicated game screen with scores and reset, plus settings, match history, and an about page. I focused on a cohesive retro phone shell layout, optional background music and sound effects, slide notifications for turns and errors, a win modal, and achievements tied to play patterns. Difficulty maps to different AI behaviors (easy random play, medium heuristics, hard minimax-style play), and history plus achievements persist in the browser so the experience feels continuous across sessions.",
+      "On the front end I used React with Vite, Redux Toolkit for game, settings, history, and achievements, and localStorage to persist everything except the in-progress board. The backend is a Flask REST API with CORS tuned for GitHub Pages, local Vite ports, and deployment hosts; it exposes health, move, and validate endpoints and reuses a shared Python tic-tac-toe engine. CI workflows build the SPA and deploy static assets to GitHub Pages while the API can run separately (for example on Render), with the front end pointing at a configurable base URL through environment variables. There is no traditional database, since state lives on the client.",
+      "A practical challenge was hosting the UI and API on different origins: browsers enforce CORS, and the static site can outlive or lose contact with the API. I addressed this by explicitly allowing the right origins on the Flask side and by handling failed fetch calls in the game logic: if the API is unreachable, the client shows a clear message and falls back to a simple random move so the game still runs. That kept the demo reliable for portfolio viewers even when the backend sleeps or errors, without blocking the whole interface.",
+    ],
+  },
 ];
 
+export const projects = allProjects.filter((p) => !p.hidden);
+
+export const hiddenProjectSlugs = allProjects.filter((p) => p.hidden).map((p) => p.slug);
+
 export function getProjectBySlug(slug: string): ProjectData | undefined {
-  return projects.find(
-    (p) =>
-      p.headline.toLowerCase().replace(/\s+/g, "-") === slug ||
-      p.id.toString() === slug
-  );
+  return projects.find((p) => p.slug === slug);
+}
+
+export function hasCover(imageUrl: string) {
+  return imageUrl !== "/projects/placeholder.svg";
 }

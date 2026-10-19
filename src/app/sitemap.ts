@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const projectPages = projects.map((project) => ({
-    url: `${baseUrl}/project/${project.headline.toLowerCase().replace(/\s+/g, "-")}`,
+    url: `${baseUrl}/project/${project.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.9,
