@@ -11,7 +11,7 @@ import { breadcrumbSchema, creativeWorkSchema, softwareApplicationSchema } from 
 
 export function generateStaticParams() {
   return projects.map((project) => ({
-    slug: project.headline.toLowerCase().replace(/\s+/g, "-"),
+    slug: project.slug,
   }));
 }
 
@@ -41,10 +41,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-function slugify(headline: string) {
-  return headline.toLowerCase().replace(/\s+/g, "-");
-}
-
 function getGallery(project: ProjectData): string[] {
   const rel = path.dirname(project.imageUrl);
   const dir = path.join(process.cwd(), "public", rel);
@@ -64,21 +60,6 @@ function getGallery(project: ProjectData): string[] {
   }
 }
 
-const getCategory = (id: string | number) => {
-  const map: Record<string, string> = {
-    1: "Production",
-    2: "Competition",
-    3: "Personal",
-    4: "Academic",
-    5: "Production",
-    6: "Personal",
-    7: "Academic",
-    8: "Personal",
-  };
-  return map[String(id)] || "Project";
-};
-
-
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -88,7 +69,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   const ordered = [...projects].sort((a, b) => Number(a.id) - Number(b.id));
-  const currentIndex = ordered.findIndex((p) => p.id === project.id);
+  const currentIndex = ordered.findIndex((p) => p.slug === project.slug);
   const nextProject = ordered[(currentIndex + 1) % ordered.length];
 
   const number = `P${String(project.id).padStart(3, "0")}`;
@@ -209,7 +190,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
 
         <Link
-          href={`/project/${slugify(nextProject.headline)}`}
+          href={`/project/${nextProject.slug}`}
           className="group grid cursor-pointer grid-cols-1 border-t border-border/80 md:grid-cols-2"
         >
           <div className="border-b border-border/80 p-5 md:border-b-0 md:border-r lg:p-10">
@@ -236,7 +217,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   <span className="text-[10px] font-bold uppercase tracking-widest text-fg/50">
                     Type
                   </span>
-                  <span className="text-sm font-medium lg:text-base">{getCategory(nextProject.id)}</span>
+                  <span className="text-sm font-medium lg:text-base">{nextProject.category}</span>
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-fg/50">

@@ -22,33 +22,19 @@ export const metadata: Metadata = {
   },
 };
 
-const getCategory = (id: string | number) => {
-  const map: Record<string, string> = {
-    1: "Production",
-    2: "Competition",
-    3: "Personal",
-    4: "Academic",
-    5: "Production",
-    6: "Personal",
-    7: "Academic",
-    8: "Personal",
-  };
-  return map[String(id)] || "Project";
-};
-
 const PROJECT_CARDS: StackCardData[] = [...projects]
   .sort((a, b) => Number(a.id) - Number(b.id))
   .map((project) => {
     const [role, year] = project.eyebrow.split("•").map((s) => s.trim());
     return {
       number: `P${String(project.id).padStart(3, "0")} /`,
-      eyebrow: getCategory(project.id),
+      eyebrow: project.category,
       headline: project.headline,
       body: project.body,
       imageSrc: project.imageUrl,
       imageAlt: project.headline,
       cta: "View Project",
-      href: `/project/${project.headline.toLowerCase().replace(/\s+/g, "-")}`,
+      href: `/project/${project.slug}`,
       role,
       year,
     };
