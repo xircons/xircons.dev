@@ -2,7 +2,8 @@ export function personSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Xircons",
+    name: "Wuttikan Suksan",
+    alternateName: "Xircons",
     url: "https://xircons.dev",
     jobTitle: "Full-stack Developer",
     email: "xirconsss@gmail.com",
@@ -86,7 +87,9 @@ export function creativeWorkSchema({
     description,
     author: {
       "@type": "Person",
-      name: "Xircons",
+      name: "Wuttikan Suksan",
+      alternateName: "Xircons",
+      url: "https://xircons.dev",
     },
   };
 }

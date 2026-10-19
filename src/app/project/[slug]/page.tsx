@@ -76,12 +76,12 @@ function getGallery(project: ProjectData): string[][] {
       .filter(
         (file) =>
           /\.(png|jpe?g|webp|avif)$/i.test(file) &&
-          !file.startsWith("hero.") &&
           !file.includes(" ") &&
           // A PNG with a WebP copy beside it is skipped, so each screenshot shows once.
           !(file.endsWith(".png") && files.includes(file.replace(/\.png$/, ".webp")))
       )
-      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+      // The hero image leads the gallery, then the numbered screenshots.
+      .sort((a, b) => Number(b.startsWith("hero.")) - Number(a.startsWith("hero.")) || a.localeCompare(b, undefined, { numeric: true }))
       .reduce<string[][]>((groups, file) => {
         const src = `${rel}/${file}`;
         const last = groups.at(-1);
