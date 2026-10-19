@@ -13,10 +13,10 @@ import { projects } from "@/data/projects";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: { absolute: "xircons" },
+  title: { absolute: "Xircons | Full-stack developer in Chiang Mai" },
   description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   openGraph: {
-    title: "xircons",
+    title: "Xircons | Full-stack developer in Chiang Mai",
     description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
     url: "/",
   },

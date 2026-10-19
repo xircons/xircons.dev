@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://xircons-dev.vercel.app"),
   title: {
     default: "Xircons",
-    template: "%s",
+    template: "%s | Xircons",
   },
   description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   keywords: ["Software Engineering", "UX Design", "Web Development", "Portfolio", "Xircons"],

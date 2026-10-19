@@ -49,7 +49,8 @@ export default function VideoBand() {
         <video
           ref={videoRef}
           className="absolute inset-x-0 -top-[12.5%] z-0 h-[125%] w-full object-cover will-change-transform"
-          src="/video/hero-background-optimized.mp4"
+          src="/video/hero-background.mp4"
+          poster="/video/hero-poster.webp"
           autoPlay
           muted
           loop

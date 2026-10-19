@@ -30,14 +30,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       canonical: `https://xircons-dev.vercel.app/project/${slug}`,
     },
     openGraph: {
-      title: project.headline,
+      title: `${project.headline} | Xircons`,
       description: project.body,
       url: `https://xircons-dev.vercel.app/project/${slug}`,
       siteName: "Xircons",
     },
     twitter: {
       card: "summary_large_image",
-      title: project.headline,
+      title: `${project.headline} | Xircons`,
       description: project.body,
     },
   };
@@ -112,6 +112,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const number = `P${String(project.id).padStart(3, "0")}`;
   const [role, year] = project.eyebrow.split("•").map((part) => part.trim());
   const gallery = getGallery(project);
+  const shots = gallery.flat();
+  const shotAlt = (src: string) => `${project.headline} screenshot ${shots.indexOf(src) + 1}`;
   const paragraphs = project.caseStudy ?? [project.body];
 
   const breadcrumb = breadcrumbSchema([
@@ -195,7 +197,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           {gallery.length === 0 ? (
             <>
               <aside className="relative z-20 w-full min-w-0 self-start md:sticky md:top-28 md:w-[34%] md:shrink-0">
-                <span className="font-mono text-xs uppercase tracking-[0.1em] text-muted">Overview</span>
+                <h2 className="font-mono text-xs font-normal uppercase tracking-[0.1em] text-muted">Overview</h2>
               </aside>
               <div className="flex w-full min-w-0 max-w-[68ch] flex-col gap-6 md:w-[61%] md:shrink-0">
                 {paragraphs.map((paragraph, i) => (
@@ -216,9 +218,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <>
               <aside className="relative z-20 w-full min-w-0 self-start text-left md:sticky md:top-28 md:w-[34%] md:shrink-0">
                 <div className="flex flex-col gap-6">
-                  <span className="font-mono text-xs uppercase tracking-[0.1em] text-muted">
+                  <h2 className="font-mono text-xs font-normal uppercase tracking-[0.1em] text-muted">
                     Overview
-                  </span>
+                  </h2>
                   {paragraphs.map((paragraph, i) => (
                     <p key={i} className="text-sm leading-relaxed text-fg/70 sm:text-base">
                       {paragraph}
@@ -232,14 +234,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   group.length === 1 ? (
                     <div key={group[0]} className="relative w-full shrink-0 overflow-hidden border border-border/80">
                       <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                      <Image src={group[0]} alt="" width={1920} height={1080} className="relative z-10 block h-auto w-full" />
+                      <Image src={group[0]} alt={shotAlt(group[0])} width={1920} height={1080} className="relative z-10 block h-auto w-full" />
                     </div>
                   ) : (
                     <div key={group[0]} className="grid grid-cols-2 gap-5 sm:grid-cols-3">
                       {group.map((src) => (
                         <div key={src} className="relative overflow-hidden border border-border/80">
                           <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                          <Image src={src} alt="" width={860} height={1860} sizes="(min-width: 768px) 20vw, 50vw" className="relative z-10 block h-auto w-full" />
+                          <Image src={src} alt={shotAlt(src)} width={860} height={1860} sizes="(min-width: 768px) 20vw, 50vw" className="relative z-10 block h-auto w-full" />
                         </div>
                       ))}
                     </div>
