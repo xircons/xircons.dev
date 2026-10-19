@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: "Xircons",
     template: "%s | Xircons",
   },
-  description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+  description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   keywords: ["Software Engineering", "UX Design", "Web Development", "Portfolio", "Xircons"],
   authors: [{ name: "Xircons" }],
   creator: "Xircons",
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     title: "Xircons",
-    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+    description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
     siteName: "Xircons",
   },
   twitter: {
     card: "summary_large_image",
     title: "Xircons",
-    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+    description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   },
 };
 
@@ -59,6 +59,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // Lets Next turn off scroll-smooth while it resets scroll on navigation.
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col">

@@ -12,6 +12,8 @@ export default function HashScroller() {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           target.scrollIntoView({ behavior: "smooth", block: "start" });
+          // Drop the hash once used, so going back to this page restores the last scroll spot instead of jumping here again.
+          history.replaceState(history.state, "", location.pathname + location.search);
         });
       });
     };

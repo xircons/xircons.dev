@@ -172,9 +172,8 @@ function AboutContent({
             />
           </div>
 
-          {/* 90.0625rem = 1441px; a px breakpoint would sort before xl and lose to xl:text-[3.75rem]. */}
           <h2
-            className="mt-9 text-4xl font-bold leading-[1.02] tracking-[-0.025em] lg:text-5xl xl:text-[3.75rem] min-[90.0625rem]:text-[clamp(3.75rem,4.2vw,5.5rem)]"
+            className="mt-9 text-[32px] lg:text-[48px] font-bold leading-[1.02] tracking-[-0.025em]"
             style={{ perspective: "800px" }}
           >
             {headline.split(" ").map((word, i) => (
@@ -191,7 +190,7 @@ function AboutContent({
 
           <motion.p
             style={{ opacity: subheadOpacity, y: subheadY }}
-            className="mt-7 max-w-[27em] text-xl leading-[1.55] min-[90.0625rem]:text-[clamp(1.25rem,1.4vw,1.625rem)] text-[#4A4A4A]"
+            className="mt-7 max-w-[34em] text-[15px] lg:text-base leading-[1.55] text-[#4A4A4A]"
           >
             {subhead}
           </motion.p>
@@ -210,7 +209,7 @@ function AboutContent({
             className="mt-7 grid grid-cols-2 divide-x divide-border border border-border"
           >
             <div className="px-5 py-[18px]">
-              <span className="block text-4xl font-bold tracking-[-0.02em] tabular-nums min-[90.0625rem]:text-[clamp(2.25rem,2.5vw,3rem)]">
+              <span className="block text-4xl font-bold tracking-[-0.02em] tabular-nums">
                 <motion.span aria-hidden="true">{roundedCount}</motion.span>
                 <span className="sr-only">{projects.length}</span>
               </span>
@@ -219,7 +218,7 @@ function AboutContent({
               </span>
             </div>
             <div className="px-5 py-[18px]">
-              <span className="block text-4xl font-bold tracking-[-0.02em] tabular-nums min-[90.0625rem]:text-[clamp(2.25rem,2.5vw,3rem)]">1st</span>
+              <span className="block text-4xl font-bold tracking-[-0.02em] tabular-nums">1st</span>
               <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
                 iCAS-CMU HUB Hackathon 2025
               </span>
@@ -246,7 +245,7 @@ function FactRow({ fact, index, progress }: { fact: Fact; index: number; progres
       >
         {fact.label}
       </motion.dt>
-      <motion.dd style={{ opacity, y }} className="mt-1 text-base font-medium lg:mt-0 min-[90.0625rem]:text-[clamp(1rem,1.1vw,1.25rem)]">
+      <motion.dd style={{ opacity, y }} className="mt-1 text-base font-medium lg:mt-0">
         {fact.value}
       </motion.dd>
     </div>

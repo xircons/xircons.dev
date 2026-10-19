@@ -6,12 +6,16 @@ export interface ProjectData {
   headline: string;
   body: string;
   imageUrl: string;
+  // Shown side by side on the Works card instead of imageUrl, for phone screenshots.
+  cardImages?: string[];
   ctaText?: string;
   ctaLink?: string;
   caseStudy?: string[];
+  // Keeps the entry for later but drops it from every page, list and count.
+  hidden?: boolean;
 }
 
-export const projects: readonly ProjectData[] = [
+const allProjects: readonly ProjectData[] = [
   {
     id: 1,
     slug: "keptcarbon",
@@ -20,7 +24,7 @@ export const projects: readonly ProjectData[] = [
     headline: "KeptCarbon",
     body: "GeoAI platform that estimates the carbon-credit potential of rubber plantations from plots mapped by users.",
     imageUrl: "/projects/keptcarbon/hero.png",
-    ctaText: "Visit Site",
+    ctaText: "Visit site",
     ctaLink: "https://keptcarbon.net",
     caseStudy: [
       "I worked on KeptCarbon at turnPRO, a GeoAI web platform that estimates the carbon-credit potential of rubber plantations. It is built in collaboration with Thai universities to support Thailand's Net Zero 2050 policy, with Rayong as the pilot province. The goal is to give landowners and project teams a credible, map-first way to understand how much carbon their plantations can capture, instead of relying on spreadsheets and manual field estimates.",
@@ -33,12 +37,12 @@ export const projects: readonly ProjectData[] = [
     id: 2,
     slug: "skillforce",
     category: "Internship",
-    eyebrow: "Lead frontend developer • 2026",
+    eyebrow: "Lead frontend and full-stack developer • 2026",
     headline: "SkillForce",
     body: "Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.",
     // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.png.
     imageUrl: "/projects/placeholder.svg",
-    ctaText: "Private Project",
+    ctaText: "Private project",
     caseStudy: [
       "SkillForce is a multi-module workforce skills platform I built at turnPRO, made up of separate Admin, Learner, Company and Mentor apps on a shared backend. Admins manage courses, skill tracks, assessments and QR-verifiable certificates; learners take courses and track their progress; companies post the skills they need. The goal was a single system that connects training, assessment and hiring demand, rather than separate tools for each.",
       "I started as a full-stack developer and became Lead Frontend Developer, leading a team of four frontend developers. I owned the Learner module, a mobile-first web app covering registration, profile, courses, assessment results, certificates and notifications, and later took on the AI course-generation flow in the Admin app. Every page had the same definition of done: wired to the real API, with loading, error and empty states, matching the frozen Figma design, and responsive on mobile.",
@@ -54,7 +58,7 @@ export const projects: readonly ProjectData[] = [
     headline: "iCAS-CMU HUB",
     body: "A production CMU club platform for memberships, events, assignments, live chat, and admin workflows, live at icas-cmu.turnpro.dev.",
     imageUrl: "/projects/icas-cmu/hero.png",
-    ctaText: "Visit Site",
+    ctaText: "Visit site",
     ctaLink: "https://icas-cmu.turnpro.dev",
     caseStudy: [
       "We built iCAS-CMU HUB (Integrated Club Administration System) as a team, and I worked on it as a full-stack developer. The app is a web platform for managing university clubs at CMU: it centralizes memberships, events, assignments, budgets, reports, and admin workflows so leaders and staff are not juggling spreadsheets and informal channels. My goal was to help deliver a single place where members can join clubs and take part in activities, while admins and club leaders can run day-to-day operations with clear roles and permissions. The platform is live in production at icas-cmu.turnpro.dev.",
@@ -66,16 +70,16 @@ export const projects: readonly ProjectData[] = [
   },
   {
     id: 4,
-    slug: "checkdee",
+    slug: "chekdee",
     category: "Internship",
-    eyebrow: "Full-stack developer • 2026",
-    headline: "Checkdee",
+    eyebrow: "Solo full-stack developer • 2026",
+    headline: "Chekdee",
     body: "LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.",
-    // ponytail: placeholder until screenshots arrive; switch to /projects/checkdee/hero.png.
-    imageUrl: "/projects/placeholder.svg",
-    ctaText: "Private Project",
+    imageUrl: "/projects/chekdee/16.png",
+    cardImages: ["/projects/chekdee/1.png", "/projects/chekdee/2.png", "/projects/chekdee/3.png"],
+    ctaText: "Private project",
     caseStudy: [
-      "Checkdee is a LINE-based employee attendance system I built at turnPRO for CAMT, Chiang Mai University. Staff check in from inside LINE instead of a separate app or a fingerprint scanner, and admins get schedules, leave and reports in one dashboard. The goal was to make attendance quick for staff and hard to fake, while giving admins numbers they can trust.",
+      "Chekdee is a LINE-based employee attendance system I built at turnPRO for CAMT, Chiang Mai University. Staff check in from inside LINE instead of a separate app or a fingerprint scanner, and admins get schedules, leave and reports in one dashboard. The goal was to make attendance quick for staff and hard to fake, while giving admins numbers they can trust.",
       "Staff open the app through LINE (LIFF with LINE Login), register once, and check in by scanning a rotating QR code shown on a lobby TV; checking out is a single button in the app. Lateness and absence follow clear rules against each person's scheduled shift, and admins can correct a day with a logged reason. Leave requests are submitted through a form with attachments and emailed to the supervisor with a secure, expiring approval link. Admins manage recurring weekly schedules per employee, since staff are students whose hours follow their class timetable, alongside holidays that sync automatically from a public API.",
       "I built the full frontend in Next.js with the App Router, TypeScript, Tailwind CSS and shadcn/ui, with all interface copy in Thai on a custom design system. The backend is written in Go with Echo, following Clean Architecture, with LINE login and password login for the system owner, JWT access tokens with refresh-token rotation, and PostgreSQL. It runs on Docker Compose on the company's own Linux server.",
       "The core challenge was trust: check-in only means something if it cannot be faked. The QR token rotates every 15 seconds and is HMAC-signed, so a screenshot stops working almost immediately. Kiosk TVs authenticate with revocable device tokens instead of user accounts, and worked hours are calculated against the scheduled shift rather than raw timestamps. For reporting, I built a two-sheet Excel export with an employee lookup dropdown, conditional formatting and a per-employee daily log, so admins can audit the data without needing access to the system itself.",
@@ -85,11 +89,11 @@ export const projects: readonly ProjectData[] = [
     id: 5,
     slug: "zero-mock",
     category: "Production",
-    eyebrow: "Full-stack developer • 2026",
+    eyebrow: "Solo full-stack developer • 2026",
     headline: "Zero-mock",
     body: "A zero-config Node.js CLI that instantly turns a single JSON file into a full CRUD REST API with CORS, pagination, and simulated latency for rapid frontend development.",
     imageUrl: "/projects/zero-mock/hero.png",
-    ctaText: "View Package",
+    ctaText: "View package",
     ctaLink: "https://www.npmjs.com/package/@xirconsss/zero-mock",
     caseStudy: [
       "I built zero-mock as a solo maintainer in a full-stack and tooling role. It is a zero-config developer tool that dynamically generates a persistent REST API from a JSON file while providing a Next.js web dashboard to manage projects. The problem it solves is the overhead frontend developers face when building prototypes: they need a reliable, self-updating local database and a clean visual interface to monitor resources without writing custom mock handlers or manually editing JSON files.",
@@ -103,10 +107,10 @@ export const projects: readonly ProjectData[] = [
     slug: "turnpro-skill-radar",
     category: "Internship",
     eyebrow: "Full-stack developer • 2026",
-    headline: "turnPRO Skill Radar",
+    headline: "turnPRO",
     body: "Company site with an internal system that scores team skills from real project tasks and shows them as radar charts.",
     imageUrl: "/projects/turnpro-skill-radar/hero.png",
-    ctaText: "Visit Site",
+    ctaText: "Visit site",
     ctaLink: "https://turnpro.dev",
     caseStudy: [
       "turnpro.dev is turnPRO's company site, combining a public landing page with an internal system that measures the skills of each team member. Instead of asking people to rate themselves, it scores skills from the tasks they actually complete in the team's project-management tools, so the picture reflects real work rather than self-assessment.",
@@ -117,11 +121,11 @@ export const projects: readonly ProjectData[] = [
     id: 7,
     slug: "store.atelien",
     category: "Academic",
-    eyebrow: "Full-stack developer • 2025",
+    eyebrow: "Solo full-stack developer • 2025",
     headline: "store.atelien",
     body: "An e-commerce website I made for a school project. People can sign up, browse products, use a cart and checkout, and there is an admin area to manage orders, products, and coupons.",
     imageUrl: "/projects/store.atelien/hero.png",
-    ctaText: "View Source",
+    ctaText: "View source",
     ctaLink: "https://github.com/xircons/store.atelien",
     caseStudy: [
       "I built store.atelien, a full-stack e-commerce demo for my studies. It is a fictional design-focused store (inspired by a minimalist retail look) that lets people browse products, sign up and log in, manage a cart, apply discount codes, and complete checkout with shipping and totals. The goal was to show I can ship a realistic online shop end to end, beyond static pages, while keeping the project clearly educational and non-commercial.",
@@ -132,30 +136,13 @@ export const projects: readonly ProjectData[] = [
   },
   {
     id: 8,
-    slug: "geo-care-network",
-    category: "Academic",
-    eyebrow: "Full-stack developer • 2026",
-    headline: "Geo Care Network",
-    body: "A Chiang Mai-focused map prototype for community incident reporting: browse and file reports on a live map, run CCTV footage through Gemini for auto-filled crash reports, and triage CCTV cases in a separate agency console. Data is served locally by zero-mock.",
-    imageUrl: "/projects/geo-care-network/hero.png",
-    ctaText: "View Source",
-    ctaLink: "https://github.com/xircons/geo-care-network",
-    caseStudy: [
-      "I built Geo Care Network, a web prototype for map-based incident reporting in a geographic care network, with sample data centered on Chiang Mai. It brings together a public-facing map and reports experience where residents can browse filed incidents, file or edit reports manually, and upload dashcam or CCTV footage for automated crash analysis, plus a separate agency notify workflow that behaves like a small triage console for CCTV-sourced cases. The goal was to prove out how a community safety tool could combine live map awareness, structured incident records, and AI-assisted filing from video.",
-      "On the community side, I focused on a clear path from the live map through severity and category filters, report pins with quick actions, and dedicated screens for the full reports list and manual create or edit flows where users pick location on an interactive map. Opening new or edit forms from the map uses modal-style routing so the underlying map stays visible. The CCTV flow walks users from video upload and preview through AI analysis to an auto-filled report form with Thai title and description, optional GPS-derived coordinates, and a captured thumbnail. The agency side uses a notify queue with open and archived views, status transitions, and an append-only activity log, with badge counts on the top bar so staff can see how many CCTV reports still need triage. I used CSS custom properties, CSS Modules per screen, and shared typography including Geist so the look stays consistent, while Gemini output is intentionally casual spoken Thai to match how eyewitnesses would describe a crash.",
-      "The stack is React 19 with TypeScript and Vite, React Router for multi-page navigation, and Redux Toolkit with RTK Query for server state. Report data is served by zero-mock from a local db.json file, which keeps REST-style GET, POST, PATCH, and DELETE behavior realistic during development. UI filters, search, and toast messaging live in a separate ui slice, with memoized selectors driving filtered lists on the map and reports views. Leaflet and react-leaflet power the map layers and location picker, OpenStreetMap Nominatim handles reverse geocoding when GPS metadata exists, and Google Gemini (gemini-2.5-flash) runs in the browser for multimodal video analysis. The live map and notify views poll on an interval so pins and queue state stay reasonably fresh without manual refresh.",
-      "The main challenge was making CCTV analysis trustworthy and usable without a server pipeline: I had to enforce a maximum inline upload size for Gemini, run a three-pass ensemble with fixed seeds and aggregate votes so a single flaky pass would not miss a real crash, validate strict JSON fields before filing, and still handle clips with no embedded GPS by falling back to manual pin placement and optional Nominatim lookup. Passing modal state through React Router background locations kept edit and create flows from tearing users out of map context, while splitting reports API logic, CCTV analysis, GPS extraction, and reverse geocoding into focused feature modules next to co-located CSS Modules helped me avoid one oversized page file and made it easier to extend the triage console or tighten the AI contract independently.",
-    ],
-  },
-  {
-    id: 9,
     slug: "deskcat",
     category: "Personal",
-    eyebrow: "Full-stack developer • 2025",
+    eyebrow: "Solo full-stack developer • 2025",
     headline: "deskcat",
     body: "A floating pixel-art cat that sits on your desktop, takes quick notes through the day, and gathers them into an end-of-day reflection.",
     imageUrl: "/projects/deskcat/hero.png",
-    ctaText: "View Source",
+    ctaText: "View source",
     ctaLink: "https://github.com/xircons/deskcat",
     caseStudy: [
       "I built deskcat as a solo developer to serve as a continuous on-screen companion and productivity tool. It is a desktop application featuring a floating pixel-art cat that helps users jot quick notes throughout the day. The problem it solves is the exhaustion and frustration of having to sit down every evening and trying to remember what was accomplished all day just to write daily reflections; by continuously tracking activities alongside a virtual pet companion, users no longer have to rely on their memory at the end of the day.",
@@ -165,14 +152,33 @@ export const projects: readonly ProjectData[] = [
     ],
   },
   {
+    id: 9,
+    slug: "geo-care-network",
+    hidden: true,
+    category: "Academic",
+    eyebrow: "Full-stack developer • 2026",
+    headline: "Geo Care Network",
+    body: "A Chiang Mai-focused map prototype for community incident reporting: browse and file reports on a live map, run CCTV footage through Gemini for auto-filled crash reports, and triage CCTV cases in a separate agency console. Data is served locally by zero-mock.",
+    imageUrl: "/projects/geo-care-network/hero.png",
+    ctaText: "View source",
+    ctaLink: "https://github.com/xircons/geo-care-network",
+    caseStudy: [
+      "I built Geo Care Network, a web prototype for map-based incident reporting in a geographic care network, with sample data centered on Chiang Mai. It brings together a public-facing map and reports experience where residents can browse filed incidents, file or edit reports manually, and upload dashcam or CCTV footage for automated crash analysis, plus a separate agency notify workflow that behaves like a small triage console for CCTV-sourced cases. The goal was to prove out how a community safety tool could combine live map awareness, structured incident records, and AI-assisted filing from video.",
+      "On the community side, I focused on a clear path from the live map through severity and category filters, report pins with quick actions, and dedicated screens for the full reports list and manual create or edit flows where users pick location on an interactive map. Opening new or edit forms from the map uses modal-style routing so the underlying map stays visible. The CCTV flow walks users from video upload and preview through AI analysis to an auto-filled report form with Thai title and description, optional GPS-derived coordinates, and a captured thumbnail. The agency side uses a notify queue with open and archived views, status transitions, and an append-only activity log, with badge counts on the top bar so staff can see how many CCTV reports still need triage. I used CSS custom properties, CSS Modules per screen, and shared typography including Geist so the look stays consistent, while Gemini output is intentionally casual spoken Thai to match how eyewitnesses would describe a crash.",
+      "The stack is React 19 with TypeScript and Vite, React Router for multi-page navigation, and Redux Toolkit with RTK Query for server state. Report data is served by zero-mock from a local db.json file, which keeps REST-style GET, POST, PATCH, and DELETE behavior realistic during development. UI filters, search, and toast messaging live in a separate ui slice, with memoized selectors driving filtered lists on the map and reports views. Leaflet and react-leaflet power the map layers and location picker, OpenStreetMap Nominatim handles reverse geocoding when GPS metadata exists, and Google Gemini (gemini-2.5-flash) runs in the browser for multimodal video analysis. The live map and notify views poll on an interval so pins and queue state stay reasonably fresh without manual refresh.",
+      "The main challenge was making CCTV analysis trustworthy and usable without a server pipeline: I had to enforce a maximum inline upload size for Gemini, run a three-pass ensemble with fixed seeds and aggregate votes so a single flaky pass would not miss a real crash, validate strict JSON fields before filing, and still handle clips with no embedded GPS by falling back to manual pin placement and optional Nominatim lookup. Passing modal state through React Router background locations kept edit and create flows from tearing users out of map context, while splitting reports API logic, CCTV analysis, GPS extraction, and reverse geocoding into focused feature modules next to co-located CSS Modules helped me avoid one oversized page file and made it easier to extend the triage console or tighten the AI contract independently.",
+    ],
+  },
+  {
     id: 10,
     slug: "tic-tac-toe-with-ai",
+    hidden: true,
     category: "Personal",
     eyebrow: "Full-stack developer • 2025",
     headline: "Tic-Tac-Toe with AI",
     body: "A tic-tac-toe game I built where you can play against the computer or with a friend. The computer has different levels, and on the hardest level it plays very well, so it is almost impossible to beat.",
     imageUrl: "/projects/tic-tac-toe/hero.png",
-    ctaText: "View Source",
+    ctaText: "View source",
     ctaLink: "https://github.com/xircons/tictactoe-ai",
     caseStudy: [
       "I built a tic-tac-toe project that combines a playable web app with a reinforcement-learning side: the src/ area holds a self-play training pipeline and Q-learning-style agents for research and experimentation, while the shipped experience lets people play against AI opponents and see how game state is sent to a server for smarter moves. The goal was to turn a simple 3x3 game into something that shows both classic game AI and modern full-stack delivery, so visitors get a real product instead of a notebook or script.",
@@ -182,6 +188,10 @@ export const projects: readonly ProjectData[] = [
     ],
   },
 ];
+
+export const projects = allProjects.filter((p) => !p.hidden);
+
+export const hiddenProjectSlugs = allProjects.filter((p) => p.hidden).map((p) => p.slug);
 
 export function getProjectBySlug(slug: string): ProjectData | undefined {
   return projects.find((p) => p.slug === slug);

@@ -110,7 +110,7 @@ function AccordionItem({
         className="flex w-full items-center justify-between px-8 py-6 text-left cursor-pointer"
         aria-expanded={open}
       >
-        <span className="text-xl font-semibold tracking-tight text-fg sm:text-2xl lg:text-3xl">
+        <span className="text-2xl font-semibold tracking-tight text-fg lg:text-[32px]">
           {item.title}
         </span>
         <span
@@ -131,7 +131,7 @@ function AccordionItem({
       >
         <div className="overflow-hidden">
           <div className="px-8 pb-8">
-            <p className="max-w-prose text-base leading-relaxed text-fg/70 sm:text-lg">
+            <p className="max-w-prose text-[15px] lg:text-base leading-relaxed text-fg/70">
               {item.body}
             </p>
             {item.skills && (
@@ -178,11 +178,11 @@ export default function ValueSection() {
         <div className="lg:sticky lg:top-5">
           <div className="flex min-h-[40vh] lg:min-h-[75vh] flex-col justify-between gap-10 border border-border/80 p-6 lg:p-12">
             <div className="flex flex-col gap-6">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-fg/50">
+              <span className="font-mono text-xs uppercase tracking-[0.1em] text-muted">
                 Value
               </span>
               <h2
-                className="max-w-sm text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.05] tracking-tight text-fg"
+                className="max-w-sm text-[32px] lg:text-[48px] font-bold leading-[1.05] tracking-tight text-fg"
                 style={{ perspective: "800px" }}
               >
                 {words.map((word, i) => {

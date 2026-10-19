@@ -13,10 +13,10 @@ import { projects } from "@/data/projects";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: { absolute: "Xircons | Engineering & Design" },
+  title: { absolute: "xircons" },
   description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   openGraph: {
-    title: "Xircons | Engineering & Design",
+    title: "xircons",
     description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
     url: "/",
   },
@@ -33,6 +33,7 @@ const PROJECT_CARDS: StackCardData[] = [...projects]
       headline: project.headline,
       body: project.body,
       imageSrc: project.imageUrl,
+      images: project.cardImages,
       imageAlt: project.headline,
       href: `/project/${project.slug}`,
       role,

@@ -1,3 +1,5 @@
+import { hiddenProjectSlugs } from "./src/data/projects";
+
 const nextConfig = {
   images: {
     qualities: [75, 100],
@@ -5,9 +7,9 @@ const nextConfig = {
   outputFileTracingExcludes: {
     "/*": ["public/**/*"],
   },
-  // Closed projects; temporary so the slugs can be reused later.
+  // Closed and hidden projects; temporary so the slugs can be reused later.
   async redirects() {
-    return ["ninjalingo", "good-night-hostel"].map((slug) => ({
+    return ["ninjalingo", "good-night-hostel", ...hiddenProjectSlugs].map((slug) => ({
       source: `/project/${slug}`,
       destination: "/#works",
       permanent: false,
