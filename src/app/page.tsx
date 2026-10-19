@@ -27,13 +27,13 @@ const PROJECT_CARDS: StackCardData[] = [...projects]
   .map((project) => {
     const [role, year] = project.eyebrow.split("•").map((s) => s.trim());
     return {
-      number: `P${String(project.id).padStart(3, "0")} /`,
+      slug: project.slug,
+      number: `P${String(project.id).padStart(3, "0")}`,
       eyebrow: project.category,
       headline: project.headline,
       body: project.body,
       imageSrc: project.imageUrl,
       imageAlt: project.headline,
-      cta: "View Project",
       href: `/project/${project.slug}`,
       role,
       year,
@@ -52,7 +52,7 @@ export default function Home() {
       />
       <WorksSection
         cards={PROJECT_CARDS}
-        introEyebrow="Selected Projects"
+        introEyebrow="Selected projects"
         introHeadline="Systems built for government agencies, universities and student clubs."
       />
       <VideoBand />

@@ -186,3 +186,7 @@ export const projects: readonly ProjectData[] = [
 export function getProjectBySlug(slug: string): ProjectData | undefined {
   return projects.find((p) => p.slug === slug);
 }
+
+export function hasCover(imageUrl: string) {
+  return imageUrl !== "/projects/placeholder.svg";
+}

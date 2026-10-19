@@ -1,10 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, projects, type ProjectData } from "@/data/projects";
+import { getProjectBySlug, hasCover, projects, type ProjectData } from "@/data/projects";
 import Link from "next/link";
 import Image from "next/image";
 import ActionButton from "@/components/ActionButton";
+import PrivateCover from "@/components/PrivateCover";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema, creativeWorkSchema, softwareApplicationSchema } from "@/lib/structured-data";
@@ -195,14 +196,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         >
           <div className="border-b border-border/80 p-5 md:border-b-0 md:border-r lg:p-10">
             <div className="relative aspect-[16/10] w-full overflow-hidden">
-              <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-              <Image
-                src={nextProject.imageUrl}
-                alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="relative z-10 object-cover object-center"
-              />
+              {hasCover(nextProject.imageUrl) ? (
+                <>
+                  <div className="absolute inset-0 bg-fg/10 animate-pulse" />
+                  <Image
+                    src={nextProject.imageUrl}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="relative z-10 object-cover object-center"
+                  />
+                </>
+              ) : (
+                <PrivateCover name={nextProject.headline} />
+              )}
             </div>
           </div>
 
