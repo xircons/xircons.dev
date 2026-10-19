@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy policy and data collection practices for Xircons.",
   alternates: {
-    canonical: "https://xircons-dev.vercel.app/privacy",
+    canonical: "https://xircons.dev/privacy",
   },
 };
 

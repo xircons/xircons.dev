@@ -176,7 +176,7 @@ export default function HeroSection({
         <video
           ref={videoRef}
           className={`block h-auto w-full transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
-          src="/video/hero-background-optimized.mp4"
+          src="/video/hero-background.mp4"
           autoPlay
           muted
           loop

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Terms and Conditions",
   description: "Terms and conditions of use for Xircons.",
   alternates: {
-    canonical: "https://xircons-dev.vercel.app/terms",
+    canonical: "https://xircons.dev/terms",
   },
 };
 

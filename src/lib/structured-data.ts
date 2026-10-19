@@ -3,7 +3,7 @@ export function personSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Xircons",
-    url: "https://xircons-dev.vercel.app",
+    url: "https://xircons.dev",
     jobTitle: "Full-stack Developer",
     email: "xirconsss@gmail.com",
     sameAs: [
@@ -19,7 +19,7 @@ export function websiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Xircons",
-    url: "https://xircons-dev.vercel.app",
+    url: "https://xircons.dev",
   };
 }
 

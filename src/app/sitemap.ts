@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://xircons-dev.vercel.app";
+  const baseUrl = "https://xircons.dev";
 
   const staticPages = ["", "/contact", "/privacy", "/terms"].map((route) => ({
     url: `${baseUrl}${route}`,
