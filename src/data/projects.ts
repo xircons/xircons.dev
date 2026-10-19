@@ -36,7 +36,8 @@ export const projects: readonly ProjectData[] = [
     eyebrow: "Lead frontend developer • 2026",
     headline: "SkillForce",
     body: "Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.",
-    imageUrl: "/projects/skillforce/hero.png",
+    // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.png.
+    imageUrl: "/projects/placeholder.svg",
     ctaText: "Private Project",
     caseStudy: [
       "SkillForce is a multi-module workforce skills platform I built at turnPRO, made up of separate Admin, Learner, Company and Mentor apps on a shared backend. Admins manage courses, skill tracks, assessments and QR-verifiable certificates; learners take courses and track their progress; companies post the skills they need. The goal was a single system that connects training, assessment and hiring demand, rather than separate tools for each.",
@@ -70,7 +71,8 @@ export const projects: readonly ProjectData[] = [
     eyebrow: "Full-stack developer • 2026",
     headline: "Checkdee",
     body: "LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.",
-    imageUrl: "/projects/checkdee/hero.png",
+    // ponytail: placeholder until screenshots arrive; switch to /projects/checkdee/hero.png.
+    imageUrl: "/projects/placeholder.svg",
     ctaText: "Private Project",
     caseStudy: [
       "Checkdee is a LINE-based employee attendance system I built at turnPRO for CAMT, Chiang Mai University. Staff check in from inside LINE instead of a separate app or a fingerprint scanner, and admins get schedules, leave and reports in one dashboard. The goal was to make attendance quick for staff and hard to fake, while giving admins numbers they can trust.",
