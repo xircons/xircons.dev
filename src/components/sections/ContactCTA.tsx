@@ -31,17 +31,17 @@ export default function ContactCTA() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2">
         <div className="px-8 py-12 lg:col-start-1 lg:row-start-1 lg:border-r lg:border-b lg:border-border/20 lg:px-16 lg:py-16">
-          <span className="mb-8 block text-xs font-medium uppercase tracking-[0.2em] text-[#E0E6ED]/40">
+          <span className="mb-8 block font-mono text-xs uppercase tracking-[0.1em] text-[#E0E6ED]/40">
             Contact
           </span>
-          <p className="max-w-sm text-base leading-relaxed text-[#E0E6ED]/60 sm:text-lg">
+          <p className="max-w-sm text-[15px] lg:text-base leading-relaxed text-[#E0E6ED]/60">
             Have a project in mind? Tell me what you need and I'll reply by email.
           </p>
         </div>
 
         <div className="flex flex-col justify-end px-8 py-12 lg:col-span-2 lg:col-start-2 lg:row-start-2 lg:px-16 lg:py-16 border-y border-l border-border/20">
           <h2
-            className="mb-8 max-w-4xl text-[clamp(2rem,5vw,4rem)] font-bold leading-[1] tracking-tight text-[#E0E6ED]"
+            className="mb-8 max-w-4xl text-[32px] lg:text-[48px] font-bold leading-[1] tracking-tight text-[#E0E6ED]"
             style={{ perspective: "800px" }}
           >
             {words.map((word, i) => {

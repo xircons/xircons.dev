@@ -13,27 +13,13 @@ import { projects } from "@/data/projects";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: { absolute: "Xircons | Engineering & Design" },
-  description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+  title: { absolute: "xircons" },
+  description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   openGraph: {
-    title: "Xircons | Engineering & Design",
-    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+    title: "xircons",
+    description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
     url: "/",
   },
-};
-
-const getCategory = (id: string | number) => {
-  const map: Record<string, string> = {
-    1: "Production",
-    2: "Competition",
-    3: "Personal",
-    4: "Academic",
-    5: "Production",
-    6: "Personal",
-    7: "Academic",
-    8: "Personal",
-  };
-  return map[String(id)] || "Project";
 };
 
 const PROJECT_CARDS: StackCardData[] = [...projects]
@@ -41,14 +27,16 @@ const PROJECT_CARDS: StackCardData[] = [...projects]
   .map((project) => {
     const [role, year] = project.eyebrow.split("•").map((s) => s.trim());
     return {
-      number: `P${String(project.id).padStart(3, "0")} /`,
-      eyebrow: getCategory(project.id),
+      slug: project.slug,
+      number: `P${String(project.id).padStart(3, "0")}`,
+      eyebrow: project.category,
       headline: project.headline,
       body: project.body,
       imageSrc: project.imageUrl,
+      images: project.cardImages,
+      isPrivate: project.isPrivate,
       imageAlt: project.headline,
-      cta: "View Project",
-      href: `/project/${project.headline.toLowerCase().replace(/\s+/g, "-")}`,
+      href: `/project/${project.slug}`,
       role,
       year,
     };
@@ -66,8 +54,8 @@ export default function Home() {
       />
       <WorksSection
         cards={PROJECT_CARDS}
-        introEyebrow="Selected Projects"
-        introHeadline="Web applications, business platforms, and developer tools."
+        introEyebrow="Selected projects"
+        introHeadline="Systems built for government agencies, universities and student clubs."
       />
       <VideoBand />
       <ValueSection />

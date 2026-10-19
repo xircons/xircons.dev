@@ -7,15 +7,17 @@ export default function HeadlineWord({
   progress,
   start,
   end,
+  ease,
 }: {
   word: string;
   progress: MotionValue<number>;
   start: number;
   end: number;
+  ease?: (t: number) => number;
 }) {
-  const opacity = useTransform(progress, [start, end], [0, 1]);
-  const y = useTransform(progress, [start, end], ["0.9em", "0em"]);
-  const rotateX = useTransform(progress, [start, end], [-65, 0]);
+  const opacity = useTransform(progress, [start, end], [0, 1], { ease });
+  const y = useTransform(progress, [start, end], ["0.9em", "0em"], { ease });
+  const rotateX = useTransform(progress, [start, end], [-65, 0], { ease });
 
   return (
     <span className="inline-block overflow-hidden align-bottom">
