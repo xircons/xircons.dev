@@ -176,38 +176,62 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <section className="relative z-0 px-5 py-12 lg:px-10 lg:py-20">
         <div className="flex w-full flex-col gap-10 md:flex-row md:items-start md:gap-x-[5%]">
-          <aside className="relative z-20 w-full min-w-0 self-start text-left md:sticky md:top-28 md:w-[34%] md:shrink-0">
-            <div className="flex flex-col gap-6">
-              <span className="font-mono text-xs uppercase tracking-[0.1em] text-muted">
-                Overview
-              </span>
-              {paragraphs.map((paragraph, i) => (
-                <p key={i} className="text-sm leading-relaxed text-fg/70 sm:text-base">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </aside>
-
-          <div className="relative z-0 flex w-full min-w-0 flex-col gap-5 md:w-[61%] md:shrink-0">
-            {gallery.map((group) =>
-              group.length === 1 ? (
-                <div key={group[0]} className="relative w-full shrink-0 overflow-hidden border border-border/80">
-                  <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                  <Image src={group[0]} alt="" width={1920} height={1080} className="relative z-10 block h-auto w-full" />
-                </div>
-              ) : (
-                <div key={group[0]} className="grid grid-cols-2 gap-5 sm:grid-cols-3">
-                  {group.map((src) => (
-                    <div key={src} className="relative overflow-hidden border border-border/80">
-                      <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                      <Image src={src} alt="" width={860} height={1860} sizes="(min-width: 768px) 20vw, 50vw" className="relative z-10 block h-auto w-full" />
-                    </div>
+          {gallery.length === 0 ? (
+            <>
+              <aside className="relative z-20 w-full min-w-0 self-start md:sticky md:top-28 md:w-[34%] md:shrink-0">
+                <span className="font-mono text-xs uppercase tracking-[0.1em] text-muted">Overview</span>
+              </aside>
+              <div className="flex w-full min-w-0 max-w-[68ch] flex-col gap-6 md:w-[61%] md:shrink-0">
+                {paragraphs.map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className={
+                      i === 0
+                        ? "text-xl leading-[1.45] text-fg md:text-[clamp(1.25rem,1.6vw,1.5rem)]"
+                        : "text-base leading-[1.7] text-[#4A4A4A] md:text-lg"
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <aside className="relative z-20 w-full min-w-0 self-start text-left md:sticky md:top-28 md:w-[34%] md:shrink-0">
+                <div className="flex flex-col gap-6">
+                  <span className="font-mono text-xs uppercase tracking-[0.1em] text-muted">
+                    Overview
+                  </span>
+                  {paragraphs.map((paragraph, i) => (
+                    <p key={i} className="text-sm leading-relaxed text-fg/70 sm:text-base">
+                      {paragraph}
+                    </p>
                   ))}
                 </div>
-              )
-            )}
-          </div>
+              </aside>
+
+              <div className="relative z-0 flex w-full min-w-0 flex-col gap-5 md:w-[61%] md:shrink-0">
+                {gallery.map((group) =>
+                  group.length === 1 ? (
+                    <div key={group[0]} className="relative w-full shrink-0 overflow-hidden border border-border/80">
+                      <div className="absolute inset-0 bg-fg/10 animate-pulse" />
+                      <Image src={group[0]} alt="" width={1920} height={1080} className="relative z-10 block h-auto w-full" />
+                    </div>
+                  ) : (
+                    <div key={group[0]} className="grid grid-cols-2 gap-5 sm:grid-cols-3">
+                      {group.map((src) => (
+                        <div key={src} className="relative overflow-hidden border border-border/80">
+                          <div className="absolute inset-0 bg-fg/10 animate-pulse" />
+                          <Image src={src} alt="" width={860} height={1860} sizes="(min-width: 768px) 20vw, 50vw" className="relative z-10 block h-auto w-full" />
+                        </div>
+                      ))}
+                    </div>
+                  )
+                )}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -229,6 +253,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               name={nextProject.headline}
               imageSrc={nextProject.imageUrl}
               images={nextProject.cardImages}
+              isPrivate={nextProject.isPrivate}
               alt={nextProject.headline}
               sizes="(min-width: 1024px) 58vw, 100vw"
               hoverScale="motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"

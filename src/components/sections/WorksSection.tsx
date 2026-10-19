@@ -14,6 +14,7 @@ export interface StackCardData {
   body: string;
   imageSrc: string;
   images?: string[];
+  isPrivate?: boolean;
   imageAlt: string;
   href: string;
   role?: string;
@@ -106,6 +107,7 @@ function ProjectCard({ card }: { card: StackCardData }) {
           name={card.headline}
           imageSrc={card.imageSrc}
           images={card.images}
+          isPrivate={card.isPrivate}
           alt={card.imageAlt}
           sizes="(min-width: 1024px) 50vw, 100vw"
           hoverScale="lg:group-hover:scale-[1.04] lg:group-focus-within:scale-[1.04]"

@@ -6,13 +6,14 @@ interface ProjectCoverProps {
   name: string;
   imageSrc: string;
   images?: string[];
+  isPrivate?: boolean;
   alt: string;
   sizes: string;
   // Scale classes keyed to the parent's group state, e.g. "lg:group-hover:scale-[1.04]".
   hoverScale: string;
 }
 
-export default function ProjectCover({ name, imageSrc, images, alt, sizes, hoverScale }: ProjectCoverProps) {
+export default function ProjectCover({ name, imageSrc, images, isPrivate, alt, sizes, hoverScale }: ProjectCoverProps) {
   const zoom = `transition-transform duration-[600ms] ease-out ${hoverScale}`;
   return (
     <div className="relative aspect-video w-full overflow-hidden">
@@ -43,7 +44,7 @@ export default function ProjectCover({ name, imageSrc, images, alt, sizes, hover
           />
         </>
       ) : (
-        <PrivateCover name={name} />
+        <PrivateCover name={name} isPrivate={isPrivate} />
       )}
     </div>
   );

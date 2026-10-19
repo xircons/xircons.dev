@@ -34,6 +34,7 @@ const PROJECT_CARDS: StackCardData[] = [...projects]
       body: project.body,
       imageSrc: project.imageUrl,
       images: project.cardImages,
+      isPrivate: project.isPrivate,
       imageAlt: project.headline,
       href: `/project/${project.slug}`,
       role,

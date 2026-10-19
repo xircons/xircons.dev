@@ -8,6 +8,8 @@ export interface ProjectData {
   imageUrl: string;
   // Shown side by side on the Works card instead of imageUrl, for phone screenshots.
   cardImages?: string[];
+  // Covers without images say "Private project" only when this is set; otherwise "Screenshots coming soon".
+  isPrivate?: boolean;
   ctaText?: string;
   ctaLink?: string;
   caseStudy?: string[];
@@ -42,8 +44,10 @@ const allProjects: readonly ProjectData[] = [
     body: "Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.",
     // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.png.
     imageUrl: "/projects/placeholder.svg",
-    ctaText: "Private project",
+    ctaText: "Visit public site",
+    ctaLink: "https://skillforce.camt.cmu.ac.th/company",
     caseStudy: [
+      "The public site is only the front door. Most of my work sits behind the login: the Learner app I owned end to end, and the AI course-generation flow in the Admin app.",
       "SkillForce is a multi-module workforce skills platform I built at turnPRO, made up of separate Admin, Learner, Company and Mentor apps on a shared backend. Admins manage courses, skill tracks, assessments and QR-verifiable certificates; learners take courses and track their progress; companies post the skills they need. The goal was a single system that connects training, assessment and hiring demand, rather than separate tools for each.",
       "I started as a full-stack developer and became Lead Frontend Developer, leading a team of four frontend developers. I owned the Learner module, a mobile-first web app covering registration, profile, courses, assessment results, certificates and notifications, and later took on the AI course-generation flow in the Admin app. Every page had the same definition of done: wired to the real API, with loading, error and empty states, matching the frozen Figma design, and responsive on mobile.",
       "The Learner app uses Next.js with the App Router, Tailwind CSS, React Query for server state and Recharts for learning-outcome charts, on a shared design system. The backend is a Node.js API with Prisma on PostgreSQL. I built an onboarding gate that sends partially registered users back to finish registration instead of into a broken app, and a resume flow that pre-fills an abandoned registration so learners do not have to start over.",
@@ -74,6 +78,7 @@ const allProjects: readonly ProjectData[] = [
     category: "Internship",
     eyebrow: "Solo full-stack developer • 2026",
     headline: "Chekdee",
+    isPrivate: true,
     body: "LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.",
     imageUrl: "/projects/chekdee/16.png",
     cardImages: ["/projects/chekdee/1.png", "/projects/chekdee/2.png", "/projects/chekdee/3.png"],
