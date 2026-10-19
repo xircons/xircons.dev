@@ -6,6 +6,7 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch to start a project with Xircons.",
+  alternates: { canonical: "https://xircons.dev/contact" },
   openGraph: {
     title: "Contact | Xircons",
     description: "Get in touch to start a project with Xircons.",

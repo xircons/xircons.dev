@@ -1,4 +1,4 @@
-const url = "https://xircons-dev.vercel.app/project/zero-mock";
+const url = "https://xircons.dev/project/zero-mock";
 
 fetch(url)
   .then(res => res.text())

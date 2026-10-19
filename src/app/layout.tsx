@@ -19,17 +19,17 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://xircons-dev.vercel.app"),
+  metadataBase: new URL("https://xircons.dev"),
   title: {
     default: "Xircons",
-    template: "%s",
+    template: "%s | Xircons",
   },
   description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   keywords: ["Software Engineering", "UX Design", "Web Development", "Portfolio", "Xircons"],
   authors: [{ name: "Xircons" }],
   creator: "Xircons",
   alternates: {
-    canonical: "https://xircons-dev.vercel.app/",
+    canonical: "https://xircons.dev/",
   },
   openGraph: {
     type: "website",
