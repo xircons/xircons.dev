@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   keywords: ["Software Engineering", "UX Design", "Web Development", "Portfolio", "Xircons"],
-  authors: [{ name: "Xircons" }],
+  authors: [{ name: "Wuttikan Suksan", url: "https://xircons.dev" }],
   creator: "Xircons",
   alternates: {
     canonical: "https://xircons.dev/",
