@@ -14,10 +14,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: { absolute: "Xircons | Engineering & Design" },
-  description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+  description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   openGraph: {
     title: "Xircons | Engineering & Design",
-    description: "Portfolio of Xircons, a full-stack developer building web apps, business platforms, and developer tools.",
+    description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
     url: "/",
   },
 };
@@ -53,7 +53,7 @@ export default function Home() {
       <WorksSection
         cards={PROJECT_CARDS}
         introEyebrow="Selected Projects"
-        introHeadline="Web applications, business platforms, and developer tools."
+        introHeadline="Systems built for government agencies, universities and student clubs."
       />
       <VideoBand />
       <ValueSection />
