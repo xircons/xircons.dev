@@ -1,3 +1,5 @@
+import { CONTACT_EMAIL } from "./site";
+
 export function personSchema() {
   return {
     "@context": "https://schema.org",
@@ -6,7 +8,7 @@ export function personSchema() {
     alternateName: "Xircons",
     url: "https://xircons.dev",
     jobTitle: "Full-stack Developer",
-    email: "xirconsss@gmail.com",
+    email: CONTACT_EMAIL,
     sameAs: [
       "https://github.com/xircons",
       "https://www.facebook.com/pppwtk",

@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-const CONTACT_EMAIL = "xirconsss@gmail.com";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export default function ContactForm() {
   const [step, setStep] = useState(1);
