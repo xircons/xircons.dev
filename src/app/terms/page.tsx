@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions",
@@ -92,7 +93,7 @@ export default function TermsPage() {
 
           <h2 className="mt-12 text-2xl font-bold">8. Contact Us</h2>
           <p>
-            If you have any questions about these Terms, please contact me at: <a href="mailto:xirconsss@gmail.com">xirconsss@gmail.com</a>
+            If you have any questions about these Terms, please contact me at: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           </p>
         </div>
       </section>

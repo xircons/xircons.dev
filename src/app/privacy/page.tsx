@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -122,7 +123,7 @@ export default function PrivacyPage() {
             If you have any questions about this Privacy Policy, please contact me:
           </p>
           <ul className="list-disc pl-6 marker:text-fg/40">
-            <li>By email: <a href="mailto:xirconsss@gmail.com">xirconsss@gmail.com</a></li>
+            <li>By email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
           </ul>
         </div>
       </section>
