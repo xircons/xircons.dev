@@ -1,5 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { Resend } from "resend";
+import { buildContactEmail } from "@/lib/contact-email";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const TO_EMAIL = "xirconsss@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
@@ -8,15 +10,6 @@ const INMEMORY_LIMITER = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS = 5;
 const MAX_LIMITER_SIZE = 10000; // Cap to prevent memory leaks
-
-function escapeHtml(unsafe: string): string {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -80,10 +73,10 @@ export async function POST(req: NextRequest) {
           parsedOrigin.endsWith(".vercel.app");
 
         if (!isAllowedOrigin) {
-          return NextResponse.json({ error: "This request was blocked. Please email xirconsss@gmail.com instead." }, { status: 403 });
+          return NextResponse.json({ error: `This request was blocked. Please email ${CONTACT_EMAIL} instead.` }, { status: 403 });
         }
       } catch {
-        return NextResponse.json({ error: "This request was blocked. Please email xirconsss@gmail.com instead." }, { status: 403 });
+        return NextResponse.json({ error: `This request was blocked. Please email ${CONTACT_EMAIL} instead.` }, { status: 403 });
       }
     }
 
@@ -139,36 +132,29 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "You must accept the terms and privacy policy", field: "terms" }, { status: 400 });
     }
 
-    const safeName = escapeHtml(name.trim());
-    const safeEmail = escapeHtml(email.trim());
-    const safePhone = escapeHtml(phone?.trim() || "N/A");
-    const safeCompany = escapeHtml(company?.trim() || "N/A");
-    const safeMessage = escapeHtml(message.trim()).replace(/\n/g, "<br/>");
+    const { subject, html, text: plainText } = buildContactEmail({
+      name,
+      email,
+      phone: typeof phone === "string" ? phone : undefined,
+      company: typeof company === "string" ? company : undefined,
+      message,
+      acceptedTerms,
+      receivedAt: new Date(),
+    });
 
     const { data, error } = await resend.emails.send({
-      from: `Xircons Contact Form <${FROM_EMAIL}>`,
+      from: `xircons.dev <${FROM_EMAIL}>`,
       to: [TO_EMAIL],
-      subject: `New Inquiry from ${safeName} ${company ? `(${safeCompany})` : ""}`,
+      subject,
       replyTo: email,
-      html: `
-        <h2>New Contact Inquiry</h2>
-        <p><strong>Name:</strong> ${safeName}</p>
-        <p><strong>Email:</strong> ${safeEmail}</p>
-        <p><strong>Phone:</strong> ${safePhone}</p>
-        <p><strong>Company:</strong> ${safeCompany}</p>
-        <br/>
-        <h3>Message:</h3>
-        <p>${safeMessage}</p>
-        <br/>
-        <hr/>
-        <p><small>Terms accepted: ${acceptedTerms ? "Yes" : "No"}</small></p>
-      `,
+      html,
+      text: plainText,
     });
 
     if (error) {
       console.error("Resend error:", error);
       return NextResponse.json(
-        { error: "Your message could not be sent. Please email xirconsss@gmail.com instead." },
+        { error: `Your message could not be sent. Please email ${CONTACT_EMAIL} instead.` },
         { status: 502 }
       );
     }
