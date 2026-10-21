@@ -10,7 +10,14 @@ const get = async (path) => {
   const res = await fetch(base + path, { redirect: "manual" });
   return { path, res, html: await res.text() };
 };
-const pages = await Promise.all(paths.map(get));
+let pages, notFound, llms, sitemap;
+try {
+  pages = await Promise.all(paths.map(get));
+  [notFound, llms, sitemap] = await Promise.all(["/this-does-not-exist", "/llms.txt", "/sitemap.xml"].map(get));
+} catch (e) {
+  console.error(`cannot reach ${base}: ${e.cause?.code ?? e.message}`);
+  process.exit(1);
+}
 const [home] = pages;
 const projects = pages.filter((p) => p.path.startsWith("/project/"));
 
@@ -35,10 +42,6 @@ const check = (name, fn) => {
     console.log(`FAIL ${name} ${String(e.message).split("\n")[0]}`);
   }
 };
-
-const notFound = await get("/this-does-not-exist");
-const llms = await get("/llms.txt");
-const sitemap = await get("/sitemap.xml");
 
 check("home-title", () => assert.equal(title(home.html), "Wuttikan Suksan (Xircons): Full-stack Developer in Chiang Mai"));
 check("project-titles", () => each(projects, (p) => assert.match(title(p.html) ?? "", /^.+: .+ \| Xircons$/)));
@@ -74,9 +77,9 @@ check("person-schema", () => {
   assert.equal(p.address?.addressLocality, "Chiang Mai");
   assert.equal(p.address?.addressCountry, "TH");
   assert.ok([p.knowsAbout].flat().filter(Boolean).length > 0, "knowsAbout empty");
-  const same = [p.sameAs].flat().filter(Boolean).join(" ");
-  assert.ok(/linkedin\.com/.test(same), "sameAs missing LinkedIn");
-  assert.ok(/npmjs\.com/.test(same), "sameAs missing npm");
+  const same = [p.sameAs].flat().filter(Boolean);
+  assert.ok(same.includes("https://www.linkedin.com/in/wuttikan-suksan"), "sameAs missing LinkedIn");
+  assert.ok(same.includes("https://www.npmjs.com/~xirconsss"), "sameAs missing npm");
 });
 check("graph-context", () =>
   each(pages, (p) =>
@@ -96,8 +99,10 @@ check("author-ref", () => {
 check("no-placeholder", () => each(pages, (p) => assert.ok(!JSON.stringify(jsonld(p.html)).includes("placeholder.svg"))));
 check("no-copykub", () => each(pages, (p) => assert.ok(!/copykub/i.test(p.html))));
 check("intro", () => {
-  assert.ok(home.html.includes("Chiang Mai"), "no Chiang Mai");
-  assert.ok(home.html.includes("Next.js"), "no Next.js");
+  const sub = home.html.match(/<p[^>]*>(I(?:&#x27;|')m Wuttikan Suksan[\s\S]*?)<\/p>/)?.[1];
+  assert.ok(sub, "no About subhead");
+  assert.ok(sub.includes("Chiang Mai"), "subhead lacks Chiang Mai");
+  assert.ok(sub.includes("Next.js"), "subhead lacks Next.js");
 });
 check("lcp", () => {
   const img = tags(home.html, "img").find((t) => attr(t, "src")?.includes("xircons-full-nobg") || attr(t, "srcset")?.includes("xircons-full-nobg"));
