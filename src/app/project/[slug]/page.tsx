@@ -9,7 +9,13 @@ import ProjectCover from "@/components/ProjectCover";
 import ProjectMeta from "@/components/ProjectMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { baseOpenGraph } from "@/lib/site";
 import { breadcrumbSchema, creativeWorkSchema, softwareApplicationSchema } from "@/lib/structured-data";
+
+// The segment's opengraph-image.tsx supplies the image.
+const projectOpenGraph = Object.fromEntries(
+  Object.entries(baseOpenGraph).filter(([key]) => key !== "images"),
+);
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -23,22 +29,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
+  const title = `${project.headline}: ${project.descriptor}`;
+  const description = project.metaDescription ?? project.body;
   return {
-    title: project.headline,
-    description: project.body,
+    title,
+    description,
     alternates: {
       canonical: `https://xircons.dev/project/${slug}`,
     },
     openGraph: {
-      title: `${project.headline} | Xircons`,
-      description: project.body,
+      ...projectOpenGraph,
+      title: `${title} | Xircons`,
+      description,
       url: `https://xircons.dev/project/${slug}`,
-      siteName: "Xircons",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.headline} | Xircons`,
-      description: project.body,
+      title: `${title} | Xircons`,
+      description,
     },
   };
 }

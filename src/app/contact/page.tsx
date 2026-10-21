@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { baseOpenGraph } from "@/lib/site";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch to start a project with Xircons.",
+  description: "Hire Wuttikan Suksan (Xircons), a full-stack developer in Chiang Mai. Tell me about your web app or platform and I'll reply within 3 business days.",
   alternates: { canonical: "https://xircons.dev/contact" },
   openGraph: {
+    ...baseOpenGraph,
     title: "Contact | Xircons",
-    description: "Get in touch to start a project with Xircons.",
+    description: "Hire Wuttikan Suksan (Xircons), a full-stack developer in Chiang Mai. Tell me about your web app or platform and I'll reply within 3 business days.",
     url: "/contact",
   },
 };
@@ -29,7 +31,7 @@ export default function ContactPage() {
               Contact
             </h1>
             <p className="max-w-[28rem] text-xl font-medium leading-[1.15] tracking-[-0.02em] sm:text-2xl lg:text-[2rem]">
-              Tell me about your project and I&apos;ll reply with next steps.
+              Tell me about your project and I&apos;ll reply within 3 business days with next steps.
             </p>
           </div>
           <div aria-hidden="true" className="flex-1 px-6 py-12 sm:px-10 lg:px-16 lg:py-24 xl:px-24" />

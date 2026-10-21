@@ -11,12 +11,15 @@ import Footer from "@/components/Footer";
 import HashScroller from "@/components/HashScroller";
 import { projects } from "@/data/projects";
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Xircons" },
+  title: { absolute: "Wuttikan Suksan (Xircons): Full-stack Developer in Chiang Mai" },
   description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
+  alternates: { canonical: "https://xircons.dev/" },
   openGraph: {
-    title: "Xircons",
+    ...baseOpenGraph,
+    title: "Wuttikan Suksan (Xircons): Full-stack Developer in Chiang Mai",
     description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
     url: "/",
   },
