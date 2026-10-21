@@ -121,7 +121,6 @@ export default function Navbar() {
           src="/logo/xircons-x-nobg.png"
           alt="Xircons"
           fill
-          priority
           sizes="(min-width: 1024px) 7rem, (min-width: 640px) 6rem, 5rem"
           className={`object-contain object-left transition-opacity duration-300 ${isLight || open ? "opacity-0" : "opacity-100"}`}
         />
@@ -129,7 +128,6 @@ export default function Navbar() {
           src="/logo/xircons-x-white-nobg.png"
           alt="Xircons White"
           fill
-          priority
           sizes="(min-width: 1024px) 7rem, (min-width: 640px) 6rem, 5rem"
           className={`object-contain object-left transition-opacity duration-300 ${isLight || open ? "opacity-100" : "opacity-0"}`}
         />
@@ -162,11 +160,12 @@ export default function Navbar() {
 
       <aside
         aria-hidden={!open}
+        inert={!open}
         className={`fixed right-0 top-0 z-50 flex h-full w-full flex-col bg-white text-fg shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] sm:w-[70vw] md:w-[50vw] lg:w-[38vw] xl:w-[32vw] ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex h-full w-full flex-col justify-between overflow-y-auto px-6 pb-8 pt-24 sm:px-8 sm:pt-28 lg:px-10 lg:pb-12">
           <div>
-            <h2 className="mb-8 text-xs font-medium uppercase tracking-[0.25em] text-fg/40">
+            <h2 className="mb-8 text-xs font-medium uppercase tracking-[0.25em] text-fg/70">
               Navigation
             </h2>
             <nav className="flex flex-col">
@@ -218,7 +217,7 @@ export default function Navbar() {
                                   className="group flex items-center justify-between gap-4 py-2 pr-2 transition-colors duration-300"
                                 >
                                   <span className="flex items-baseline gap-2">
-                                    <span className="font-mono text-xs font-medium text-fg/40 transition-colors duration-300 group-hover:text-fg/70">
+                                    <span className="font-mono text-xs font-medium text-fg/70 transition-colors duration-300 group-hover:text-fg/70">
                                       P{String(work.id).padStart(3, "0")}
                                     </span>
                                     <span className="text-sm font-medium text-fg/70 transition-colors duration-300 group-hover:text-fg">
@@ -265,7 +264,7 @@ export default function Navbar() {
                   </a>
                 ))}
               </div>
-              <span className="text-[10px] uppercase tracking-widest text-fg/40">
+              <span className="text-[10px] uppercase tracking-widest text-fg/70">
                 © {year} XIRCONS
               </span>
             </div>

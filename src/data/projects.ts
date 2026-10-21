@@ -1,9 +1,13 @@
 export interface ProjectData {
   id: number;
   slug: string;
+  updated: string;
   category: string;
   eyebrow: string;
   headline: string;
+  descriptor: string;
+  // Used for the meta description when body is too long for search results.
+  metaDescription?: string;
   body: string;
   imageUrl: string;
   // Shown side by side on the Works card instead of imageUrl, for phone screenshots.
@@ -14,6 +18,7 @@ export interface ProjectData {
   ctaLink?: string;
   caseStudy?: string[];
   // Keeps the entry for later but drops it from every page, list and count.
+  // Un-hiding: add metaDescription if body > 160 chars, and add the slug to scripts/check-seo.mjs and public/llms.txt.
   hidden?: boolean;
 }
 
@@ -21,9 +26,11 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 1,
     slug: "keptcarbon",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Full-stack developer • 2026",
     headline: "KeptCarbon",
+    descriptor: "GeoAI Carbon Credit Platform",
     body: "GeoAI platform that estimates the carbon-credit potential of rubber plantations from plots mapped by users.",
     imageUrl: "/projects/keptcarbon/hero.webp",
     ctaText: "Visit site",
@@ -38,9 +45,11 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 2,
     slug: "skillforce",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Lead frontend and full-stack developer • 2026",
     headline: "SkillForce",
+    descriptor: "Workforce Skills Platform",
     body: "Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.",
     // ponytail: placeholder until screenshots arrive; switch to /projects/skillforce/hero.webp.
     imageUrl: "/projects/placeholder.svg",
@@ -57,9 +66,11 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 3,
     slug: "icas-cmu-hub",
+    updated: "2026-10-21",
     category: "Competition",
     eyebrow: "Full-stack developer • 2025",
     headline: "iCAS-CMU HUB",
+    descriptor: "University Club Management Platform",
     body: "A production CMU club platform for memberships, events, assignments, live chat, and admin workflows, live at icas-cmu.turnpro.dev.",
     imageUrl: "/projects/icas-cmu/hero.webp",
     ctaText: "Visit site",
@@ -75,9 +86,11 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 4,
     slug: "chekdee",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Solo full-stack developer • 2026",
     headline: "Chekdee",
+    descriptor: "LINE QR Attendance System",
     isPrivate: true,
     body: "LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.",
     imageUrl: "/projects/chekdee/16.webp",
@@ -93,9 +106,12 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 5,
     slug: "zero-mock",
+    updated: "2026-10-21",
     category: "Production",
     eyebrow: "Solo full-stack developer • 2026",
     headline: "Zero-mock",
+    descriptor: "JSON to REST API Mock CLI",
+    metaDescription: "Zero-config Node.js CLI that turns one JSON file into a full CRUD REST API with CORS, pagination and simulated latency.",
     body: "A zero-config Node.js CLI that instantly turns a single JSON file into a full CRUD REST API with CORS, pagination, and simulated latency for rapid frontend development.",
     imageUrl: "/projects/zero-mock/hero.webp",
     ctaText: "View package",
@@ -110,9 +126,11 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 6,
     slug: "turnpro-skill-radar",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Frontend developer • 2026",
     headline: "turnPRO",
+    descriptor: "Team Skill Radar System",
     body: "Company site with an internal system that scores team skills from real project tasks and shows them as radar charts.",
     imageUrl: "/projects/turnpro-skill-radar/hero.webp",
     ctaText: "Visit site",
@@ -128,9 +146,12 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 7,
     slug: "store.atelien",
+    updated: "2026-10-21",
     category: "Academic",
     eyebrow: "Solo full-stack developer • 2025",
     headline: "store.atelien",
+    descriptor: "Full-stack E-commerce Store",
+    metaDescription: "School e-commerce project with sign-up, product browsing, cart and checkout, plus an admin area for orders, products and coupons.",
     body: "An e-commerce website I made for a school project. People can sign up, browse products, use a cart and checkout, and there is an admin area to manage orders, products, and coupons.",
     imageUrl: "/projects/store.atelien/hero.webp",
     ctaText: "View source",
@@ -145,9 +166,11 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 8,
     slug: "deskcat",
+    updated: "2026-10-21",
     category: "Personal",
     eyebrow: "Solo full-stack developer • 2025",
     headline: "deskcat",
+    descriptor: "Pixel-art Desktop Notes App",
     body: "A floating pixel-art cat that sits on your desktop, takes quick notes through the day, and gathers them into an end-of-day reflection.",
     imageUrl: "/projects/deskcat/hero.webp",
     ctaText: "View source",
@@ -162,10 +185,12 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 9,
     slug: "geo-care-network",
+    updated: "2026-10-21",
     hidden: true,
     category: "Academic",
     eyebrow: "Full-stack developer • 2026",
     headline: "Geo Care Network",
+    descriptor: "Community Incident Map Prototype",
     body: "A Chiang Mai-focused map prototype for community incident reporting: browse and file reports on a live map, run CCTV footage through Gemini for auto-filled crash reports, and triage CCTV cases in a separate agency console. Data is served locally by zero-mock.",
     imageUrl: "/projects/geo-care-network/hero.webp",
     ctaText: "View source",
@@ -180,10 +205,12 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 10,
     slug: "tic-tac-toe-with-ai",
+    updated: "2026-10-21",
     hidden: true,
     category: "Personal",
     eyebrow: "Full-stack developer • 2025",
     headline: "Tic-Tac-Toe with AI",
+    descriptor: "Tic-Tac-Toe Game with AI",
     body: "A tic-tac-toe game I built where you can play against the computer or with a friend. The computer has different levels, and on the hardest level it plays very well, so it is almost impossible to beat.",
     imageUrl: "/projects/tic-tac-toe/hero.webp",
     ctaText: "View source",

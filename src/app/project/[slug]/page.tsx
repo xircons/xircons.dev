@@ -9,7 +9,13 @@ import ProjectCover from "@/components/ProjectCover";
 import ProjectMeta from "@/components/ProjectMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_URL, baseOpenGraph } from "@/lib/site";
 import { breadcrumbSchema, creativeWorkSchema, softwareApplicationSchema } from "@/lib/structured-data";
+
+// The segment's opengraph-image.tsx supplies the image.
+const projectOpenGraph = Object.fromEntries(
+  Object.entries(baseOpenGraph).filter(([key]) => key !== "images"),
+);
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -23,22 +29,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
+  const title = `${project.headline}: ${project.descriptor}`;
+  const description = project.metaDescription ?? project.body;
   return {
-    title: project.headline,
-    description: project.body,
+    title,
+    description,
     alternates: {
       canonical: `https://xircons.dev/project/${slug}`,
     },
     openGraph: {
-      title: `${project.headline} | Xircons`,
-      description: project.body,
+      ...projectOpenGraph,
+      title: `${title} | Xircons`,
+      description,
       url: `https://xircons.dev/project/${slug}`,
-      siteName: "Xircons",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.headline} | Xircons`,
-      description: project.body,
+      title: `${title} | Xircons`,
+      description,
     },
   };
 }
@@ -121,17 +129,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     { name: project.headline, url: `https://xircons.dev/project/${slug}` },
   ]);
 
+  const schemaImageUrl = project.imageUrl.endsWith("placeholder.svg")
+    ? `${SITE_URL}/project/${slug}/opengraph-image`
+    : `${SITE_URL}${project.imageUrl}`;
+
   const projectSchema = project.headline === "Zero-mock" 
     ? softwareApplicationSchema({
         name: project.headline,
         url: project.ctaLink ?? `https://xircons.dev/project/${slug}`,
-        imageUrl: `https://xircons.dev${project.imageUrl}`,
+        imageUrl: schemaImageUrl,
         description: project.body,
       })
     : creativeWorkSchema({
         name: project.headline,
         url: `https://xircons.dev/project/${slug}`,
-        imageUrl: `https://xircons.dev${project.imageUrl}`,
+        imageUrl: schemaImageUrl,
         description: project.body,
       });
 
@@ -187,7 +199,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           {project.ctaLink ? (
             <ActionButton href={project.ctaLink} label={project.ctaText ?? "View project"} fullWidth />
           ) : (
-            <span className="text-sm font-medium text-fg/50">{project.ctaText ?? "Private"}</span>
+            <span className="text-sm font-medium text-fg/70">{project.ctaText ?? "Private"}</span>
           )}
         </div>
       </section>

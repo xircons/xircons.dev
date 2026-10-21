@@ -39,7 +39,7 @@ export default function Footer() {
               }`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#E0E6ED]/30">
+              <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#E0E6ED]/60">
                 {col.code}
               </span>
               <span className="h-1.5 w-1.5 bg-[#E8A359]" aria-hidden="true" />
@@ -64,7 +64,7 @@ export default function Footer() {
 
       <LogoReveal className="h-[40vh] w-full" />
 
-      <div className="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4 border-t border-border/20 p-6 sm:px-8 sm:py-5 lg:px-16 xl:px-20 text-[11px] uppercase tracking-widest text-[#E0E6ED]/30 text-center sm:text-left">
+      <div className="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4 border-t border-border/20 p-6 sm:px-8 sm:py-5 lg:px-16 xl:px-20 text-[11px] uppercase tracking-widest text-[#E0E6ED]/60 text-center sm:text-left">
         <span>
           CHIANG MAI, THAILAND: (GMT+7) <LiveClock />
         </span>

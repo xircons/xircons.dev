@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { CONTACT_EMAIL, baseOpenGraph } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     "How Xircons collects, uses, and protects personal data on this site.",
   alternates: { canonical: "https://xircons.dev/privacy" },
   openGraph: {
+    ...baseOpenGraph,
     title: "Privacy Policy | Xircons",
     description:
       "How Xircons collects, uses, and protects personal data on this site.",
     url: "/privacy",
-    siteName: "Xircons",
   },
   robots: { index: true, follow: true },
 };

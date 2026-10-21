@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { CONTACT_EMAIL, baseOpenGraph } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions",
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     "Terms of use for the Xircons website and any services offered through it.",
   alternates: { canonical: "https://xircons.dev/terms" },
   openGraph: {
+    ...baseOpenGraph,
     title: "Terms and Conditions | Xircons",
     description:
       "Terms of use for the Xircons website and any services offered through it.",
     url: "/terms",
-    siteName: "Xircons",
   },
   robots: { index: true, follow: true },
 };

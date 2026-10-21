@@ -58,7 +58,7 @@ export default function LogoReveal({ className = "" }: LogoRevealProps) {
     >
       <div className="relative h-full w-full">
         <Image
-          src="/logo/xircons-full-nobg.png?v=19"
+          src="/logo/xircons-full-nobg.webp"
           alt="Xircons logo"
           fill
           unoptimized
