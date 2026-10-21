@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import FormStateClearer from "@/components/FormStateClearer";
+import { baseOpenGraph } from "@/lib/site";
 import { personSchema, websiteSchema } from "@/lib/structured-data";
 
 const geistSans = Geist({
@@ -28,21 +29,14 @@ export const metadata: Metadata = {
   keywords: ["Software Engineering", "UX Design", "Web Development", "Portfolio", "Xircons"],
   authors: [{ name: "Wuttikan Suksan", url: "https://xircons.dev" }],
   creator: "Xircons",
-  alternates: {
-    canonical: "https://xircons.dev/",
-  },
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    ...baseOpenGraph,
     url: "/",
-    title: "Xircons",
+    title: "Wuttikan Suksan (Xircons): Full-stack Developer in Chiang Mai",
     description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
-    siteName: "Xircons",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Xircons",
-    description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   },
 };
 
