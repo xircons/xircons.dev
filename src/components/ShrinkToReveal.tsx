@@ -56,7 +56,7 @@ export default function ShrinkToReveal({
   imageSrc = "/logo/xircons-full-nobg.png",
   imageAlt = "Xircons",
   headline = "HELLO! I'M XIRCONS",
-  subhead = "I'm Wuttikan Suksan. I turn messy requirements into software people use every day: attendance check-ins over LINE, carbon estimates drawn on a map, club management for a whole university.",
+  subhead = "I'm Wuttikan Suksan, a full-stack developer in Chiang Mai. I build production systems with Next.js, Node.js and PostgreSQL, and turn messy requirements into software people use every day: attendance check-ins over LINE, carbon estimates drawn on a map, club management for a whole university.",
   facts = DEFAULT_FACTS,
 }: ShrinkToRevealProps) {
   const sectionRef = useRef<HTMLElement>(null);

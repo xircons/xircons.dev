@@ -1,34 +1,48 @@
-import { CONTACT_EMAIL } from "./site";
+import { CONTACT_EMAIL, SITE_URL } from "./site";
+
+export const PERSON_ID = `${SITE_URL}/#person`;
+
+export function personRef() {
+  return { "@id": PERSON_ID };
+}
 
 export function personSchema() {
   return {
-    "@context": "https://schema.org",
+    "@id": PERSON_ID,
     "@type": "Person",
     name: "Wuttikan Suksan",
     alternateName: "Xircons",
-    url: "https://xircons.dev",
+    url: SITE_URL,
+    image: `${SITE_URL}/wuttikan/wuttikan-suksan.jpg`,
     jobTitle: "Full-stack Developer",
     email: CONTACT_EMAIL,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Chiang Mai",
+      addressCountry: "TH",
+    },
+    knowsAbout: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "PostGIS", "Python", "FastAPI", "Tailwind CSS", "Docker"],
     sameAs: [
       "https://github.com/xircons",
       "https://www.facebook.com/pppwtk",
       "https://www.instagram.com/pppwtk",
+      "https://www.linkedin.com/in/wuttikan-suksan",
+      "https://www.npmjs.com/~xirconsss",
     ],
   };
 }
 
 export function websiteSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Xircons",
-    url: "https://xircons.dev",
+    url: SITE_URL,
+    publisher: personRef(),
   };
 }
 
 export function breadcrumbSchema(items: { name: string; url?: string }[]) {
   return {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
@@ -53,12 +67,12 @@ export function softwareApplicationSchema({
   applicationCategory?: string;
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name,
     url,
     image: imageUrl,
     description,
+    author: personRef(),
     applicationCategory,
     operatingSystem: "Any",
     offers: {
@@ -81,17 +95,11 @@ export function creativeWorkSchema({
   description: string;
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "CreativeWork",
     name,
     url,
     image: imageUrl,
     description,
-    author: {
-      "@type": "Person",
-      name: "Wuttikan Suksan",
-      alternateName: "Xircons",
-      url: "https://xircons.dev",
-    },
+    author: personRef(),
   };
 }

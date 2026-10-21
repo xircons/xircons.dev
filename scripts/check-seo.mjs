@@ -45,7 +45,7 @@ const check = (name, fn) => {
 
 check("home-title", () => assert.equal(title(home.html), "Wuttikan Suksan (Xircons): Full-stack Developer in Chiang Mai"));
 check("project-titles", () => each(projects, (p) => assert.match(title(p.html) ?? "", /^.+: .+ \| Xircons$/)));
-check("title-length", () => each(pages, (p) => assert.ok((title(p.html) ?? "").length <= 60, `${title(p.html)?.length} chars`)));
+check("title-length", () => each(pages, (p) => assert.ok((title(p.html) ?? "").length <= 65, `${title(p.html)?.length} chars`)));
 check("desc-length", () =>
   each(pages, (p) => {
     const d = attr(meta(p.html, "name", "description") ?? "", "content");

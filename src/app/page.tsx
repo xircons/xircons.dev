@@ -52,8 +52,8 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <ShrinkToReveal
-        imageSrc="/wuttikan/___________________copykub.jpg"
-        imageAlt="Xircons studio"
+        imageSrc="/wuttikan/wuttikan-suksan.jpg"
+        imageAlt="Wuttikan Suksan"
       />
       <WorksSection
         cards={PROJECT_CARDS}

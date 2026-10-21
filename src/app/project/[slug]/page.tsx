@@ -9,7 +9,7 @@ import ProjectCover from "@/components/ProjectCover";
 import ProjectMeta from "@/components/ProjectMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { baseOpenGraph } from "@/lib/site";
+import { SITE_URL, baseOpenGraph } from "@/lib/site";
 import { breadcrumbSchema, creativeWorkSchema, softwareApplicationSchema } from "@/lib/structured-data";
 
 // The segment's opengraph-image.tsx supplies the image.
@@ -129,17 +129,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     { name: project.headline, url: `https://xircons.dev/project/${slug}` },
   ]);
 
+  const schemaImageUrl = project.imageUrl.endsWith("placeholder.svg")
+    ? `${SITE_URL}/project/${slug}/opengraph-image`
+    : `${SITE_URL}${project.imageUrl}`;
+
   const projectSchema = project.headline === "Zero-mock" 
     ? softwareApplicationSchema({
         name: project.headline,
         url: project.ctaLink ?? `https://xircons.dev/project/${slug}`,
-        imageUrl: `https://xircons.dev${project.imageUrl}`,
+        imageUrl: schemaImageUrl,
         description: project.body,
       })
     : creativeWorkSchema({
         name: project.headline,
         url: `https://xircons.dev/project/${slug}`,
-        imageUrl: `https://xircons.dev${project.imageUrl}`,
+        imageUrl: schemaImageUrl,
         description: project.body,
       });
 
