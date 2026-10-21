@@ -63,6 +63,9 @@ check("og", () =>
   each(pages, (p) => {
     assert.equal(attr(meta(p.html, "property", "og:type") ?? "", "content"), "website");
     assert.ok(attr(meta(p.html, "property", "og:image") ?? "", "content"), "no og:image");
+    const tw = attr(meta(p.html, "name", "twitter:title") ?? "", "content");
+    const ogTitle = attr(meta(p.html, "property", "og:title") ?? "", "content");
+    if (tw !== undefined) assert.equal(tw, ogTitle, "twitter:title differs from og:title");
   }));
 check("404", () => {
   assert.equal(notFound.res.status, 404);

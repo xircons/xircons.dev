@@ -165,7 +165,7 @@ export default function Navbar() {
       >
         <div className="flex h-full w-full flex-col justify-between overflow-y-auto px-6 pb-8 pt-24 sm:px-8 sm:pt-28 lg:px-10 lg:pb-12">
           <div>
-            <h2 className="mb-8 text-xs font-medium uppercase tracking-[0.25em] text-fg/40">
+            <h2 className="mb-8 text-xs font-medium uppercase tracking-[0.25em] text-fg/70">
               Navigation
             </h2>
             <nav className="flex flex-col">
@@ -217,7 +217,7 @@ export default function Navbar() {
                                   className="group flex items-center justify-between gap-4 py-2 pr-2 transition-colors duration-300"
                                 >
                                   <span className="flex items-baseline gap-2">
-                                    <span className="font-mono text-xs font-medium text-fg/40 transition-colors duration-300 group-hover:text-fg/70">
+                                    <span className="font-mono text-xs font-medium text-fg/70 transition-colors duration-300 group-hover:text-fg/70">
                                       P{String(work.id).padStart(3, "0")}
                                     </span>
                                     <span className="text-sm font-medium text-fg/70 transition-colors duration-300 group-hover:text-fg">
@@ -264,7 +264,7 @@ export default function Navbar() {
                   </a>
                 ))}
               </div>
-              <span className="text-[10px] uppercase tracking-widest text-fg/40">
+              <span className="text-[10px] uppercase tracking-widest text-fg/70">
                 © {year} XIRCONS
               </span>
             </div>

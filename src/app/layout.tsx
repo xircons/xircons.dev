@@ -37,8 +37,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wuttikan Suksan (Xircons): Full-stack Developer in Chiang Mai",
-    description: "Portfolio of Xircons, a full-stack developer in Chiang Mai building systems for government agencies and universities.",
   },
 };
 

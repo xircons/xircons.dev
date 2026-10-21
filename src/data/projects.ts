@@ -18,6 +18,7 @@ export interface ProjectData {
   ctaLink?: string;
   caseStudy?: string[];
   // Keeps the entry for later but drops it from every page, list and count.
+  // Un-hiding: add metaDescription if body > 160 chars, and add the slug to scripts/check-seo.mjs and public/llms.txt.
   hidden?: boolean;
 }
 

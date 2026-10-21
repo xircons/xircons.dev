@@ -7,5 +7,5 @@ export const baseOpenGraph: NonNullable<Metadata["openGraph"]> = {
   type: "website",
   locale: "en_US",
   siteName: "Xircons",
-  images: ["/opengraph-image"],
+  images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
 };
