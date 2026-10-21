@@ -104,7 +104,7 @@ export default function HeroSection({
             ))}
           </h1>
           <p
-            className={`max-w-sm text-xs leading-relaxed text-accent/50 sm:text-sm lg:text-base ${mounted ? "hero-enter" : "hero-enter-start"}`}
+            className={`max-w-sm text-xs leading-relaxed text-accent/70 sm:text-sm lg:text-base ${mounted ? "hero-enter" : "hero-enter-start"}`}
             style={{ "--enter-y": "24px" } as React.CSSProperties}
           >
             {subheadText}
@@ -121,7 +121,7 @@ export default function HeroSection({
 
             <div className="flex items-center bg-bg px-4 sm:px-6 lg:px-8">
               <span
-                className={`text-[10px] font-medium text-accent/50 uppercase tracking-[0.2em] sm:text-xs ${mounted ? "hero-enter" : "hero-enter-start"}`}
+                className={`text-[10px] font-medium text-accent/70 uppercase tracking-[0.2em] sm:text-xs ${mounted ? "hero-enter" : "hero-enter-start"}`}
                 style={{ "--enter-x": "24px" } as React.CSSProperties}
               >
                 DEVELOPER

@@ -1,0 +1,20 @@
+# Wuttikan Suksan (Xircons)
+
+> Full-stack developer in Chiang Mai working with Next.js, Node.js and PostgreSQL. Builds systems for government agencies, universities and student clubs.
+
+## Projects
+
+- [KeptCarbon](https://xircons.dev/project/keptcarbon): GeoAI platform that estimates the carbon-credit potential of rubber plantations from plots mapped by users.
+- [SkillForce](https://xircons.dev/project/skillforce): Multi-module workforce skills platform where I led a four-person frontend team and owned the Learner app.
+- [iCAS-CMU HUB](https://xircons.dev/project/icas-cmu-hub): A production CMU club platform for memberships, events, assignments, live chat, and admin workflows, live at icas-cmu.turnpro.dev.
+- [Chekdee](https://xircons.dev/project/chekdee): LINE-based attendance system with rotating signed QR check-in, email leave approval and Excel reports.
+- [Zero-mock](https://xircons.dev/project/zero-mock): A zero-config Node.js CLI that instantly turns a single JSON file into a full CRUD REST API with CORS, pagination, and simulated latency for rapid frontend development.
+- [turnPRO](https://xircons.dev/project/turnpro-skill-radar): Company site with an internal system that scores team skills from real project tasks and shows them as radar charts.
+- [store.atelien](https://xircons.dev/project/store.atelien): An e-commerce website I made for a school project. People can sign up, browse products, use a cart and checkout, and there is an admin area to manage orders, products, and coupons.
+- [deskcat](https://xircons.dev/project/deskcat): A floating pixel-art cat that sits on your desktop, takes quick notes through the day, and gathers them into an end-of-day reflection.
+
+## Contact
+
+- [Contact](https://xircons.dev/contact)
+- hello@xircons.dev
+

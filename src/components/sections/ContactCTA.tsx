@@ -31,7 +31,7 @@ export default function ContactCTA() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2">
         <div className="px-8 py-12 lg:col-start-1 lg:row-start-1 lg:border-r lg:border-b lg:border-border/20 lg:px-16 lg:py-16">
-          <span className="mb-8 block font-mono text-xs uppercase tracking-[0.1em] text-[#E0E6ED]/40">
+          <span className="mb-8 block font-mono text-xs uppercase tracking-[0.1em] text-[#E0E6ED]/60">
             Contact
           </span>
           <p className="max-w-sm text-[15px] lg:text-base leading-relaxed text-[#E0E6ED]/60">

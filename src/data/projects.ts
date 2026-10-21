@@ -1,6 +1,7 @@
 export interface ProjectData {
   id: number;
   slug: string;
+  updated: string;
   category: string;
   eyebrow: string;
   headline: string;
@@ -24,6 +25,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 1,
     slug: "keptcarbon",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Full-stack developer • 2026",
     headline: "KeptCarbon",
@@ -42,6 +44,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 2,
     slug: "skillforce",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Lead frontend and full-stack developer • 2026",
     headline: "SkillForce",
@@ -62,6 +65,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 3,
     slug: "icas-cmu-hub",
+    updated: "2026-10-21",
     category: "Competition",
     eyebrow: "Full-stack developer • 2025",
     headline: "iCAS-CMU HUB",
@@ -81,6 +85,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 4,
     slug: "chekdee",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Solo full-stack developer • 2026",
     headline: "Chekdee",
@@ -100,6 +105,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 5,
     slug: "zero-mock",
+    updated: "2026-10-21",
     category: "Production",
     eyebrow: "Solo full-stack developer • 2026",
     headline: "Zero-mock",
@@ -119,6 +125,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 6,
     slug: "turnpro-skill-radar",
+    updated: "2026-10-21",
     category: "Internship",
     eyebrow: "Frontend developer • 2026",
     headline: "turnPRO",
@@ -138,6 +145,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 7,
     slug: "store.atelien",
+    updated: "2026-10-21",
     category: "Academic",
     eyebrow: "Solo full-stack developer • 2025",
     headline: "store.atelien",
@@ -157,6 +165,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 8,
     slug: "deskcat",
+    updated: "2026-10-21",
     category: "Personal",
     eyebrow: "Solo full-stack developer • 2025",
     headline: "deskcat",
@@ -175,6 +184,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 9,
     slug: "geo-care-network",
+    updated: "2026-10-21",
     hidden: true,
     category: "Academic",
     eyebrow: "Full-stack developer • 2026",
@@ -194,6 +204,7 @@ const allProjects: readonly ProjectData[] = [
   {
     id: 10,
     slug: "tic-tac-toe-with-ai",
+    updated: "2026-10-21",
     hidden: true,
     category: "Personal",
     eyebrow: "Full-stack developer • 2025",

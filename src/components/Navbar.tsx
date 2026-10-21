@@ -160,6 +160,7 @@ export default function Navbar() {
 
       <aside
         aria-hidden={!open}
+        inert={!open}
         className={`fixed right-0 top-0 z-50 flex h-full w-full flex-col bg-white text-fg shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] sm:w-[70vw] md:w-[50vw] lg:w-[38vw] xl:w-[32vw] ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex h-full w-full flex-col justify-between overflow-y-auto px-6 pb-8 pt-24 sm:px-8 sm:pt-28 lg:px-10 lg:pb-12">

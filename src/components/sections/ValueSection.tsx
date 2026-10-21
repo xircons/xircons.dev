@@ -199,7 +199,7 @@ export default function ValueSection() {
                 })}
               </h2>
             </div>
-            <p className="max-w-xs text-sm leading-relaxed text-fg/50">
+            <p className="max-w-xs text-sm leading-relaxed text-fg/70">
               From business requirements and system design to final deployment.
             </p>
           </div>

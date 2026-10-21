@@ -199,7 +199,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           {project.ctaLink ? (
             <ActionButton href={project.ctaLink} label={project.ctaText ?? "View project"} fullWidth />
           ) : (
-            <span className="text-sm font-medium text-fg/50">{project.ctaText ?? "Private"}</span>
+            <span className="text-sm font-medium text-fg/70">{project.ctaText ?? "Private"}</span>
           )}
         </div>
       </section>
