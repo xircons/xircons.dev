@@ -141,9 +141,10 @@ export default function HeroSection({
                 style={{ "--enter-x": "24px" } as React.CSSProperties}
               >
                 <Image
-                  src="/logo/xircons-full-nobg.png"
+                  src="/logo/xircons-full-nobg.webp"
                   alt="Xircons logo"
                   fill
+                  unoptimized
                   priority
                   fetchPriority="high"
                   sizes="(max-width: 1024px) 100vw, 50vw"

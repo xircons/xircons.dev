@@ -121,7 +121,6 @@ export default function Navbar() {
           src="/logo/xircons-x-nobg.png"
           alt="Xircons"
           fill
-          loading="eager"
           sizes="(min-width: 1024px) 7rem, (min-width: 640px) 6rem, 5rem"
           className={`object-contain object-left transition-opacity duration-300 ${isLight || open ? "opacity-0" : "opacity-100"}`}
         />
@@ -129,7 +128,6 @@ export default function Navbar() {
           src="/logo/xircons-x-white-nobg.png"
           alt="Xircons White"
           fill
-          loading="eager"
           sizes="(min-width: 1024px) 7rem, (min-width: 640px) 6rem, 5rem"
           className={`object-contain object-left transition-opacity duration-300 ${isLight || open ? "opacity-100" : "opacity-0"}`}
         />

@@ -58,9 +58,10 @@ export default function LogoReveal({ className = "" }: LogoRevealProps) {
     >
       <div className="relative h-full w-full">
         <Image
-          src="/logo/xircons-full-nobg.png"
+          src="/logo/xircons-full-nobg.webp"
           alt="Xircons logo"
           fill
+          unoptimized
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-contain scale-[0.85] md:scale-[0.9] brightness-0 invert transition-opacity duration-300 group-hover:opacity-0"
         />
