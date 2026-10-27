@@ -2,7 +2,7 @@
 
 import Image, { getImageProps } from "next/image";
 import { useRef, useCallback, useState, useEffect } from "react";
-import { useBackgroundVideo } from "@/lib/use-background-video";
+import { DESKTOP, useBackgroundVideo } from "@/lib/use-background-video";
 
 const { props: poster } = getImageProps({
   src: "/video/hero-poster.webp",
@@ -185,11 +185,11 @@ export default function HeroSection({
 
       <div className="relative w-full shrink-0 overflow-hidden bg-bg aspect-video" data-navbar-theme="light">
         <picture>
-          {showVideo !== false && <source media="(min-width: 768px)" srcSet={BLANK} />}
+          {showVideo !== false && <source media={DESKTOP} srcSet={BLANK} />}
           <img {...poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
         </picture>
         {!isVideoLoaded && showVideo !== false && (
-          <div className="absolute inset-0 z-10 hidden items-center justify-center bg-fg/10 animate-pulse md:flex">
+          <div className="absolute inset-0 z-10 hidden items-center justify-center bg-fg/10 animate-pulse md:[@media(hover:hover)]:flex">
             <span className="sr-only">Loading video...</span>
           </div>
         )}
