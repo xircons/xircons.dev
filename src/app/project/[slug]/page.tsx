@@ -246,14 +246,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   group.length === 1 ? (
                     <div key={group[0]} className="relative w-full shrink-0 overflow-hidden border border-border/80">
                       <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                      <Image src={group[0]} alt={shotAlt(group[0])} width={1920} height={1080} className="relative z-10 block h-auto w-full" />
+                      <Image src={group[0]} alt={shotAlt(group[0])} width={1920} height={1080} sizes="(min-width: 768px) 61vw, 100vw" className="relative z-10 block h-auto w-full" />
                     </div>
                   ) : (
                     <div key={group[0]} className="grid grid-cols-2 gap-5 sm:grid-cols-3">
                       {group.map((src) => (
                         <div key={src} className="relative overflow-hidden border border-border/80">
                           <div className="absolute inset-0 bg-fg/10 animate-pulse" />
-                          <Image src={src} alt={shotAlt(src)} width={860} height={1860} sizes="(min-width: 768px) 20vw, 50vw" className="relative z-10 block h-auto w-full" />
+                          <Image src={src} alt={shotAlt(src)} width={860} height={1860} sizes="(min-width: 768px) 20vw, (min-width: 640px) 33vw, 50vw" className="relative z-10 block h-auto w-full" />
                         </div>
                       ))}
                     </div>
