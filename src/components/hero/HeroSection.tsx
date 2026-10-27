@@ -1,7 +1,20 @@
 "use client";
 
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { useRef, useCallback, useState, useEffect } from "react";
+import { useBackgroundVideo } from "@/lib/use-background-video";
+
+const { props: poster } = getImageProps({
+  src: "/video/hero-poster.webp",
+  alt: "",
+  width: 1280,
+  height: 720,
+  sizes: "100vw",
+  priority: true,
+});
+
+// Desktop matches this empty source while the video is allowed, so the poster is never fetched there.
+const BLANK = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 interface HeroSectionProps {
   headlineLines?: string[];
@@ -41,6 +54,7 @@ export default function HeroSection({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const showVideo = useBackgroundVideo();
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setMounted(true));
@@ -70,7 +84,7 @@ export default function HeroSection({
       video.removeEventListener("canplay", reveal);
       video.removeEventListener("error", reveal);
     };
-  }, []);
+  }, [showVideo]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -169,22 +183,28 @@ export default function HeroSection({
       </div>
 
       <div className="relative w-full shrink-0 overflow-hidden bg-bg aspect-video" data-navbar-theme="light">
-        {!isVideoLoaded && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-fg/10 animate-pulse">
+        <picture>
+          {showVideo !== false && <source media="(min-width: 768px)" srcSet={BLANK} />}
+          <img {...poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        </picture>
+        {!isVideoLoaded && showVideo !== false && (
+          <div className="absolute inset-0 z-10 hidden items-center justify-center bg-fg/10 animate-pulse md:flex">
             <span className="sr-only">Loading video...</span>
           </div>
         )}
-        <video
-          ref={videoRef}
-          className={`block h-auto w-full transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
-          src="/video/hero-background.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        />
+        {showVideo && (
+          <video
+            ref={videoRef}
+            className={`relative block h-auto w-full transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+            src="/video/hero-background.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          />
+        )}
       </div>
     </section>
   );

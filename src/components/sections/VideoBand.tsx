@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useBackgroundVideo } from "@/lib/use-background-video";
 
 export default function VideoBand() {
   const bandRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const showVideo = useBackgroundVideo();
 
   useEffect(() => {
     let frame = 0;
@@ -49,7 +51,7 @@ export default function VideoBand() {
         <video
           ref={videoRef}
           className="absolute inset-x-0 -top-[12.5%] z-0 h-[125%] w-full object-cover will-change-transform"
-          src="/video/hero-background.mp4"
+          src={showVideo ? "/video/hero-background.mp4" : undefined}
           poster="/video/hero-poster.webp"
           autoPlay
           muted
