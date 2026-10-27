@@ -275,7 +275,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         <Link
           href={`/project/${nextProject.slug}`}
-          aria-label={`Next project: ${nextProject.headline}`}
           className="group flex flex-col gap-5 border-y border-border px-5 py-6 lg:grid lg:grid-cols-[7fr_5fr] lg:gap-0 lg:px-12 lg:py-0"
         >
           <div className="lg:flex lg:items-center lg:border-r lg:border-border lg:py-10 lg:pr-10">
