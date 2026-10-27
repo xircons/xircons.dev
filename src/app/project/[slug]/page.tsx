@@ -283,7 +283,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               imageSrc={nextProject.imageUrl}
               images={nextProject.cardImages}
               isPrivate={nextProject.isPrivate}
-              alt={nextProject.headline}
+              alt=""
               sizes="(min-width: 1024px) 58vw, 100vw"
               hoverScale="motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
             />
