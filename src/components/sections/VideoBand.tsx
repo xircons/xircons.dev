@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { useBackgroundVideo } from "@/lib/use-background-video";
 
 export default function VideoBand() {
   const bandRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const layerRef = useRef<HTMLDivElement>(null);
+  const showVideo = useBackgroundVideo();
 
   useEffect(() => {
     let frame = 0;
@@ -23,10 +26,10 @@ export default function VideoBand() {
     };
 
     const render = () => {
-      const video = videoRef.current;
+      const layer = layerRef.current;
       current += (target - current) * 0.06;
-      if (video) {
-        video.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
+      if (layer) {
+        layer.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
       }
       frame = requestAnimationFrame(render);
     };
@@ -46,17 +49,19 @@ export default function VideoBand() {
   return (
     <section className="relative z-0 w-full bg-bg" data-navbar-theme="light">
       <div ref={bandRef} className="relative h-[50vh] w-full overflow-hidden isolate">
-        <video
-          ref={videoRef}
-          className="absolute inset-x-0 -top-[12.5%] z-0 h-[125%] w-full object-cover will-change-transform"
-          src="/video/hero-background.mp4"
-          poster="/video/hero-poster.webp"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
+        <div ref={layerRef} className="absolute inset-x-0 -top-[12.5%] z-0 h-[125%] w-full will-change-transform">
+          {/* Same src and sizes as the hero poster, so phones reuse that request instead of fetching the raw file. */}
+          <Image src="/video/hero-poster.webp" alt="" fill sizes="100vw" className="object-cover" />
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={showVideo ? "/video/hero-background.mp4" : undefined}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+        </div>
       </div>
     </section>
   );

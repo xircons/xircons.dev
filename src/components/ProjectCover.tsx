@@ -38,7 +38,7 @@ export default function ProjectCover({ name, imageSrc, images, isPrivate, alt, s
             src={imageSrc}
             alt={alt}
             fill
-            quality={100}
+            quality={75}
             sizes={sizes}
             className={`relative z-10 object-cover object-top ${zoom}`}
           />
