@@ -11,6 +11,7 @@ const { props: poster } = getImageProps({
   height: 720,
   sizes: "100vw",
   priority: true,
+  fetchPriority: "high",
 });
 
 // Desktop matches this empty source while the video is allowed, so the poster is never fetched there.
